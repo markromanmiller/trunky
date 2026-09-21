@@ -54,16 +54,15 @@ paths:
       responses:
         "201":
           description: >
-            Created. Two rows were actually written: the requested fact,
-            and a theProvenance row linking its handle to the given
-            provenance object.
+            Created. If `provenance` was given, a second row is also
+            written: a theProvenance row linking the fact's handle to the
+            given provenance object. `provenance` is not required and is
+            not checked against anything -- it's written as-is if present.
           content:
             application/json:
               schema: { $ref: "#/components/schemas/StatementWithProvenance" }
         "400":
-          description: >
-            Missing/malformed field, or `provenance` does not reference an
-            entity tagged aComponent=ProvenanceInfo.
+          description: Missing or malformed field.
     put:
       summary: Not supported -- statements are append-only.
       responses:
@@ -75,9 +74,9 @@ paths:
   /statements/bulk:
     post:
       summary: >
-        Append many statements in one all-or-nothing batch, sharing a single
-        provenance. Every item is validated before any row is written; if
-        any item is malformed, nothing is inserted.
+        Append many statements in one all-or-nothing batch, optionally
+        sharing a single provenance. Every item is validated before any row
+        is written; if any item is malformed, nothing is inserted.
       requestBody:
         required: true
         content:
@@ -86,10 +85,11 @@ paths:
       responses:
         "201":
           description: >
-            Created. Each input item produced two rows: the requested fact,
-            and a theProvenance row linking its handle to the given
-            provenance object. Response array is in the same order as the
-            input `statements` array.
+            Created. If `provenance` was given, each input item also
+            produces a theProvenance row linking its handle to the given
+            provenance object; `provenance` is not required and is not
+            checked against anything. Response array is in the same order
+            as the input `statements` array.
           content:
             application/json:
               schema:
@@ -97,9 +97,8 @@ paths:
                 items: { $ref: "#/components/schemas/StatementWithProvenance" }
         "400":
           description: >
-            No rows were written. Either the batch was empty/malformed, one
-            item at the given `index` was invalid, or `provenance` does not
-            reference an entity tagged aComponent=ProvenanceInfo.
+            No rows were written. Either the batch was empty/malformed, or
+            one item at the given `index` was invalid.
   /statements/by-component:
     get:
       summary: >
@@ -229,8 +228,11 @@ components:
         provenance:
           type: string
           format: uuid
-          description: UUID of an entity tagged aComponent=ProvenanceInfo.
-      required: [attribute, entity, value, value_type, provenance]
+          description: >
+            Optional. Not validated against anything -- by convention it's
+            the UUID of an entity tagged aComponent=ProvenanceInfo, but the
+            server accepts any string here as-is.
+      required: [attribute, entity, value, value_type]
     StatementWithProvenance:
       allOf:
         - { $ref: "#/components/schemas/Statement" }
@@ -256,9 +258,11 @@ components:
           type: string
           format: uuid
           description: >
-            UUID of an entity tagged aComponent=ProvenanceInfo, shared by
-            every statement in this batch.
-      required: [statements, provenance]
+            Optional, shared by every statement in this batch. Not
+            validated against anything -- by convention it's the UUID of
+            an entity tagged aComponent=ProvenanceInfo, but the server
+            accepts any string here as-is.
+      required: [statements]
     SearchResult:
       type: object
       properties:

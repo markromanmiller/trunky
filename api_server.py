@@ -26,7 +26,6 @@ VALUE_TYPES = {"uuid", "str", "int"}
 
 A_COMPONENT = "90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a"
 THE_PROVENANCE = "d9496c5d-6e55-43ca-84bf-72d565c33419"
-PROVENANCE_INFO = "622966de-0519-4a9b-a2d5-95a99850ba42"
 THE_INTENTION = "9ca34038-1a65-4ede-88c5-1492ab4bc249"
 
 print(f"loading embedding model {vector_store.MODEL_NAME}...")
@@ -240,17 +239,6 @@ class Handler(BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length", 0))
         return json.loads(self.rfile.read(length))
 
-    def _check_provenance(self, conn, provenance):
-        if not UUID_RE.match(provenance):
-            return "provenance must be a UUID"
-        is_provenance_info = conn.execute(
-            "SELECT 1 FROM statements WHERE attribute = ? AND entity = ? AND value = ?",
-            (A_COMPONENT, provenance, PROVENANCE_INFO),
-        ).fetchone()
-        if not is_provenance_info:
-            return "provenance must be the UUID of an entity tagged aComponent=ProvenanceInfo"
-        return None
-
     def _post_single(self):
         try:
             body = self._read_json_body()
@@ -258,42 +246,37 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(400, {"error": "invalid JSON body"})
             return
 
-        if "provenance" not in body:
-            self._send_json(400, {"error": "missing field: provenance"})
-            return
         error = validate_item(body)
         if error:
             self._send_json(400, {"error": error})
             return
 
-        attribute, entity, value, value_type, provenance = (
-            body["attribute"], body["entity"], body["value"], body["value_type"], body["provenance"]
+        attribute, entity, value, value_type = (
+            body["attribute"], body["entity"], body["value"], body["value_type"]
         )
+        provenance = body.get("provenance")
 
         conn = get_conn()
-        error = self._check_provenance(conn, provenance)
-        if error:
-            conn.close()
-            self._send_json(400, {"error": error})
-            return
-
         handle = str(uuid.uuid4())
-        provenance_handle = str(uuid.uuid4())
         conn.execute(
             "INSERT INTO statements (handle, attribute, entity, value, value_type) VALUES (?, ?, ?, ?, ?)",
             (handle, attribute, entity, value, value_type),
         )
-        conn.execute(
-            "INSERT INTO statements (handle, attribute, entity, value, value_type) VALUES (?, ?, ?, ?, ?)",
-            (provenance_handle, THE_PROVENANCE, handle, provenance, "uuid"),
-        )
+        response = {"handle": handle, "attribute": attribute, "entity": entity,
+                    "value": value, "value_type": value_type}
+        if provenance is not None:
+            provenance_handle = str(uuid.uuid4())
+            conn.execute(
+                "INSERT INTO statements (handle, attribute, entity, value, value_type) VALUES (?, ?, ?, ?, ?)",
+                (provenance_handle, THE_PROVENANCE, handle, provenance, "uuid"),
+            )
+            response["provenance"] = provenance
+            response["provenance_handle"] = provenance_handle
         conn.commit()
         conn.close()
         if attribute == THE_INTENTION:
             index_intentions([(handle, entity, value)])
-        self._send_json(201, {"handle": handle, "attribute": attribute, "entity": entity,
-                               "value": value, "value_type": value_type,
-                               "provenance": provenance, "provenance_handle": provenance_handle})
+        self._send_json(201, response)
 
     def _post_bulk(self):
         try:
@@ -302,9 +285,6 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(400, {"error": "invalid JSON body"})
             return
 
-        if "provenance" not in body:
-            self._send_json(400, {"error": "missing field: provenance"})
-            return
         if "statements" not in body or not isinstance(body["statements"], list):
             self._send_json(400, {"error": "missing or non-array field: statements"})
             return
@@ -312,7 +292,7 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(400, {"error": "statements must not be empty"})
             return
 
-        provenance = body["provenance"]
+        provenance = body.get("provenance")
         items = body["statements"]
 
         # Validate every item before writing anything -- all-or-nothing.
@@ -323,29 +303,24 @@ class Handler(BaseHTTPRequestHandler):
                 return
 
         conn = get_conn()
-        error = self._check_provenance(conn, provenance)
-        if error:
-            conn.close()
-            self._send_json(400, {"error": error})
-            return
-
         results = []
         for item in items:
             handle = str(uuid.uuid4())
-            provenance_handle = str(uuid.uuid4())
             conn.execute(
                 "INSERT INTO statements (handle, attribute, entity, value, value_type) VALUES (?, ?, ?, ?, ?)",
                 (handle, item["attribute"], item["entity"], item["value"], item["value_type"]),
             )
-            conn.execute(
-                "INSERT INTO statements (handle, attribute, entity, value, value_type) VALUES (?, ?, ?, ?, ?)",
-                (provenance_handle, THE_PROVENANCE, handle, provenance, "uuid"),
-            )
-            results.append({
-                "handle": handle, "attribute": item["attribute"], "entity": item["entity"],
-                "value": item["value"], "value_type": item["value_type"],
-                "provenance": provenance, "provenance_handle": provenance_handle,
-            })
+            result = {"handle": handle, "attribute": item["attribute"], "entity": item["entity"],
+                      "value": item["value"], "value_type": item["value_type"]}
+            if provenance is not None:
+                provenance_handle = str(uuid.uuid4())
+                conn.execute(
+                    "INSERT INTO statements (handle, attribute, entity, value, value_type) VALUES (?, ?, ?, ?, ?)",
+                    (provenance_handle, THE_PROVENANCE, handle, provenance, "uuid"),
+                )
+                result["provenance"] = provenance
+                result["provenance_handle"] = provenance_handle
+            results.append(result)
         conn.commit()
         conn.close()
         index_intentions(

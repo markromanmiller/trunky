@@ -28,4 +28,4 @@ A short collection of benefits are:
 
 ## How to start?
 
-Clone the repository, install `requirements.txt`, and run `python3 api_server.py`. Point your own coding agent at `llms.txt` in this repo, it's written for exactly this: an agent-facing guide to the domain model and conventions, so it can start making the same kind of raw `/statements` API calls I do, on your own local copy of the data.
+Clone the repository, install `requirements.txt`, apply `starter.sql` (`sqlite3 lignin.db < starter.sql`) to seed the bootstrap vocabulary `llms.txt` refers to, and run `python3 api_server.py`. Point your own coding agent at `llms.txt` in this repo, it's written for exactly this: an agent-facing guide to the domain model and conventions, so it can start making the same kind of raw `/statements` API calls I do, on your own local copy of the data.

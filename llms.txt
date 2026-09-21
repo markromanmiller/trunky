@@ -84,6 +84,9 @@ That's the whole recipe. The component entity itself never gets an `aComponent` 
 |---|---|---|
 | theProvenance | `d9496c5d-6e55-43ca-84bf-72d565c33419` | Points from a statement's handle to the ProvenanceInfo entity describing who assembled it and when. |
 | ProvenanceInfo | `622966de-0519-4a9b-a2d5-95a99850ba42` | A way to tell who put this information together and when. |
+| theSelfDescribingProvenance | `0cacaa3b-d1be-4314-9644-a65baff03a63` | Used exactly once per ProvenanceInfo entity, pointing it at itself. Terminates the regress of every provenance statement needing its own provenance -- the same trick as theName of theName. |
+
+Every actual `ProvenanceInfo` *instance* (as opposed to the concept above) is still its own fresh entity per installation or per batch, there's no shared "well-known" ProvenanceInfo UUID across databases, only the attribute/component vocabulary above is fixed.
 
 ### If it fits a schema already in use, write it
 
