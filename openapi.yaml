@@ -1,0 +1,276 @@
+openapi: 3.0.3
+info:
+  title: lignindb
+  version: "0.1"
+  description: >
+    Append-only attribute/entity/value store. Every fact is a row
+    (attribute, entity, value, value_type, handle); the handle is itself
+    a first-class entity, so statements about statements (corrections,
+    provenance) are just more rows. See AGENT_GUIDE.md for the domain
+    model -- this document only describes the HTTP surface.
+servers:
+  - url: https://lignindb.dev.markromanmiller.com
+security:
+  - basicAuth: []
+paths:
+  /statements:
+    get:
+      summary: Query statements, optionally filtered.
+      parameters:
+        - in: query
+          name: attribute
+          schema: { type: string, format: uuid }
+        - in: query
+          name: entity
+          schema: { type: string, format: uuid }
+        - in: query
+          name: value
+          schema: { type: string }
+        - in: query
+          name: handle
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: >
+            Matching rows (max 5000). The X-Truncated response header is
+            "true" when more rows matched than the cap -- fails loud rather
+            than silently dropping rows the caller didn't ask to have
+            dropped. Detected via a LIMIT+1 probe, not a separate COUNT(*).
+          headers:
+            X-Truncated:
+              schema: { type: string, enum: ["true", "false"] }
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Statement" }
+    post:
+      summary: Append one new statement. Never updates or deletes an existing row.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/NewStatement" }
+      responses:
+        "201":
+          description: >
+            Created. Two rows were actually written: the requested fact,
+            and a theProvenance row linking its handle to the given
+            provenance object.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/StatementWithProvenance" }
+        "400":
+          description: >
+            Missing/malformed field, or `provenance` does not reference an
+            entity tagged aComponent=ProvenanceInfo.
+    put:
+      summary: Not supported -- statements are append-only.
+      responses:
+        "405": { description: Always returned. }
+    delete:
+      summary: Not supported -- statements are append-only.
+      responses:
+        "405": { description: Always returned. }
+  /statements/bulk:
+    post:
+      summary: >
+        Append many statements in one all-or-nothing batch, sharing a single
+        provenance. Every item is validated before any row is written; if
+        any item is malformed, nothing is inserted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/NewStatementBatch" }
+      responses:
+        "201":
+          description: >
+            Created. Each input item produced two rows: the requested fact,
+            and a theProvenance row linking its handle to the given
+            provenance object. Response array is in the same order as the
+            input `statements` array.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/StatementWithProvenance" }
+        "400":
+          description: >
+            No rows were written. Either the batch was empty/malformed, one
+            item at the given `index` was invalid, or `provenance` does not
+            reference an entity tagged aComponent=ProvenanceInfo.
+  /statements/by-component:
+    get:
+      summary: >
+        All statements belonging to any entity tagged aComponent=<component>,
+        including the aComponent tagging rows themselves. Server-side scoped
+        (a SQL subquery on the entity/attribute/value indexes, not a filter
+        over a full fetch), so it isn't subject to GET /statements's row cap
+        the way loading everything client-side and filtering would be.
+      parameters:
+        - in: query
+          name: component
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: >
+            Matching rows (max 5000, same safety cap and X-Truncated
+            behavior as GET /statements).
+          headers:
+            X-Truncated:
+              schema: { type: string, enum: ["true", "false"] }
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Statement" }
+        "400":
+          description: Missing or malformed `component`.
+  /statements/search:
+    get:
+      summary: >
+        Fuzzy-match str-valued statements against a query string, scored with
+        Python's difflib (no exact-match requirement, unlike GET /statements).
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema: { type: string }
+          description: Text to fuzzy-match against `value` (case-insensitive).
+        - in: query
+          name: attribute
+          schema: { type: string, format: uuid }
+          description: Restrict candidates to this attribute before scoring.
+        - in: query
+          name: limit
+          schema: { type: integer, default: 20 }
+      responses:
+        "200":
+          description: Matches sorted by descending score, plus a total count.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SearchResult" }
+        "400":
+          description: Missing `q`.
+  /statements/semantic-search:
+    get:
+      summary: >
+        Semantic search over theIntention values, via a local sentence-transformers
+        model (all-MiniLM-L6-v2). The index (vectors.db) is kept live: every
+        POST /statements or /statements/bulk write whose attribute is
+        theIntention is embedded and upserted automatically, no rebuild step
+        needed. Rows written by direct sqlite edits bypass this and need
+        embed_intentions.py rerun to catch up.
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, default: 10 }
+      responses:
+        "200":
+          description: theIntention rows ranked by cosine similarity to `q`.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  matches:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        score: { type: number }
+                        handle: { type: string, format: uuid }
+                        entity:
+                          type: string
+                          format: uuid
+                          description: The concept this theIntention row describes.
+                        value: { type: string }
+                required: [matches]
+        "400":
+          description: Missing `q`.
+  /openapi.yaml:
+    get:
+      summary: This document.
+      responses:
+        "200": { description: OK. }
+  /llms.txt:
+    get:
+      summary: Agent-facing guide to this store's domain model and conventions.
+      responses:
+        "200": { description: OK. }
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    Statement:
+      type: object
+      properties:
+        handle: { type: string, format: uuid }
+        attribute: { type: string, format: uuid }
+        entity: { type: string, format: uuid }
+        value: { type: string }
+        value_type: { type: string, enum: [uuid, str, int] }
+      required: [handle, attribute, entity, value, value_type]
+    NewStatement:
+      type: object
+      properties:
+        attribute: { type: string, format: uuid }
+        entity: { type: string, format: uuid }
+        value: { type: string }
+        value_type: { type: string, enum: [uuid, str, int] }
+        provenance:
+          type: string
+          format: uuid
+          description: UUID of an entity tagged aComponent=ProvenanceInfo.
+      required: [attribute, entity, value, value_type, provenance]
+    StatementWithProvenance:
+      allOf:
+        - { $ref: "#/components/schemas/Statement" }
+        - type: object
+          properties:
+            provenance: { type: string, format: uuid }
+            provenance_handle: { type: string, format: uuid }
+    NewStatementBatch:
+      type: object
+      properties:
+        statements:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            properties:
+              attribute: { type: string, format: uuid }
+              entity: { type: string, format: uuid }
+              value: { type: string }
+              value_type: { type: string, enum: [uuid, str, int] }
+            required: [attribute, entity, value, value_type]
+        provenance:
+          type: string
+          format: uuid
+          description: >
+            UUID of an entity tagged aComponent=ProvenanceInfo, shared by
+            every statement in this batch.
+      required: [statements, provenance]
+    SearchResult:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            allOf:
+              - { $ref: "#/components/schemas/Statement" }
+              - type: object
+                properties:
+                  score: { type: number }
+        total:
+          type: integer
+          description: Count of all matches scoring >= 0.3, before `limit` was applied.
+      required: [matches, total]

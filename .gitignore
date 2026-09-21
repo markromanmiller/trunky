@@ -1,0 +1,6 @@
+*.db
+*.db.bak.*
+__pycache__/
+*.pyc
+.venv/
+chi-paper/

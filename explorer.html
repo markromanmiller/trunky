@@ -1,0 +1,517 @@
+<title>lignindb explorer</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #6b7280; --border: #e5e7eb;
+    --accent: #2563eb; --req-missing: #fee2e2; --req-missing-fg: #991b1b;
+    --des-missing: #fef3c7; --des-missing-fg: #92400e; --row-hover: #f3f4f6;
+    --card: #f9fafb; --mono-bg: #f3f4f6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a; --fg: #e6e6e6; --muted: #9ca3af; --border: #2a2d33;
+      --accent: #60a5fa; --req-missing: #3f1d1d; --req-missing-fg: #fca5a5;
+      --des-missing: #3f321a; --des-missing-fg: #fcd34d; --row-hover: #1d2026;
+      --card: #1a1d23; --mono-bg: #1d2026;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg); margin: 0; padding: 1.5rem;
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  h1 { font-size: 1.1rem; margin: 0 0 1rem; display: flex; align-items: center; gap: .6rem; }
+  h1 .tag { font-size: .7rem; color: var(--muted); font-weight: normal; border: 1px solid var(--border); border-radius: 4px; padding: .1rem .4rem; }
+  .toolbar { display: flex; gap: .6rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+  select, input[type=text] {
+    background: var(--card); color: var(--fg); border: 1px solid var(--border);
+    border-radius: 6px; padding: .4rem .6rem; font: inherit;
+  }
+  input[type=text] { min-width: 220px; }
+  button {
+    background: var(--card); color: var(--fg); border: 1px solid var(--border);
+    border-radius: 6px; padding: .4rem .7rem; font: inherit; cursor: pointer;
+  }
+  button:hover { background: var(--row-hover); }
+  a.ref { color: var(--accent); text-decoration: none; cursor: pointer; }
+  a.ref:hover { text-decoration: underline; }
+  .muted { color: var(--muted); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .85em; background: var(--mono-bg); padding: .1rem .3rem; border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 1.5rem; }
+  th, td { text-align: left; padding: .45rem .7rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: .85rem; white-space: nowrap; }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: var(--fg); }
+  th .sort-arrow { display: inline-block; width: 1em; opacity: .6; }
+  .slot-badge {
+    display: inline-block; width: .5rem; height: .5rem; border-radius: 50%;
+    margin-right: .4rem; vertical-align: middle;
+  }
+  .slot-badge.required { background: var(--req-missing-fg); }
+  .slot-badge.desirable { background: var(--des-missing-fg); }
+  .slot-badge.optional { background: var(--muted); }
+  .unpin { color: var(--muted); cursor: pointer; margin-left: .3rem; font-weight: normal; }
+  .unpin:hover { color: var(--req-missing-fg); }
+  tbody tr:hover { background: var(--row-hover); }
+  td.missing-required { background: var(--req-missing); color: var(--req-missing-fg); font-style: italic; }
+  td.missing-desirable { background: var(--des-missing); color: var(--des-missing-fg); font-style: italic; }
+  .legend { display: flex; gap: 1rem; font-size: .8rem; color: var(--muted); margin-bottom: 1rem; }
+  .legend span { display: inline-flex; align-items: center; gap: .35rem; }
+  .swatch { width: .8rem; height: .8rem; border-radius: 3px; display: inline-block; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
+  .prov-btn { font-size: .75rem; padding: .15rem .5rem; }
+  .prov-note { font-size: .82rem; color: var(--muted); margin-top: .3rem; }
+  #status { color: var(--muted); font-size: .85rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  #truncWarning {
+    display: none; background: var(--req-missing); color: var(--req-missing-fg);
+    border: 1px solid var(--req-missing-fg); border-radius: 6px;
+    padding: .6rem .9rem; margin-bottom: 1rem; font-weight: 600;
+  }
+</style>
+
+<h1>lignindb explorer <span class="tag">read-only</span></h1>
+<div id="truncWarning"></div>
+<div class="toolbar">
+  <select id="componentPicker"><option>loading…</option></select>
+  <input id="search" type="text" placeholder="jump to an entity by name…">
+  <button id="searchBtn">Go</button>
+  <span id="status"></span>
+</div>
+<div id="view"></div>
+
+<script>
+const THE_NAME = "acf5cebb-8d80-45ad-9a1f-a3dd48682ef6";
+const THE_INTENTION = "9ca34038-1a65-4ede-88c5-1492ab4bc249";
+const A_COMPONENT = "90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a";
+const A_REQUIRED_SLOT = "24762266-9337-4930-b88c-55b6af4e7642";
+const A_DESIRABLE_SLOT = "8a707bcb-7ff7-488f-b7e3-b1679f823c95";
+const AN_OPTIONAL_SLOT = "e8d0e88d-a8ea-4612-8e8c-a4be732d1a93";
+const THE_PROVENANCE = "d9496c5d-6e55-43ca-84bf-72d565c33419";
+const A_NOTE = "29a25e0e-3f32-4787-965e-3ecc917d6fef";
+const A_REPLACEMENT = "8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9";
+const AN_ERRATUM = "1c260a46-c907-4efc-adb2-9345aebd9500";
+
+let names = {};          // uuid -> name (every theName row -- small, loaded in full)
+let byEntity = {};       // uuid -> [rows] -- scoped to whatever view is currently showing, rebuilt on navigation
+let byAttrEntity = {};   // "attr|entity" -> [rows] -- same scoping as byEntity
+let components = {};     // componentUuid -> Map(memberEntityUuid -> tagging statement's own handle) (small scaffolding data, loaded in full)
+let slotsOf = { required: {}, desirable: {}, optional: {} }; // componentUuid -> [attrUuid] (small, loaded in full)
+let superseded = new Set(); // uuids (entities or statement handles) that an aReplacement points away from, or that carry an anErratum -- hidden by default either way
+
+function label(uuid) {
+  return names[uuid] || uuid;
+}
+function isUuid(s) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(s);
+}
+function refLink(uuid) {
+  const a = document.createElement("a");
+  a.className = "ref";
+  a.textContent = label(uuid);
+  if (label(uuid) !== uuid) { a.title = uuid; }
+  a.onclick = () => showEntity(uuid);
+  return a;
+}
+const ROW_LIMIT = 5000; // must match api_server.py's ROW_LIMIT
+function warnTruncated(label) {
+  const el = document.getElementById("truncWarning");
+  el.style.display = "block";
+  el.textContent = `⚠ Server row limit (${ROW_LIMIT}) was hit while loading ${label} — results shown are incomplete.`;
+}
+async function fetchJson(url, warnLabel) {
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.headers.get("X-Truncated") === "true") warnTruncated(warnLabel || url);
+  return data;
+}
+function indexRows(rowList) {
+  const byE = {}, byAE = {};
+  for (const r of rowList) {
+    (byE[r.entity] ??= []).push(r);
+    (byAE[r.attribute + "|" + r.entity] ??= []).push(r);
+  }
+  return { byE, byAE };
+}
+
+// Scaffolding is small no matter how large the content data gets (theName,
+// aComponent, and the slot declarations are schema-level, not per-row) --
+// safe to load in full on open. Actual statement content is fetched per
+// component or per entity, server-side scoped, so it's never capped by
+// GET /statements's row limit the way a single full fetch would be.
+async function loadAll() {
+  document.getElementById("status").textContent = "loading…";
+  const [nameRows, componentRows, requiredRows, desirableRows, optionalRows, replacementRows, erratumRows] = await Promise.all([
+    fetchJson(`/statements?attribute=${THE_NAME}`, "theName (scaffolding)"),
+    fetchJson(`/statements?attribute=${A_COMPONENT}`, "aComponent (scaffolding)"),
+    fetchJson(`/statements?attribute=${A_REQUIRED_SLOT}`, "aRequiredSlot (scaffolding)"),
+    fetchJson(`/statements?attribute=${A_DESIRABLE_SLOT}`, "aDesirableSlot (scaffolding)"),
+    fetchJson(`/statements?attribute=${AN_OPTIONAL_SLOT}`, "anOptionalSlot (scaffolding)"),
+    fetchJson(`/statements?attribute=${A_REPLACEMENT}`, "aReplacement (scaffolding)"),
+    fetchJson(`/statements?attribute=${AN_ERRATUM}`, "anErratum (scaffolding)"),
+  ]);
+
+  names = {};
+  for (const r of nameRows) names[r.entity] = r.value;
+
+  components = {}; // componentUuid -> Map(memberEntityUuid -> that member's own aComponent-tagging statement handle)
+  for (const r of componentRows) (components[r.value] ??= new Map()).set(r.entity, r.handle);
+
+  slotsOf = { required: {}, desirable: {}, optional: {} };
+  for (const r of requiredRows) (slotsOf.required[r.entity] ??= []).push(r.value);
+  for (const r of desirableRows) (slotsOf.desirable[r.entity] ??= []).push(r.value);
+  for (const r of optionalRows) (slotsOf.optional[r.entity] ??= []).push(r.value);
+
+  superseded = new Set([...replacementRows.map(r => r.entity), ...erratumRows.map(r => r.entity)]);
+
+  const total = nameRows.length + componentRows.length + requiredRows.length + desirableRows.length + optionalRows.length + replacementRows.length + erratumRows.length;
+  document.getElementById("status").textContent = `${total} scaffolding rows loaded — statement content is fetched per view`;
+}
+
+function populatePicker() {
+  const sel = document.getElementById("componentPicker");
+  sel.innerHTML = "";
+  const opts = Object.keys(components)
+    .map(c => ({ uuid: c, label: label(c), n: components[c].size }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+  for (const o of opts) {
+    const opt = document.createElement("option");
+    opt.value = o.uuid;
+    opt.textContent = `${o.label} (${o.n})`;
+    sel.appendChild(opt);
+  }
+  sel.onchange = () => showComponentTable(sel.value);
+  if (opts.length) showComponentTable(opts[0].uuid);
+}
+let loadToken = 0; // guards against a slow fetch clobbering a faster, later-triggered one
+
+function cellValues(entity, attr) {
+  const rs = byAttrEntity[attr + "|" + entity] || [];
+  return rs.map(r => r.value_type === "uuid" ? label(r.value) : r.value);
+}
+
+async function showComponentTable(componentUuid) {
+  const view = document.getElementById("view");
+  const memberMap = components[componentUuid] || new Map();
+  const allMembers = [...memberMap.keys()];
+
+  if (!allMembers.length) {
+    view.innerHTML = `<p class="empty">No entities tagged with ${label(componentUuid)}.</p>`;
+    return;
+  }
+
+  const myToken = ++loadToken;
+  view.innerHTML = `<p class="empty">loading ${label(componentUuid)}…</p>`;
+  const contentRows = await fetchJson(`/statements/by-component?component=${componentUuid}`, label(componentUuid));
+  if (myToken !== loadToken) return; // a newer selection has already superseded this fetch
+  ({ byE: byEntity, byAE: byAttrEntity } = indexRows(contentRows));
+
+  // hidden if the member itself was replaced/erratum'd, OR if the specific
+  // statement claiming its membership in this component was erratum'd
+  // (the membership claim is void even though the entity itself is fine)
+  const visibleMembers = allMembers.filter(m => !superseded.has(m) && !superseded.has(memberMap.get(m)));
+  const hiddenCount = allMembers.length - visibleMembers.length;
+
+  const required = slotsOf.required[componentUuid] || [];
+  const desirable = slotsOf.desirable[componentUuid] || [];
+  const optional = slotsOf.optional[componentUuid] || [];
+  const pinnedExtra = []; // attribute uuids clicked into their own column, in click order
+
+  let showAll = false;
+  let sortCol = -1, sortDir = 1; // -1 = entity name column
+
+  const legend = document.createElement("div");
+  legend.className = "legend";
+  legend.innerHTML = `
+    <span><span class="swatch" style="background:var(--req-missing)"></span>missing required slot</span>
+    <span><span class="swatch" style="background:var(--des-missing)"></span>missing desirable slot</span>
+    <span><span class="slot-badge required" style="margin:0"></span>required</span>
+    <span><span class="slot-badge desirable" style="margin:0"></span>desirable</span>
+    <span><span class="slot-badge optional" style="margin:0"></span>optional</span>
+    <span>(no dot = pinned extra column)</span>
+    <span class="muted">click a column header to sort · click a chip under "additional attributes" to pin it as a column</span>`;
+
+  const table = document.createElement("table");
+  const thead = document.createElement("thead");
+  const tbody = document.createElement("tbody");
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  const footer = document.createElement("p");
+  footer.className = "muted";
+
+  function columnsList() {
+    return [...required, ...desirable, ...optional, ...pinnedExtra];
+  }
+  function activeMembers() {
+    return showAll ? allMembers : visibleMembers;
+  }
+  function badgeFor(c) {
+    if (required.includes(c)) return `<span class="slot-badge required"></span>`;
+    if (desirable.includes(c)) return `<span class="slot-badge desirable"></span>`;
+    if (optional.includes(c)) return `<span class="slot-badge optional"></span>`;
+    return "";
+  }
+  function cellText(m, colIdx, cols) {
+    if (colIdx === -1) return label(m);
+    return cellValues(m, cols[colIdx]).join("; ");
+  }
+  // how many currently-active rows carry each undeclared attribute at least once
+  function extraFrequency(declared) {
+    const freq = {};
+    for (const m of activeMembers()) {
+      const seen = new Set();
+      for (const r of (byEntity[m] || [])) {
+        if (declared.has(r.attribute) || seen.has(r.attribute)) continue;
+        seen.add(r.attribute);
+        freq[r.attribute] = (freq[r.attribute] || 0) + 1;
+      }
+    }
+    return freq;
+  }
+
+  function makeHeader(colIdx, text, badgeHtml, pinned) {
+    const th = document.createElement("th");
+    th.className = "sortable";
+    if (badgeHtml) th.insertAdjacentHTML("beforeend", badgeHtml);
+    th.appendChild(document.createTextNode(text));
+    if (pinned) {
+      const x = document.createElement("span");
+      x.className = "unpin";
+      x.textContent = "×";
+      x.title = "remove this column";
+      x.onclick = (e) => {
+        e.stopPropagation();
+        const cols = columnsList();
+        const idx = pinnedExtra.indexOf(cols[colIdx]);
+        if (idx !== -1) pinnedExtra.splice(idx, 1);
+        sortCol = -1; sortDir = 1;
+        render();
+      };
+      th.appendChild(x);
+    }
+    const arrow = document.createElement("span");
+    arrow.className = "sort-arrow";
+    arrow.textContent = (colIdx === sortCol) ? (sortDir === 1 ? "▲" : "▼") : "";
+    th.appendChild(arrow);
+    th.onclick = () => {
+      sortDir = (sortCol === colIdx) ? -sortDir : 1;
+      sortCol = colIdx;
+      render();
+    };
+    return th;
+  }
+
+  function renderRow(m, cols, declared, freq) {
+    const tr = document.createElement("tr");
+    const nameTd = document.createElement("td");
+    nameTd.appendChild(refLink(m));
+    tr.appendChild(nameTd);
+    for (const c of cols) {
+      const td = document.createElement("td");
+      const vals = cellValues(m, c);
+      if (vals.length) {
+        td.textContent = vals.join("; ");
+      } else if (required.includes(c)) {
+        td.textContent = "missing"; td.className = "missing-required";
+      } else if (desirable.includes(c)) {
+        td.textContent = "missing"; td.className = "missing-desirable";
+      }
+      tr.appendChild(td);
+    }
+    const extraTd = document.createElement("td");
+    const seen = new Set();
+    const rowExtras = [];
+    for (const r of (byEntity[m] || [])) {
+      if (declared.has(r.attribute) || seen.has(r.attribute)) continue;
+      seen.add(r.attribute);
+      rowExtras.push(r.attribute);
+    }
+    rowExtras.sort((a, b) => (freq[b] || 0) - (freq[a] || 0) || label(a).localeCompare(label(b)));
+    rowExtras.slice(0, 6).forEach((a, i) => {
+      if (i) extraTd.append(", ");
+      const chip = document.createElement("a");
+      chip.className = "ref";
+      chip.textContent = label(a);
+      chip.title = "click to add as a column";
+      chip.onclick = () => {
+        if (!pinnedExtra.includes(a)) pinnedExtra.push(a);
+        render();
+      };
+      extraTd.appendChild(chip);
+    });
+    if (rowExtras.length > 6) extraTd.append(` +${rowExtras.length - 6} more`);
+    tr.appendChild(extraTd);
+    return tr;
+  }
+
+  function render() {
+    const cols = columnsList();
+    const declared = new Set([...cols, A_COMPONENT]);
+    const freq = extraFrequency(declared);
+    const active = activeMembers();
+
+    const headRow = document.createElement("tr");
+    headRow.appendChild(makeHeader(-1, "entity", "", false));
+    cols.forEach((c, i) => headRow.appendChild(makeHeader(i, label(c), badgeFor(c), pinnedExtra.includes(c))));
+    const extraTh = document.createElement("th");
+    extraTh.textContent = "additional attributes";
+    headRow.appendChild(extraTh);
+    thead.innerHTML = "";
+    thead.appendChild(headRow);
+
+    const sorted = [...active].sort((a, b) => {
+      const av = cellText(a, sortCol, cols), bv = cellText(b, sortCol, cols);
+      return av.localeCompare(bv, undefined, { numeric: true, sensitivity: "base" }) * sortDir;
+    });
+    tbody.innerHTML = "";
+    for (const m of sorted) tbody.appendChild(renderRow(m, cols, declared, freq));
+
+    footer.textContent = "";
+    if (hiddenCount) {
+      footer.append(showAll
+        ? `Showing all ${allMembers.length} rows, including ${hiddenCount} superseded (aReplacement) or flagged void (anErratum). `
+        : `${hiddenCount} row${hiddenCount === 1 ? "" : "s"} excluded (superseded via aReplacement, or flagged void via anErratum). `);
+      const link = document.createElement("a");
+      link.className = "ref";
+      link.textContent = showAll ? "hide superseded rows" : "show all";
+      link.onclick = () => { showAll = !showAll; render(); };
+      footer.appendChild(link);
+    }
+  }
+
+  render();
+
+  view.innerHTML = "";
+  view.appendChild(legend);
+  view.appendChild(table);
+  view.appendChild(footer);
+}
+
+async function showEntity(uuid) {
+  const view = document.getElementById("view");
+  const myToken = ++loadToken;
+  view.innerHTML = `<p class="empty">loading ${label(uuid)}…</p>`;
+  const ownRows = await fetchJson(`/statements?entity=${uuid}`, label(uuid));
+  if (myToken !== loadToken) return;
+  ({ byE: byEntity, byAE: byAttrEntity } = indexRows(ownRows));
+
+  const card = document.createElement("div");
+  card.className = "card";
+  const heading = document.createElement("h2");
+  heading.style.fontSize = "1rem";
+  heading.innerHTML = `${label(uuid)} <span class="muted">(<code>${uuid}</code>)</span>`;
+  card.appendChild(heading);
+
+  const memberOf = Object.keys(components).filter(c => components[c].has(uuid));
+  if (memberOf.length) {
+    const p = document.createElement("p");
+    p.className = "muted";
+    p.append("tagged as: ");
+    memberOf.forEach((c, i) => { if (i) p.append(", "); p.appendChild(refLink(c)); });
+    card.appendChild(p);
+  }
+
+  const table = document.createElement("table");
+  table.innerHTML = "<thead><tr><th>attribute</th><th>value</th><th>handle</th><th></th></tr></thead>";
+  const tbody = document.createElement("tbody");
+  const allOwn = byEntity[uuid] || [];
+  const visibleOwn = allOwn.filter(r => !superseded.has(r.handle));
+  const hiddenCount = allOwn.length - visibleOwn.length;
+  let showAll = false;
+  const tbodyFooter = document.createElement("p");
+  tbodyFooter.className = "muted";
+
+  function renderRows() {
+    tbody.innerHTML = "";
+    for (const r of (showAll ? allOwn : visibleOwn)) {
+      renderOneRow(r);
+    }
+  }
+  function renderFooter() {
+    if (!hiddenCount) { tbodyFooter.textContent = ""; return; }
+    tbodyFooter.textContent = "";
+    tbodyFooter.append(showAll
+      ? `Showing all ${allOwn.length} statements, including ${hiddenCount} superseded (aReplacement) or flagged void (anErratum). `
+      : `${hiddenCount} statement${hiddenCount === 1 ? "" : "s"} excluded (superseded via aReplacement, or flagged void via anErratum). `);
+    const link = document.createElement("a");
+    link.className = "ref";
+    link.textContent = showAll ? "hide superseded statements" : "show all";
+    link.onclick = () => { showAll = !showAll; renderRows(); renderFooter(); };
+    tbodyFooter.appendChild(link);
+  }
+
+  function renderOneRow(r) {
+    const tr = document.createElement("tr");
+    const attrTd = document.createElement("td"); attrTd.appendChild(refLink(r.attribute));
+    const valTd = document.createElement("td");
+    if (r.value_type === "uuid") valTd.appendChild(refLink(r.value));
+    else valTd.textContent = r.value;
+    const handleTd = document.createElement("td");
+    const handleLink = document.createElement("a");
+    handleLink.className = "ref"; handleLink.innerHTML = `<code>${r.handle.slice(0, 8)}…</code>`;
+    handleLink.onclick = () => showEntity(r.handle);
+    handleTd.appendChild(handleLink);
+    const provTd = document.createElement("td");
+    const btn = document.createElement("button");
+    btn.className = "prov-btn"; btn.textContent = "provenance";
+    let noteText = null; // cached after first fetch, so re-toggling doesn't refetch
+    btn.onclick = async () => {
+      const existing = provTd.querySelector(".prov-note");
+      if (existing) { existing.remove(); return; }
+      if (noteText === null) {
+        btn.disabled = true;
+        const provRows = (await fetchJson(`/statements?entity=${r.handle}`)).filter(x => x.attribute === THE_PROVENANCE);
+        if (provRows.length) {
+          const noteRows = (await fetchJson(`/statements?entity=${provRows[0].value}`)).filter(x => x.attribute === A_NOTE);
+          noteText = noteRows.map(n => n.value).join(" / ") || "(no note)";
+        } else {
+          noteText = "(no provenance recorded)";
+        }
+        btn.disabled = false;
+      }
+      const noteEl = document.createElement("div");
+      noteEl.className = "prov-note";
+      noteEl.textContent = noteText;
+      provTd.appendChild(noteEl);
+    };
+    provTd.appendChild(btn);
+    tr.append(attrTd, valTd, handleTd, provTd);
+    tbody.appendChild(tr);
+  }
+  renderRows();
+  renderFooter();
+  table.appendChild(tbody);
+  card.appendChild(table);
+  card.appendChild(tbodyFooter);
+
+  view.innerHTML = "";
+  view.appendChild(card);
+}
+
+document.getElementById("searchBtn").onclick = () => {
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  if (!q) return;
+  const matches = Object.entries(names).filter(([, n]) => n.toLowerCase().includes(q));
+  if (matches.length === 1) {
+    showEntity(matches[0][0]);
+  } else if (matches.length === 0) {
+    document.getElementById("view").innerHTML = `<p class="empty">No name matches "${q}".</p>`;
+  } else {
+    const view = document.getElementById("view");
+    view.innerHTML = "<p>Multiple matches:</p><ul id='matchList'></ul>";
+    const ul = document.getElementById("matchList");
+    for (const [uuid] of matches) {
+      const li = document.createElement("li");
+      li.appendChild(refLink(uuid));
+      ul.appendChild(li);
+    }
+  }
+};
+document.getElementById("search").addEventListener("keydown", e => {
+  if (e.key === "Enter") document.getElementById("searchBtn").click();
+});
+
+loadAll().then(populatePicker);
+</script>

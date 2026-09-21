@@ -1,0 +1,146 @@
+# lignindb — agent guide
+
+LigninDB is a single-user (as of August 2026) knowledge base for low-commitment, add-only, single-source-of-truth, LLM-friendly, iteratively developed knowledge.
+
+This document's own UUID: `317df636-6d11-47b5-83d9-2daf3f5b335c`
+
+## Base Data Format
+
+The data format is conceptually a statement-attribute-entity-value quad, with a fifth column of data type for value so that results can be interpreted without de-prefixing.
+
+At its lowest level, the data model is more linguistic than mathematical. Each row is linguistically interpreted as:
+
+[statement-identifier] says [attribute] of [entity] is [value]
+
+For example, the bootstrap rows that give `theName` and `theIntention` their own names and intentions:
+
+```
+bae3d3d2-1f4a-4204-9d0b-eb3a459efc2d says theName      of theName      is "theName"
+fd11b5f8-c756-4994-b45a-a5c5b3342440 says theIntention of theName      is "Display this as a
+                                                                            human-readable name
+                                                                            to the user instead
+                                                                            of the UUID in most
+                                                                            situations"
+d1d4174b-323c-480e-a3db-d132961cbd9e says theName      of theIntention is "theIntention"
+953f2505-2804-43a4-8b09-bac91e00c894 says theIntention of theIntention is "This string
+                                                                            represents
+                                                                            instructions,
+                                                                            intentions, or
+                                                                            interpretations in
+                                                                            natural language.
+                                                                            It grounds the
+                                                                            structure to
+                                                                            reality."
+```
+(theName = `acf5cebb-8d80-45ad-9a1f-a3dd48682ef6`, theIntention = `9ca34038-1a65-4ede-88c5-1492ab4bc249`)
+
+This design shift from storing mathematical equality to a linguistic statement is made plausible by LLM availability. The shift itself enables flexible schemas and comparison of schemas, as intentions and descriptions are first-class machine-accessible entities, without needing a full mathematical specification. This benefit comes at the expense of some linguistic ambiguity in re-implementation, though the intention strings can use very technical math definitions too (which is why language is powerful.)
+
+Note that items (the UUIDs) are not constrained to be only one of attributes, values, or entities - all items are valid all the time at this base level.
+
+Direct access to this data format as well as the convenience methods of current version of the wrapper API are described at `openapi.yaml`.
+
+## Useful Patterns
+
+Common cross-domain patterns to be aware of when using this knowledge base, grouped by concern. Each subsection below has its own name/UUID/intention table for the concepts it introduces.
+
+### Naming convention
+
+Attribute names starting with `a`/`an` signal multi-valued: expect one row per value (e.g. `aReceiver`, `aRequiredSlot` — an entity can carry several). Attribute names starting with `the` signal an expected-singular value (e.g. `theName`, `theProvenance`). This is convention only — nothing in the store enforces it — but it holds throughout the existing data, so a mismatched prefix on a lookup (`theAttendees` when the real attribute is `anAttendee`) is a likely sign you've got the wrong name.
+
+### Readability
+
+| name | UUID | intention |
+|---|---|---|
+| theName | `acf5cebb-8d80-45ad-9a1f-a3dd48682ef6` | Display this as a human-readable name to the user instead of the UUID in most situations |
+| theIntention | `9ca34038-1a65-4ede-88c5-1492ab4bc249` | This string represents instructions, intentions, or interpretations in natural language. It grounds the structure to reality. |
+| theDescription | `05d61805-e171-4bdc-a770-3cf2ed75cf44` | A longer, paragraph-plus natural-language description of the item — more substantial than aNote's deliberately-unspecified free text. |
+
+### Entity-Component Architecture
+While a Class-Instance architecture can be built with this data model, the design philosophy favors an Entity-Component scheme.
+
+**Slot declarations are advisory, not enforced.** `aRequiredSlot`/`aDesirableSlot`/`anOptionalSlot` describe the intended shape of a component for discovery, tooling, and the explorer's missing-slot highlighting — but `POST /statements` and `POST /statements/bulk` do not check them. You can write an entity that violates a required slot and the write will succeed; nothing will reject it until something reads the data and chooses to validate against the declared shape.
+
+**Defining a new component — worked example.** No new mechanism is needed beyond what's already in this glossary:
+
+1. Mint a UUID for the component/category entity itself (e.g. `<new-component-uuid>`).
+2. Give it `theName` and `theIntention` rows, same as any other concept.
+3. For each attribute it should carry, add one slot-declaration row: `aRequiredSlot`/`aDesirableSlot`/`anOptionalSlot` of `<new-component-uuid>` is `<the-attribute-uuid>`.
+4. Tag actual instances by writing `aComponent of <instance-uuid> is <new-component-uuid>`.
+
+That's the whole recipe. The component entity itself never gets an `aComponent` row pointing at itself or at `SlotCriteria` — only the *attributes* (`aRequiredSlot` etc.) carry the `SlotCriteria` tag, once, at the schema level. Whether something is "a component" is inferred entirely from other entities pointing `aComponent` at it, not from any self-declaration.
+
+| name | UUID | intention |
+|---|---|---|
+| aComponent | `90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a` | Tags an entity as belonging to a category, so entities sharing that category can be validated for a shared shape. |
+| SlotCriteria | `8e37c137-4791-470c-8af2-f9ef087d76f6` | Tags an attribute as one that declares a slot relationship between a component and an attribute it expects members to carry — regardless of whether that expectation is enforced as an error, a warning, or purely informational. |
+| aRequiredSlot | `24762266-9337-4930-b88c-55b6af4e7642` | Declares that entities carrying a given component must have at least one statement using the given attribute, for validation purposes. |
+| aDesirableSlot | `8a707bcb-7ff7-488f-b7e3-b1679f823c95` | Declares that entities carrying a given component are expected to have at least one statement using the given attribute; absence is worth a warning, not an error, and signals data worth completing. |
+| anOptionalSlot | `e8d0e88d-a8ea-4612-8e8c-a4be732d1a93` | Declares that entities carrying a given component may have this attribute, for table and schema discovery purposes only — its absence has no validation consequence. |
+
+### Provenance
+
+| name | UUID | intention |
+|---|---|---|
+| theProvenance | `d9496c5d-6e55-43ca-84bf-72d565c33419` | Points from a statement's handle to the ProvenanceInfo entity describing who assembled it and when. |
+| ProvenanceInfo | `622966de-0519-4a9b-a2d5-95a99850ba42` | A way to tell who put this information together and when. |
+
+### If it fits a schema already in use, write it
+
+When something you're told fits a shape this store already tracks — an availability window, a deadline, anything with an existing attribute or component for it — the implicit expectation is to include that information, not just reason with it in the moment: insert it if it's new, write `aReplacement` if it changes something already stored. This isn't "write down everything you happen to hear" — the trigger is that the concept is already being tracked here, so leaving it out is the exception that needs a reason, not the default.
+
+### Correction & Supersession
+
+Two distinct mechanisms, easy to conflate — pick based on whether the old item was ever legitimately true:
+
+- `aReplacement` — for a sequence of states each true in their own time (a schedule changes, a definition gets refined). Written `aReplacement of <old> is <new>` — the old item is the entity, the new item(s) are the value(s). Multi-valued: an old item may have been superseded by more than one new item (e.g. split into two). Chain-walk from an old item forward to find the current one; nothing here carries a timestamp, so recency is inferred only by following the chain, never by row order.
+- `anErratum` — for something that should never have existed as asserted in the first place: a mistake, not a later legitimate change. Multi-valued, since an item can be wrong for more than one reason.
+
+| name | UUID | intention |
+|---|---|---|
+| aReplacement | `8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9` | Points from an older statement's handle (or an older entity) to the newer statement or entity that supersedes it. A reader should prefer the value(s) here over the item bearing this statement's entity, unless something else in turn has an aReplacement pointing away from that item too — walk the chain to find the current one. Multi-valued: an old item may have been superseded by more than one new item (e.g. split into two). Nothing in this store carries a timestamp, so recency is inferred only by following this chain, never by row order. |
+| anErratum | `1c260a46-c907-4efc-adb2-9345aebd9500` | Free text flagging that the statement or entity carrying this (by UUID) should never have existed as asserted — a mistake, not a later legitimate change. Multi-valued (anErratum, not theErratum) since an item could be wrong for more than one reason. Distinct from aReplacement, which chains a sequence of states each true in their own time — anErratum instead marks something void from the start. Could become a full component later if a flagged item ever needs more than free text attached. |
+
+### Intentional Miscellany
+In contrast to a database, it is explicitly supported and even encouraged to add data that has no particular structure or has a structure to be made later.
+
+| name | UUID | intention |
+|---|---|---|
+| aNote | `29a25e0e-3f32-4787-965e-3ecc917d6fef` | Free text. Deliberately left unspecified — no fixed meaning is imposed on what this note should contain. |
+
+### Navigating
+
+`aReferencedUUID of (thisdoc) is (X)` — declares that a document or piece of code hardcodes UUID X. This guide practices what it declares: every UUID named above has a corresponding `aReferencedUUID of 317df636-6d11-47b5-83d9-2daf3f5b335c is <that-uuid>` row already in the store, so a steward can query for this document's own dependencies directly:
+
+```
+GET /statements?attribute=9084efd2-1fcf-492e-9ec1-63ef91691f47&entity=317df636-6d11-47b5-83d9-2daf3f5b335c
+```
+
+| name | UUID | intention |
+|---|---|---|
+| aReferencedUUID | `9084efd2-1fcf-492e-9ec1-63ef91691f47` | Declares that a document or piece of code hardcodes the given UUID because that's the shape best to operate on. Lets a data steward find every place an item is used — useful for keeping items up to date, or seeing how an item is used in context. |
+
+## Usage Principles
+
+Defer to the human user, but as guidelines for users that show evidence of being unfamiliar with this system or desiring to follow the intended norms of the creator, consider the following:
+
+### Search before you mint.
+While this system is designed with the intention that no action should be "expensive" (beyond the number of rows it creates), if you are in doubt whether an item exists, search first. Even if the item isn't the same, it may be worth building on or referencing as a synonym.
+
+```
+GET /statements?attribute=acf5cebb-8d80-45ad-9a1f-a3dd48682ef6&value=<NameYouAreLookingFor>
+```
+(`acf5cebb-8d80-45ad-9a1f-a3dd48682ef6` is `theName`.) Note this match is exact, not fuzzy or substring — a near-miss on spelling or casing will not surface an existing item.
+
+### Add backlinks when UUIDs are used in code and documents
+
+UUIDs will inevitably be hardcoded into code. This is neither avoidable nor does this design philosophy consider it negative. Rather, this makes explicit the implicit design choices of the code, so that these design choices can be quickly queried and updates proposed to the user or data steward.
+
+## Future plans
+
+- vector database for name and intentions
+- aSynonym of X is Y
+- Projects or Domains to help searches
+- Better versioning and superseding / deprecating logic
+- A better way to do provenance
+- Cryptographically signed items
