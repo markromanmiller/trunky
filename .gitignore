@@ -1,6 +1,53 @@
-*.db
-*.db.bak.*
+# This repository is public. Everything is ignored unless listed below, so a new file or set stays
+# private until someone adds it here on purpose.
+/*
+
+!/.gitignore
+!/README.md
+!/INTENT.md
+!/SYSARCH.md
+!/llms.txt
+!/requirements.txt
+!/trunky.conf
+
+!/explorer/
+# mockups name private sets
+/explorer/static/mockups/
+
+!/tools/
+/tools/*
+!/tools/check.py
+!/tools/trunky_lock.py
+!/tools/set_dag.py
+!/tools/export.py
+!/tools/set_run_status.py
+!/tools/ecs/
+/tools/ecs/*
+!/tools/ecs/engine.py
+!/tools/ecs/view.py
+!/tools/ecs/claude_actor.py
+!/tools/systems/
+/tools/systems/*
+!/tools/systems/classify_calendar_events.py
+!/tools/systems/fetch_metadata.py
+!/tools/systems/pull_calendar.py
+!/tools/systems/screen.py
+
+!/proposals/
+/proposals/*
+!/proposals/ecs-engine-design.md
+!/proposals/query-dialect-design.md
+
+# Statement sets: only those whose aReaderGroup is everyone. The registry and permissions sets stay local,
+# since they name every set, private ones included.
+!/sets/
+/sets/*
+!/sets/e8fc1b1b-e129-4fd0-8841-4fc7ce437c6e.csv
+!/sets/f06f1c36-ea82-4764-928c-2f8e8e1b402f.csv
+!/sets/4c6e512c-e078-4edb-9db7-44ccc18f6bda.csv
+!/sets/0bbb6b35-b62e-413e-ad35-744e2c24c7f8.csv
+!/sets/29e974d6-52e0-4b1a-b35f-e3b6a9b03a10.csv
+!/sets/2b1275fb-90ee-48c3-9aa4-d6cdb0341254.csv
+
 __pycache__/
 *.pyc
-.venv/
-chi-paper/

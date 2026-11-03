@@ -1,0 +1,215 @@
+handle,attribute,entity,value,value_type
+756fd0b6-5844-4674-b623-fda1a7b7b999,2f20ad3f-595a-4380-a13d-2b330e164f0b,1a99f570-bcc8-45a8-8a6e-ee7741b4a3b0,test@example.org,str
+bae3d3d2-1f4a-4204-9d0b-eb3a459efc2d,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,theName,str
+49e81f20-9d05-4ede-91ee-717e85d8aa56,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,2f20ad3f-595a-4380-a13d-2b330e164f0b,theSender,str
+fd11b5f8-c756-4994-b45a-a5c5b3342440,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,9ca34038-1a65-4ede-88c5-1492ab4bc249,theIntention,str
+953f2505-2804-43a4-8b09-bac91e00c894,9ca34038-1a65-4ede-88c5-1492ab4bc249,9ca34038-1a65-4ede-88c5-1492ab4bc249,"This string represents instructions, intentions, or interpretations in natural language. It grounds the structure to reality.",str
+d1d4174b-323c-480e-a3db-d132961cbd9e,9ca34038-1a65-4ede-88c5-1492ab4bc249,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,Display this as a human-readable name to the user instead of the UUID in most situations,str
+b6489ad2-8db1-4d3c-9968-d316ec402cdc,9ca34038-1a65-4ede-88c5-1492ab4bc249,2f20ad3f-595a-4380-a13d-2b330e164f0b,Email address of the sender of this email.,str
+c7f92286-d49a-4f4f-9f08-06bb7cbe4df8,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,bfb8804a-d718-4f08-b64d-c97058c3afcc,aReceiver,str
+8171b0a3-41bc-403a-998d-aaab6b936b48,9ca34038-1a65-4ede-88c5-1492ab4bc249,bfb8804a-d718-4f08-b64d-c97058c3afcc,Email address of a receiver of this email.,str
+482abc91-ecd1-4260-946a-974791e0beaf,bfb8804a-d718-4f08-b64d-c97058c3afcc,1a99f570-bcc8-45a8-8a6e-ee7741b4a3b0,friend@example.com,str
+a05c23af-2b28-4931-b96b-9b9161ff9a4c,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,aComponent,str
+ce35108f-1e0f-480e-bf87-be8ecb28eb5b,9ca34038-1a65-4ede-88c5-1492ab4bc249,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,"Tags an entity as belonging to a category, so entities sharing that category can be validated for a shared shape.",str
+d588b9aa-b2b9-47e6-bbb3-3e696868aedf,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d0be292d-e58c-4177-9349-e737ca26639a,Email,str
+b69e8b7a-e492-4638-9939-e64c389d5af6,9ca34038-1a65-4ede-88c5-1492ab4bc249,d0be292d-e58c-4177-9349-e737ca26639a,"Marks an entity as an email, expected to carry theSender and at least one aReceiver.",str
+9975716f-5dab-440e-bcb9-d72799a3f1ec,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,1a99f570-bcc8-45a8-8a6e-ee7741b4a3b0,d0be292d-e58c-4177-9349-e737ca26639a,uuid
+7fa4a8f5-5eec-483a-86e4-62c6957462b0,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,24762266-9337-4930-b88c-55b6af4e7642,aRequiredSlot,str
+e2b60c83-18f8-4170-ad89-905de8562a3f,9ca34038-1a65-4ede-88c5-1492ab4bc249,24762266-9337-4930-b88c-55b6af4e7642,"Declares that entities carrying a given component must have at least one statement using the given attribute, for validation purposes.",str
+d2c478d6-ccb4-4672-8a34-5b49ab60b53e,24762266-9337-4930-b88c-55b6af4e7642,d0be292d-e58c-4177-9349-e737ca26639a,2f20ad3f-595a-4380-a13d-2b330e164f0b,uuid
+df4e6fc9-4549-4342-b695-ad788b4231bb,24762266-9337-4930-b88c-55b6af4e7642,d0be292d-e58c-4177-9349-e737ca26639a,bfb8804a-d718-4f08-b64d-c97058c3afcc,uuid
+d36c3789-ae7b-4c20-875e-d169fbc19ebf,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,8e37c137-4791-470c-8af2-f9ef087d76f6,SlotCriteria,str
+06a13ff8-8b17-475f-a67e-31d2a1d53a4d,9ca34038-1a65-4ede-88c5-1492ab4bc249,8e37c137-4791-470c-8af2-f9ef087d76f6,"Tags an attribute as one that declares a slot relationship between a component and an attribute it expects members to carry -- regardless of whether that expectation is enforced as an error, a warning, or purely informational.",str
+6e13c00c-605f-4692-b28a-318a79b0e7b0,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,8a707bcb-7ff7-488f-b7e3-b1679f823c95,aDesirableSlot,str
+d6653479-cf64-4057-8c7f-1e9e89e25546,9ca34038-1a65-4ede-88c5-1492ab4bc249,8a707bcb-7ff7-488f-b7e3-b1679f823c95,"Declares that entities carrying a given component are expected to have at least one statement using the given attribute; absence is worth a warning, not an error, and signals data worth completing.",str
+9bc6ffeb-4ff6-4477-b4d6-1961b4076cc1,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,anOptionalSlot,str
+e3a37884-a65a-49fc-a9f2-828e04adbadc,9ca34038-1a65-4ede-88c5-1492ab4bc249,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,"Declares that entities carrying a given component may have this attribute, for table and schema discovery purposes only -- its absence has no validation consequence.",str
+3fe7df4a-e5ed-4a8f-9780-75b911c54074,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,24762266-9337-4930-b88c-55b6af4e7642,8e37c137-4791-470c-8af2-f9ef087d76f6,uuid
+c5922f27-613d-4068-b02b-e99cc32abad4,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,8a707bcb-7ff7-488f-b7e3-b1679f823c95,8e37c137-4791-470c-8af2-f9ef087d76f6,uuid
+368959cc-df4a-4e85-b9ab-0c9fcefe2ba3,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,8e37c137-4791-470c-8af2-f9ef087d76f6,uuid
+171f17e6-b3d2-413b-aef3-99e7f130b018,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,29a25e0e-3f32-4787-965e-3ecc917d6fef,aNote,str
+a5caef25-900e-4fda-971b-15d017361576,9ca34038-1a65-4ede-88c5-1492ab4bc249,29a25e0e-3f32-4787-965e-3ecc917d6fef,Free text. Deliberately left unspecified -- no fixed meaning is imposed on what this note should contain.,str
+a11fbe45-8bc3-49e4-a586-e8e620ebffd1,d9496c5d-6e55-43ca-84bf-72d565c33419,06a13ff8-8b17-475f-a67e-31d2a1d53a4d,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+960be789-7aea-408a-9152-e1a10749cc15,d9496c5d-6e55-43ca-84bf-72d565c33419,171f17e6-b3d2-413b-aef3-99e7f130b018,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+ce9737a0-0c44-478e-9ff5-32f31a65c252,d9496c5d-6e55-43ca-84bf-72d565c33419,368959cc-df4a-4e85-b9ab-0c9fcefe2ba3,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+2148873b-1855-428b-bdae-e4dbd1e31730,d9496c5d-6e55-43ca-84bf-72d565c33419,3fe7df4a-e5ed-4a8f-9780-75b911c54074,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+853703fc-852e-42bf-bf2b-29c2de577745,d9496c5d-6e55-43ca-84bf-72d565c33419,482abc91-ecd1-4260-946a-974791e0beaf,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+a57ed535-e194-443e-ad10-270edf621a02,d9496c5d-6e55-43ca-84bf-72d565c33419,49e81f20-9d05-4ede-91ee-717e85d8aa56,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+ff48f6a0-e15a-48ce-bc0a-1e2e66fa0848,d9496c5d-6e55-43ca-84bf-72d565c33419,6e13c00c-605f-4692-b28a-318a79b0e7b0,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+db104e4b-7b15-4161-bae1-7db8be2ddc9a,d9496c5d-6e55-43ca-84bf-72d565c33419,756fd0b6-5844-4674-b623-fda1a7b7b999,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+495b878a-dd93-4633-b9c2-1f9e29227622,d9496c5d-6e55-43ca-84bf-72d565c33419,7fa4a8f5-5eec-483a-86e4-62c6957462b0,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+33ef2f16-176e-4d56-aee4-5529a8527e86,d9496c5d-6e55-43ca-84bf-72d565c33419,8171b0a3-41bc-403a-998d-aaab6b936b48,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+d33d90df-7dde-47bb-a70c-57cd02ddfc28,d9496c5d-6e55-43ca-84bf-72d565c33419,953f2505-2804-43a4-8b09-bac91e00c894,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+ece30e1e-dfe7-4b14-94f4-afc312287130,d9496c5d-6e55-43ca-84bf-72d565c33419,9975716f-5dab-440e-bcb9-d72799a3f1ec,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+077a4d51-97b7-438a-8bec-d5b71e9771ab,d9496c5d-6e55-43ca-84bf-72d565c33419,9bc6ffeb-4ff6-4477-b4d6-1961b4076cc1,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+f39c8f2c-6da5-4954-b3be-ea0c73b35b5b,d9496c5d-6e55-43ca-84bf-72d565c33419,a05c23af-2b28-4931-b96b-9b9161ff9a4c,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+c2cb591c-5afb-4746-9516-a08ec0117a35,d9496c5d-6e55-43ca-84bf-72d565c33419,a5caef25-900e-4fda-971b-15d017361576,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+425cd2d9-9929-4fee-9e9a-6905f6cecaaf,d9496c5d-6e55-43ca-84bf-72d565c33419,b6489ad2-8db1-4d3c-9968-d316ec402cdc,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+92a2dd3c-4b9c-4010-ab6b-1b73efd0e7ed,d9496c5d-6e55-43ca-84bf-72d565c33419,b69e8b7a-e492-4638-9939-e64c389d5af6,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+6f5939fd-a98f-43ec-838a-75acb4e3eb13,d9496c5d-6e55-43ca-84bf-72d565c33419,bae3d3d2-1f4a-4204-9d0b-eb3a459efc2d,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+ce0a8a54-45a8-4ac8-9cca-fcd547fa0e59,d9496c5d-6e55-43ca-84bf-72d565c33419,c5922f27-613d-4068-b02b-e99cc32abad4,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+4d6fb79f-9f73-4682-a9f7-29ebe2812001,d9496c5d-6e55-43ca-84bf-72d565c33419,c7f92286-d49a-4f4f-9f08-06bb7cbe4df8,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+fbbfbccc-22d1-4746-a2bf-fe291ef655d2,d9496c5d-6e55-43ca-84bf-72d565c33419,ce35108f-1e0f-480e-bf87-be8ecb28eb5b,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+c0c213b5-6f50-4205-a3ff-44d10dac4c2a,d9496c5d-6e55-43ca-84bf-72d565c33419,d1d4174b-323c-480e-a3db-d132961cbd9e,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+9a55e1ff-1898-4541-abdc-49ae681b956b,d9496c5d-6e55-43ca-84bf-72d565c33419,d2c478d6-ccb4-4672-8a34-5b49ab60b53e,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+9fb674e9-0172-4357-af06-f1d9ad350059,d9496c5d-6e55-43ca-84bf-72d565c33419,d36c3789-ae7b-4c20-875e-d169fbc19ebf,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+e97a5477-18e5-4c54-a828-addaa576dd58,d9496c5d-6e55-43ca-84bf-72d565c33419,d588b9aa-b2b9-47e6-bbb3-3e696868aedf,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+64db1e63-7b4e-4be8-b971-b5130251073f,d9496c5d-6e55-43ca-84bf-72d565c33419,d6653479-cf64-4057-8c7f-1e9e89e25546,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+d9db1125-1684-4caf-9bf4-3a0f1efefd54,d9496c5d-6e55-43ca-84bf-72d565c33419,df4e6fc9-4549-4342-b695-ad788b4231bb,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+26f46647-a111-4594-ab7f-b11668ecad24,d9496c5d-6e55-43ca-84bf-72d565c33419,e2b60c83-18f8-4170-ad89-905de8562a3f,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+299add65-e7ed-4fdc-a03e-c7fca62016ff,d9496c5d-6e55-43ca-84bf-72d565c33419,e3a37884-a65a-49fc-a9f2-828e04adbadc,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+d69cc24f-6a2c-4db3-8de9-97269deae12d,d9496c5d-6e55-43ca-84bf-72d565c33419,fd11b5f8-c756-4994-b45a-a5c5b3342440,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+ef076b6d-00ee-453c-ba2b-f0f2b14cbb2b,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,9084efd2-1fcf-492e-9ec1-63ef91691f47,aReferencedUUID,str
+301740a6-4f93-4cfd-bfa6-a40e14eca19f,d9496c5d-6e55-43ca-84bf-72d565c33419,ef076b6d-00ee-453c-ba2b-f0f2b14cbb2b,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+badb07b4-255c-4889-9c8b-49b70052cd1b,9ca34038-1a65-4ede-88c5-1492ab4bc249,9084efd2-1fcf-492e-9ec1-63ef91691f47,"Declares that a document or piece of code hardcodes the given UUID because that's the shape best to operate on. Lets a data steward find every place an item is used -- useful for keeping items up to date, or seeing how an item is used in context.",str
+45302acb-2f66-463c-b7b8-be382ae22d01,d9496c5d-6e55-43ca-84bf-72d565c33419,badb07b4-255c-4889-9c8b-49b70052cd1b,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+7dfd1f25-64f6-442f-811f-7d1c94443e1f,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,317df636-6d11-47b5-83d9-2daf3f5b335c,lignindb agent guide,str
+f7b107b1-4618-4c1c-821f-093139ce3ab4,d9496c5d-6e55-43ca-84bf-72d565c33419,7dfd1f25-64f6-442f-811f-7d1c94443e1f,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+289c73c7-2042-4736-a54a-f822922ed0e3,9ca34038-1a65-4ede-88c5-1492ab4bc249,317df636-6d11-47b5-83d9-2daf3f5b335c,"General-purpose onboarding document for an AI agent working with lignindb: explains the base data format, common cross-domain patterns, and usage principles.",str
+89985460-ba10-40d1-bc02-c0bbdc05c7f9,d9496c5d-6e55-43ca-84bf-72d565c33419,289c73c7-2042-4736-a54a-f822922ed0e3,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+2a0cf28a-3fb0-4b7a-9bf6-b6dc33a25ce4,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+5b6a0f31-29cb-4264-967b-c9f0d04a117a,d9496c5d-6e55-43ca-84bf-72d565c33419,2a0cf28a-3fb0-4b7a-9bf6-b6dc33a25ce4,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+ddd046a2-3b5e-4714-93ae-69b1f02b1734,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,9ca34038-1a65-4ede-88c5-1492ab4bc249,uuid
+139f8370-9416-44af-be61-5123b6099439,d9496c5d-6e55-43ca-84bf-72d565c33419,ddd046a2-3b5e-4714-93ae-69b1f02b1734,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+d8da580e-ba31-429b-8c41-96d67b01a665,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,uuid
+8cf60a96-fa0c-4daf-aad8-7365e206764e,d9496c5d-6e55-43ca-84bf-72d565c33419,d8da580e-ba31-429b-8c41-96d67b01a665,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+86fb8955-92d9-4f0d-a279-44c7ffc1ae18,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,8e37c137-4791-470c-8af2-f9ef087d76f6,uuid
+e884745f-c993-4b02-b76e-6a841b3422da,d9496c5d-6e55-43ca-84bf-72d565c33419,86fb8955-92d9-4f0d-a279-44c7ffc1ae18,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+3a71ab74-1a33-4dda-99cc-3d3efb44b299,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,24762266-9337-4930-b88c-55b6af4e7642,uuid
+926c102a-a24d-40a0-8eda-f7e54cebf49d,d9496c5d-6e55-43ca-84bf-72d565c33419,3a71ab74-1a33-4dda-99cc-3d3efb44b299,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+358784cf-1663-4384-9dbf-8819ef6d49ba,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,8a707bcb-7ff7-488f-b7e3-b1679f823c95,uuid
+69399c9d-2909-499b-800b-ac29d74cee88,d9496c5d-6e55-43ca-84bf-72d565c33419,358784cf-1663-4384-9dbf-8819ef6d49ba,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+6acfe58b-f862-4e81-ac03-90c4dac3dcfc,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,uuid
+ae6d06e4-0fe1-4b9d-9aa8-504edfc97e46,d9496c5d-6e55-43ca-84bf-72d565c33419,6acfe58b-f862-4e81-ac03-90c4dac3dcfc,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+88375c28-552d-4b48-9279-ee029d2fd1cc,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,d9496c5d-6e55-43ca-84bf-72d565c33419,uuid
+12b04fa8-1f16-4201-afcd-59251f3d1374,d9496c5d-6e55-43ca-84bf-72d565c33419,88375c28-552d-4b48-9279-ee029d2fd1cc,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+73ffb24d-c510-49f5-93cb-feb9c085d357,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+a191c4f3-bd71-42a3-92dd-7a88e509ee43,d9496c5d-6e55-43ca-84bf-72d565c33419,73ffb24d-c510-49f5-93cb-feb9c085d357,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+2162ddd4-8f80-41db-b7f9-9ec863cbddd8,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,29a25e0e-3f32-4787-965e-3ecc917d6fef,uuid
+c29d9497-7ddc-46f8-ae39-d8a964301bd8,d9496c5d-6e55-43ca-84bf-72d565c33419,2162ddd4-8f80-41db-b7f9-9ec863cbddd8,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+ea507988-151f-4623-b96f-472b8ceaa8bc,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,9084efd2-1fcf-492e-9ec1-63ef91691f47,uuid
+55e195b0-96d7-40b3-ba82-5447d14b8ada,d9496c5d-6e55-43ca-84bf-72d565c33419,ea507988-151f-4623-b96f-472b8ceaa8bc,a9a2120b-8b5e-4f7b-ad85-2795929e4329,uuid
+d1e4e012-8f73-4b09-af5f-1e6227f6a5a5,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,0d9a7284-495e-45ae-98e8-e28f57c5cce3,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+bfb19ec0-3eb7-41c2-bbbb-ded171b8c3ee,d9496c5d-6e55-43ca-84bf-72d565c33419,d1e4e012-8f73-4b09-af5f-1e6227f6a5a5,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+c46f5d15-6ea2-433c-afd0-c2f1d1809663,29a25e0e-3f32-4787-965e-3ecc917d6fef,0d9a7284-495e-45ae-98e8-e28f57c5cce3,"Chat session with Mark Miller via Claude Code, 2026-08-23.",str
+9bac1dab-5507-42bd-865c-7754dc372e51,d9496c5d-6e55-43ca-84bf-72d565c33419,c46f5d15-6ea2-433c-afd0-c2f1d1809663,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+495fcc9e-67ac-4eed-bc2d-d0c06338a4b8,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,1c260a46-c907-4efc-adb2-9345aebd9500,anErratum,str
+7a700196-62d9-49e4-aeb5-261cfb5a1f4d,d9496c5d-6e55-43ca-84bf-72d565c33419,495fcc9e-67ac-4eed-bc2d-d0c06338a4b8,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+3f2d3a4f-314e-4d84-b7cc-3732994ed533,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,1c260a46-c907-4efc-adb2-9345aebd9500,uuid
+2db75f59-725c-470a-a481-be7c172957d2,d9496c5d-6e55-43ca-84bf-72d565c33419,3f2d3a4f-314e-4d84-b7cc-3732994ed533,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+7ec3c7b1-9fbc-4b68-a11a-e323cec8690e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,05d61805-e171-4bdc-a770-3cf2ed75cf44,theDescription,str
+2e1fdbc7-4718-4718-9fb8-4661d9fec892,d9496c5d-6e55-43ca-84bf-72d565c33419,7ec3c7b1-9fbc-4b68-a11a-e323cec8690e,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+aee57d3c-c795-4aa7-8014-1acca232b490,9ca34038-1a65-4ede-88c5-1492ab4bc249,05d61805-e171-4bdc-a770-3cf2ed75cf44,"A longer, paragraph-plus natural-language description of the item -- more substantial than aNote's deliberately-unspecified free text.",str
+2d087277-2d92-46ca-89b0-41326282a8c8,d9496c5d-6e55-43ca-84bf-72d565c33419,aee57d3c-c795-4aa7-8014-1acca232b490,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+3f751f60-77ca-48b9-b8d5-bea1b8a100cf,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,05d61805-e171-4bdc-a770-3cf2ed75cf44,uuid
+3455e607-25e8-4584-bc67-601f1f802b27,d9496c5d-6e55-43ca-84bf-72d565c33419,3f751f60-77ca-48b9-b8d5-bea1b8a100cf,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+38af52db-dabe-4cc2-ae9e-ad4a33af537c,5643a4bf-141c-4e8f-b630-3459338a8a0b,317df636-6d11-47b5-83d9-2daf3f5b335c,https://lignindb.dev.markromanmiller.com/llms.txt,str
+be930e41-6fe2-405d-99cd-321a96ab3441,d9496c5d-6e55-43ca-84bf-72d565c33419,38af52db-dabe-4cc2-ae9e-ad4a33af537c,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+2e3a8dd9-019e-4649-8004-703d97a228e8,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9,aReplacement,str
+bdb794c3-ec93-4dcf-bf0c-b4fe855a4c65,d9496c5d-6e55-43ca-84bf-72d565c33419,2e3a8dd9-019e-4649-8004-703d97a228e8,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+ad98fcc1-0ba2-45fb-a13e-6161d368ff98,9ca34038-1a65-4ede-88c5-1492ab4bc249,8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9,"Points from an older statement's handle (or an older entity) to the newer statement or entity that supersedes it. A reader should prefer the value(s) here over the item bearing this statement's entity, unless something else in turn has an aReplacement pointing away from that item too -- walk the chain to find the current one. Multi-valued: an old item may have been superseded by more than one new item (e.g. split into two). Nothing in this store carries a timestamp, so recency is inferred only by following this chain, never by row order.",str
+5ba5e23c-1c76-4dfd-ba23-d6e628da3d03,d9496c5d-6e55-43ca-84bf-72d565c33419,ad98fcc1-0ba2-45fb-a13e-6161d368ff98,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+923878b3-5ed5-4916-898c-e79ada7ea069,9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9,uuid
+cab44ade-a285-417c-9e90-8d709f0ec50b,d9496c5d-6e55-43ca-84bf-72d565c33419,923878b3-5ed5-4916-898c-e79ada7ea069,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+d34906eb-27e0-4a2d-8b53-a44fae149877,9ca34038-1a65-4ede-88c5-1492ab4bc249,1c260a46-c907-4efc-adb2-9345aebd9500,"Free text flagging that the statement or entity carrying this (by UUID) should never have existed as asserted -- a mistake, not a later legitimate change. Multi-valued (anErratum, not theErratum) since an item could be wrong for more than one reason. Distinct from aReplacement, which chains a sequence of states each true in their own time -- anErratum instead marks something void from the start. Could become a full component later if a flagged item ever needs more than free text attached.",str
+588acc33-8b26-46e6-bb7c-04115ed8d87f,d9496c5d-6e55-43ca-84bf-72d565c33419,d34906eb-27e0-4a2d-8b53-a44fae149877,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+b8436d48-b8ed-41ab-9fc3-6fc2d489775e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,00000000-0000-0000-0000-000000000000,theExplicitAbsence,str
+79f92de6-1631-4471-94a8-02275dc5d390,d9496c5d-6e55-43ca-84bf-72d565c33419,b8436d48-b8ed-41ab-9fc3-6fc2d489775e,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+94677b96-3199-4eb4-83d1-7b62f53963f5,9ca34038-1a65-4ede-88c5-1492ab4bc249,00000000-0000-0000-0000-000000000000,"The nil UUID (all zeros), used as the value of a uuid-typed statement to mean 'this entity was specifically checked for this attribute, and confirmed to have no applicable value' -- distinct from no row existing at all, which means never checked. E.g. anInvestigatedConstruct of <paper> is theExplicitAbsence records that a paper was screened and confirmed to report no psychological construct.",str
+da158b5b-2891-49f8-ad79-9a54394153e8,d9496c5d-6e55-43ca-84bf-72d565c33419,94677b96-3199-4eb4-83d1-7b62f53963f5,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+3706587f-f64e-42ec-8b60-606aff014ee9,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,c55a6f54-6753-4baf-a0f1-7f136962ebdf,aConditionallyRequiredSlot,str
+4cfd215c-ab90-4446-b3da-c5b2f9d422b2,d9496c5d-6e55-43ca-84bf-72d565c33419,3706587f-f64e-42ec-8b60-606aff014ee9,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+c1710dbe-daef-4289-ac69-2d14d5a4d40f,9ca34038-1a65-4ede-88c5-1492ab4bc249,c55a6f54-6753-4baf-a0f1-7f136962ebdf,"Declares that entities carrying a given component are required to carry the given attribute only when some condition holds (see theConditionDescription on the attribute itself for what that condition is) -- distinct from aRequiredSlot (always required), aDesirableSlot (expected, absence is a warning), and anOptionalSlot (no validation consequence either way).",str
+227e1fd8-1d9e-40cd-a86b-f511db7f6fa4,d9496c5d-6e55-43ca-84bf-72d565c33419,c1710dbe-daef-4289-ac69-2d14d5a4d40f,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+ec9ce7df-98d6-4e23-b818-940e6825bf27,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,c55a6f54-6753-4baf-a0f1-7f136962ebdf,8e37c137-4791-470c-8af2-f9ef087d76f6,uuid
+0731d243-be62-4f96-a6dc-3902ed1d5287,d9496c5d-6e55-43ca-84bf-72d565c33419,ec9ce7df-98d6-4e23-b818-940e6825bf27,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+16d5b70a-c079-480f-beb5-3c892318b9ba,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,5ede6713-27f2-495c-8095-d17cc6367cd2,theConditionDescription,str
+f86f186d-7d35-4b77-8c59-d8fda7504b4b,d9496c5d-6e55-43ca-84bf-72d565c33419,16d5b70a-c079-480f-beb5-3c892318b9ba,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+2d9c1dc8-9865-4ffb-b0c0-132b11b30962,9ca34038-1a65-4ede-88c5-1492ab4bc249,5ede6713-27f2-495c-8095-d17cc6367cd2,"Free text on a conditionally-required attribute (one declared via aConditionallyRequiredSlot) describing the condition under which it actually becomes required, e.g. 'required only when theTravelerType is Student.'",str
+8ae311d2-9427-4449-a683-ea9bd49add88,d9496c5d-6e55-43ca-84bf-72d565c33419,2d9c1dc8-9865-4ffb-b0c0-132b11b30962,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+b3b496e7-66b4-4e54-8e98-1976f236ffe6,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,52f1a174-a1da-4594-9e7e-9e72fca7ba08,EnumeratedOptions,str
+edf28ea1-380d-4f54-90de-ec9ef9909731,d9496c5d-6e55-43ca-84bf-72d565c33419,b3b496e7-66b4-4e54-8e98-1976f236ffe6,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+76242c16-c5b6-49e3-8d6e-779351bf4668,9ca34038-1a65-4ede-88c5-1492ab4bc249,52f1a174-a1da-4594-9e7e-9e72fca7ba08,"Tags an attribute as having a fixed, closed set of allowed values, enumerated via anEnumeratedOption -- as opposed to free text. A value not among the listed options should be treated as invalid/unexpected.",str
+825aec8a-969c-4b52-85c3-eb215b196796,d9496c5d-6e55-43ca-84bf-72d565c33419,76242c16-c5b6-49e3-8d6e-779351bf4668,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+6ff4ced6-c05f-40e7-a4fd-cc9b5fe4e46a,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,eb7d9144-af89-4b89-9958-8bbcc533a6d3,anEnumeratedOption,str
+55f39def-9fbd-4844-a583-ced01da1aa42,d9496c5d-6e55-43ca-84bf-72d565c33419,6ff4ced6-c05f-40e7-a4fd-cc9b5fe4e46a,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+eed4996e-d73d-48b4-94d4-d1dc05ffed30,9ca34038-1a65-4ede-88c5-1492ab4bc249,eb7d9144-af89-4b89-9958-8bbcc533a6d3,One allowed value for an attribute tagged aComponent=EnumeratedOptions. Multi-valued -- one row per option.,str
+8b46ee24-0e90-4ab8-945e-50c0e78bf17c,d9496c5d-6e55-43ca-84bf-72d565c33419,eed4996e-d73d-48b4-94d4-d1dc05ffed30,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+ce67d576-f9fb-4b7a-a6d3-54cf9406954d,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,9c447925-9580-4a26-a8d5-68e08001a836,Statement Draft Shorthand Notation,str
+ec90c7e9-a883-4db0-979b-ffca6151e72b,d9496c5d-6e55-43ca-84bf-72d565c33419,ce67d576-f9fb-4b7a-a6d3-54cf9406954d,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+339a4496-526b-40d8-9cf4-30839a5153f0,9ca34038-1a65-4ede-88c5-1492ab4bc249,9c447925-9580-4a26-a8d5-68e08001a836,"A compact notation for previewing statements to a human collaborator before committing them: {uuid[:4]:theName} of {uuid[:4]:theName} is <value>. Each bracketed reference is the item's UUID truncated to its first 4 characters, optionally paired with its theName so both parties can verify what's being referenced without reading full UUIDs. Applies to entities, attributes, and statement handles alike -- anything with a theName gets one shown; anything without (e.g. a bare handle) is just shown as {uuid[:4]} on its own.",str
+0b93ca51-1c61-451a-b3ec-abbebaba7184,d9496c5d-6e55-43ca-84bf-72d565c33419,339a4496-526b-40d8-9cf4-30839a5153f0,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+41b586bd-26d8-4e2c-a378-285dbe0d75c0,29a25e0e-3f32-4787-965e-3ecc917d6fef,9c447925-9580-4a26-a8d5-68e08001a836,"Worked examples: {acf5:theName} of {5261:Mark's ISMAR trip request} is ""Mark's ISMAR trip request"" -- a plain fact preview. {aRequiredSlot} of {bf2e} is {69f0:theTravelerName} -- names omitted where the reader already knows the item from context. Statement handles work the same way as entity references: {510a} of {29a2:aNote} is ""..."" previews a note being attached to a specific prior statement's handle, not to an entity. This is purely a human-review convention for previewing a batch before POSTing it -- the actual API calls always use full UUIDs; nothing about the shorthand is written to the store or affects the data model. Adopted partway through a long session (2026-09) once un-reviewed writes started causing real mistakes (see e.g. the AvailabilityWindow attendee-attribute mixup and the InstitutionalProcess-tag misuse, both corrected via anErratum in this same chat's history) -- showing the statements before committing them turned out to catch errors a silent write wouldn't have.",str
+64b71c3b-1416-45ea-808e-756014e9ec1d,d9496c5d-6e55-43ca-84bf-72d565c33419,41b586bd-26d8-4e2c-a378-285dbe0d75c0,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+2ddb2ce6-7c6f-4b61-9d9d-b777e6379b56,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,07113780-565e-452c-880f-e3bbc90b2453,OrderedList,str
+e6ca2bcc-e0b2-4b43-b32a-50e4bdf0338c,9ca34038-1a65-4ede-88c5-1492ab4bc249,07113780-565e-452c-880f-e3bbc90b2453,"Tags an entity as the head of an ordered sequence, built like a functional-language linked list. theFirst and theLast point at its end OrderedListItem wrappers; the order is read by starting at theFirst and following theNext until reaching theLast. Each wrapper's theMember is the actual listed item, so the listed items themselves carry nothing and can appear in any number of lists.",str
+51bb4e04-1ad8-4d59-8fcb-2673749fd2ba,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,33a57005-dc0b-463e-b4e6-251938b846c7,OrderedListItem,str
+fdc7ffc7-c909-4641-bb19-d6e6effaa0f9,9ca34038-1a65-4ede-88c5-1492ab4bc249,33a57005-dc0b-463e-b4e6-251938b846c7,Tags an entity as one position (a wrapper cell) in exactly one OrderedList. It points at the listed item via theMember and at the following position via theNext.,str
+7aa464a5-116b-4d3c-b0f9-1838ce01b010,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,5b5201fb-6b2e-4486-b73c-194022bae390,theMember,str
+eb95e7a7-0153-4ee9-a278-ccd4934e8df2,9ca34038-1a65-4ede-88c5-1492ab4bc249,5b5201fb-6b2e-4486-b73c-194022bae390,The item (an entity or a statement handle) that an OrderedListItem wrapper holds in its position.,str
+38362e57-be1a-41bc-8dda-5509d0f65b76,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,bf93f20a-bbb3-4655-b832-ad8d2b07e897,theFirst,str
+505d4af6-f663-4b14-928c-bb1bf2d1b32c,9ca34038-1a65-4ede-88c5-1492ab4bc249,bf93f20a-bbb3-4655-b832-ad8d2b07e897,The first OrderedListItem wrapper of an OrderedList.,str
+7b89bac3-4cb2-4538-85e2-603020c19562,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,e58bb5bc-fa24-4cd8-99db-a43fc12f600a,theLast,str
+c82dc1e4-cf4e-49da-8801-546f3e24a028,9ca34038-1a65-4ede-88c5-1492ab4bc249,e58bb5bc-fa24-4cd8-99db-a43fc12f600a,"The last OrderedListItem wrapper of an OrderedList. Lets a reader confirm that following theNext reached the true end, rather than a gap.",str
+d2986276-b4e3-4152-8645-4c44cfd4d23e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,78587753-20ed-4d00-8ca4-a94f65b551a0,theNext,str
+040f5b01-1bc4-4819-8872-1ee9067cd99a,9ca34038-1a65-4ede-88c5-1492ab4bc249,78587753-20ed-4d00-8ca4-a94f65b551a0,The OrderedListItem wrapper that comes immediately after this one in the same OrderedList. The last wrapper has none.,str
+8ab5704f-0d72-48d5-b0c4-68c3f80ebb54,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,4525b140-e244-4985-a38d-3ba6cddcfde5,thePrevious,str
+7786bec7-e7b2-41ca-9848-4fb365a98fc7,9ca34038-1a65-4ede-88c5-1492ab4bc249,4525b140-e244-4985-a38d-3ba6cddcfde5,The OrderedListItem wrapper that comes immediately before this one in the same OrderedList. Redundant with theNext (reverse-look it up instead); write it only where walking backward matters.,str
+8512f8cd-a7a0-47fb-aad2-dd7c97fa1015,24762266-9337-4930-b88c-55b6af4e7642,07113780-565e-452c-880f-e3bbc90b2453,bf93f20a-bbb3-4655-b832-ad8d2b07e897,uuid
+c9176bfe-1cea-4180-8f3c-de39af1240ae,24762266-9337-4930-b88c-55b6af4e7642,07113780-565e-452c-880f-e3bbc90b2453,e58bb5bc-fa24-4cd8-99db-a43fc12f600a,uuid
+fc8e6991-d746-466f-8ade-c7c3f5c62075,24762266-9337-4930-b88c-55b6af4e7642,33a57005-dc0b-463e-b4e6-251938b846c7,5b5201fb-6b2e-4486-b73c-194022bae390,uuid
+fd9caa9e-89ae-41fc-8f6b-a8c033c65f58,8a707bcb-7ff7-488f-b7e3-b1679f823c95,33a57005-dc0b-463e-b4e6-251938b846c7,78587753-20ed-4d00-8ca4-a94f65b551a0,uuid
+c0a775db-981e-484c-b231-f1a8585045e6,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,33a57005-dc0b-463e-b4e6-251938b846c7,4525b140-e244-4985-a38d-3ba6cddcfde5,uuid
+b73f9ca7-ca4d-4562-868b-205b57b832c7,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d9496c5d-6e55-43ca-84bf-72d565c33419,theProvenance,str
+335307f5-5d57-43d6-828e-2dabe8616480,d9496c5d-6e55-43ca-84bf-72d565c33419,b73f9ca7-ca4d-4562-868b-205b57b832c7,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+62cb69ae-13a3-47b2-91fa-d64ef278fad3,9ca34038-1a65-4ede-88c5-1492ab4bc249,d9496c5d-6e55-43ca-84bf-72d565c33419,Points from a statement's handle to the ProvenanceInfo entity describing who assembled it and when.,str
+ec943095-329d-497b-b57a-159934a07bbc,d9496c5d-6e55-43ca-84bf-72d565c33419,62cb69ae-13a3-47b2-91fa-d64ef278fad3,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+bd097fe2-6789-464b-a168-c42b7261480d,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,622966de-0519-4a9b-a2d5-95a99850ba42,ProvenanceInfo,str
+6b2094f6-013d-4471-8ac2-0a1d9a12b952,d9496c5d-6e55-43ca-84bf-72d565c33419,bd097fe2-6789-464b-a168-c42b7261480d,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+01d73853-6b8a-4885-9082-fda0f0fa5399,9ca34038-1a65-4ede-88c5-1492ab4bc249,622966de-0519-4a9b-a2d5-95a99850ba42,A way to tell who put this information together and when.,str
+2ba71d5a-670f-4841-8bd1-f703132e3303,d9496c5d-6e55-43ca-84bf-72d565c33419,01d73853-6b8a-4885-9082-fda0f0fa5399,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+150ba47e-bbb2-40d9-b348-9748ca848993,24762266-9337-4930-b88c-55b6af4e7642,622966de-0519-4a9b-a2d5-95a99850ba42,29a25e0e-3f32-4787-965e-3ecc917d6fef,uuid
+ff1335ae-a1e3-426f-af19-1f7ed4ec6a29,d9496c5d-6e55-43ca-84bf-72d565c33419,150ba47e-bbb2-40d9-b348-9748ca848993,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+351fb2fd-4f41-4970-8aa6-337be8054e13,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,0cacaa3b-d1be-4314-9644-a65baff03a63,theSelfDescribingProvenance,str
+51b07df2-e4c8-48e8-a15c-83770d35f5d9,d9496c5d-6e55-43ca-84bf-72d565c33419,351fb2fd-4f41-4970-8aa6-337be8054e13,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+cea49add-30da-4e13-b4d3-a4a64455780b,9ca34038-1a65-4ede-88c5-1492ab4bc249,0cacaa3b-d1be-4314-9644-a65baff03a63,"Used exactly once per ProvenanceInfo entity, pointing it at itself. Terminates the regress of every provenance statement needing its own provenance -- the same trick as theName of theName.",str
+6545c961-1521-41df-b1b2-c41e9b49c32b,d9496c5d-6e55-43ca-84bf-72d565c33419,cea49add-30da-4e13-b4d3-a4a64455780b,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+a6c3b9cb-5825-403d-85df-c22d53a96f93,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+17627a13-cfac-48bc-a746-1fd8809ea775,29a25e0e-3f32-4787-965e-3ecc917d6fef,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,"Publication vocabulary for generating published statement files from statement sets; agreed with Mark in a Claude Code chat, 2026-10-10.",str
+9530aebe-519f-49ae-98ff-db1370ccfd67,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,4d15b46f-492f-4568-95e6-dfcc778eb980,Export,str
+59d1f359-bb7b-4967-98bb-02d52f719b74,9ca34038-1a65-4ede-88c5-1492ab4bc249,4d15b46f-492f-4568-95e6-dfcc778eb980,A file generated from statement sets and published outside Trunky (e.g. a website's data file). It holds every statement of its included sets plus the public definitions those statements use. Only sets readable by everyone may be included.,str
+566f7fb0-25bd-4554-8bba-c0d3170235eb,24762266-9337-4930-b88c-55b6af4e7642,4d15b46f-492f-4568-95e6-dfcc778eb980,e270e670-73cb-4c76-b17b-2b82bf7ef7b1,uuid
+92be8760-3fe5-4c84-ad68-6299757ee55e,24762266-9337-4930-b88c-55b6af4e7642,4d15b46f-492f-4568-95e6-dfcc778eb980,add5cead-e7fc-4298-b7a3-e799b7380d34,uuid
+e819b998-e01e-475f-9ff5-a68b757e5af9,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,e270e670-73cb-4c76-b17b-2b82bf7ef7b1,anIncludedSet,str
+b95566e2-797c-4dd9-b7fd-3b3601518cf7,9ca34038-1a65-4ede-88c5-1492ab4bc249,e270e670-73cb-4c76-b17b-2b82bf7ef7b1,A statement set whose statements this Export contains.,str
+3f71499b-c959-4a7d-8e5e-d51393be4bff,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,add5cead-e7fc-4298-b7a3-e799b7380d34,thePublishedPath,str
+2b9c1d6c-8a28-4350-9bbe-68255b759bf6,9ca34038-1a65-4ede-88c5-1492ab4bc249,add5cead-e7fc-4298-b7a3-e799b7380d34,"Where the generated file is written, relative to the Trunky folder.",str
+14875603-9ada-4de1-b969-d1d6734cfebf,d9496c5d-6e55-43ca-84bf-72d565c33419,9530aebe-519f-49ae-98ff-db1370ccfd67,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,uuid
+12f048e7-acdf-4def-b97a-4f7fe260dcd4,d9496c5d-6e55-43ca-84bf-72d565c33419,59d1f359-bb7b-4967-98bb-02d52f719b74,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,uuid
+b8a16123-16d0-482b-b320-6842b1d377bf,d9496c5d-6e55-43ca-84bf-72d565c33419,566f7fb0-25bd-4554-8bba-c0d3170235eb,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,uuid
+cb832b05-58a7-4725-af60-8fe722c161c5,d9496c5d-6e55-43ca-84bf-72d565c33419,92be8760-3fe5-4c84-ad68-6299757ee55e,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,uuid
+59d74f5c-6e35-42bb-a3b5-e78451243389,d9496c5d-6e55-43ca-84bf-72d565c33419,e819b998-e01e-475f-9ff5-a68b757e5af9,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,uuid
+405b2f83-d815-4ddf-9bee-66c822fef1b6,d9496c5d-6e55-43ca-84bf-72d565c33419,b95566e2-797c-4dd9-b7fd-3b3601518cf7,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,uuid
+ce95a71f-c06d-4539-a2aa-ad8b291f037b,d9496c5d-6e55-43ca-84bf-72d565c33419,3f71499b-c959-4a7d-8e5e-d51393be4bff,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,uuid
+49af9f40-ad41-419a-a451-3c6158832b1c,d9496c5d-6e55-43ca-84bf-72d565c33419,2b9c1d6c-8a28-4350-9bbe-68255b759bf6,7c28ce2a-a14f-41ec-8fd1-b3c02eab699a,uuid
+d4cbce9a-9bd3-466a-98a2-49371b6310fa,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,a1e6a161-773d-4011-aaa6-13869931f59f,theRecordedTime,str
+daafc3fb-f80c-4c81-afca-f1ff944ea81d,9ca34038-1a65-4ede-88c5-1492ab4bc249,a1e6a161-773d-4011-aaa6-13869931f59f,The ISO date-time at which this information was recorded.,str
+70988d6b-a8fb-41cc-8536-8d89643e327d,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,b0aa9d2a-f3f6-48a2-813e-3f0dea55b651,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+8775388d-ff70-4ef7-b541-d86479038564,29a25e0e-3f32-4787-965e-3ecc917d6fef,b0aa9d2a-f3f6-48a2-813e-3f0dea55b651,"theRecordedTime named in the starter kit (previously only in the private paug-schema) so provenance in any set can use it; agreed with Mark in a Claude Code chat, 2026-10-11.",str
+37e0b4ad-6ebd-4558-8f60-1cfc26ad355f,a1e6a161-773d-4011-aaa6-13869931f59f,b0aa9d2a-f3f6-48a2-813e-3f0dea55b651,2026-10-11T17:39:48-05:00,str
+e61f9fd4-02a0-4b7e-be35-7bb732071ea4,d9496c5d-6e55-43ca-84bf-72d565c33419,d4cbce9a-9bd3-466a-98a2-49371b6310fa,b0aa9d2a-f3f6-48a2-813e-3f0dea55b651,uuid
+e0f82776-40dd-44b1-addf-b443736cb24c,d9496c5d-6e55-43ca-84bf-72d565c33419,daafc3fb-f80c-4c81-afca-f1ff944ea81d,b0aa9d2a-f3f6-48a2-813e-3f0dea55b651,uuid
+96054287-88c4-44bf-8322-334d8fca02fa,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,7ede6e59-945b-4a85-94d8-cce67bf154cc,theRemovalTime,str
+abe55d74-743d-422d-8a35-92019a0b16db,9ca34038-1a65-4ede-88c5-1492ab4bc249,7ede6e59-945b-4a85-94d8-cce67bf154cc,"Written 'theRemovalTime of X is T', where X is a statement's handle or an item's UUID: X held until T and no longer applies from T on. Unlike anErratum (X was never right) and aReplacement (X was superseded by a new statement or item). Current views leave X out once T has passed; a future T schedules the removal.",str
+da0e3990-f0d4-4c6c-811c-fa8e2a509483,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,e08e0092-2fbe-499e-901b-2673a95a7467,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+f8ef6043-01a7-4cf3-aa57-512f51ba3199,29a25e0e-3f32-4787-965e-3ecc917d6fef,e08e0092-2fbe-499e-901b-2673a95a7467,"theRemovalTime; the end of the Jayadeep Gopinath 1-on-1; steps 7-8 of WeeklyScheduleForANewSemester. Agreed with Mark in a Claude Code chat, 2026-10-12.",str
+16d3d904-bf97-414b-a5f2-9754ad4e9318,a1e6a161-773d-4011-aaa6-13869931f59f,e08e0092-2fbe-499e-901b-2673a95a7467,2026-10-12T09:13:35-05:00,str
+65ee3c75-858e-4937-8b97-36de5ca67f94,d9496c5d-6e55-43ca-84bf-72d565c33419,96054287-88c4-44bf-8322-334d8fca02fa,e08e0092-2fbe-499e-901b-2673a95a7467,uuid
+9f2d53d1-943f-4104-9183-a7333d642d6c,d9496c5d-6e55-43ca-84bf-72d565c33419,abe55d74-743d-422d-8a35-92019a0b16db,e08e0092-2fbe-499e-901b-2673a95a7467,uuid
+0ce4c240-3322-4a70-ae24-c87e89fbf433,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,bacac363-2456-4214-a2dd-515b50b886e7,theCardinality,str
+6885283b-c6b1-42d9-bc6c-6957e05a97ee,9ca34038-1a65-4ede-88c5-1492ab4bc249,bacac363-2456-4214-a2dd-515b50b886e7,"The exact number of values an attribute must have on any entity that has it. Can be placed on an attribute, or on a slot statement to apply only within that component.",str
+d528bdfc-5bb8-4749-a8d1-5b4035dcaf55,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,7e5d0630-af8b-471d-8e0a-14eae7f412ce,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+863b9dae-7195-4468-a81a-dee901e2d4ff,29a25e0e-3f32-4787-965e-3ecc917d6fef,7e5d0630-af8b-471d-8e0a-14eae7f412ce,"theCardinality; agreed with Mark in a Claude Code chat, 2026-10-22.",str
+7184d815-ae2b-4a09-b145-adeaf8a1f8de,a1e6a161-773d-4011-aaa6-13869931f59f,7e5d0630-af8b-471d-8e0a-14eae7f412ce,2026-10-22T08:03:51-05:00,str
+769d4dfe-95e9-45a3-a3db-afbca8ef63f7,d9496c5d-6e55-43ca-84bf-72d565c33419,0ce4c240-3322-4a70-ae24-c87e89fbf433,7e5d0630-af8b-471d-8e0a-14eae7f412ce,uuid
+71d79395-e23d-4185-808f-eebf88e17b88,d9496c5d-6e55-43ca-84bf-72d565c33419,6885283b-c6b1-42d9-bc6c-6957e05a97ee,7e5d0630-af8b-471d-8e0a-14eae7f412ce,uuid

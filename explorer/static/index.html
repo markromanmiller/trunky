@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trunky Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e9eee7; --panel:#f3f6f1; --line:#c3cdbd; --line-strong:#7c8f74;
+  --fg:#252e22; --muted:#5e6d55; --accent:#3c5a45; --accent-fg:#f3f6f1; --tag:#1e5183;
+  --shadow:rgba(0,0,0,.18); --q:#fbe7a1; --q-line:#c9a227;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b211a; --panel:#232b22; --line:#3a4637; --line-strong:#5f7158;
+    --fg:#e3eadf; --muted:#a3b19b; --accent:#8fb79b; --accent-fg:#16201a; --tag:#8cb8e6;
+    --shadow:rgba(0,0,0,.5); --q:#4a3f17; --q-line:#c9a227;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1b211a; --panel:#232b22; --line:#3a4637; --line-strong:#5f7158;
+  --fg:#e3eadf; --muted:#a3b19b; --accent:#8fb79b; --accent-fg:#16201a; --tag:#8cb8e6;
+  --shadow:rgba(0,0,0,.5); --q:#4a3f17; --q-line:#c9a227;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:"Public Sans",system-ui,sans-serif; font-size:14px;
+  padding:20px 18px;
+}
+header{display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:12px; flex-wrap:wrap}
+h1{font-family:"Vollkorn",serif; font-weight:700; font-size:24px; margin:0}
+.sub{color:var(--muted); font-size:12.5px; margin:0}
+
+.toolbar{display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; align-items:center}
+select, .omnibar{
+  border:1px solid var(--line-strong); background:var(--panel); color:var(--fg);
+  font:inherit; font-size:13.5px; padding:8px 12px; border-radius:6px; max-width:100%;
+}
+select:focus-visible, .omnibar:focus-visible, .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.omni-wrap{position:relative; flex:1 1 260px; max-width:520px}
+.omnibar{width:100%; border-radius:20px; padding:8px 14px}
+.dropdown{
+  position:absolute; top:calc(100% + 4px); left:0; right:0; z-index:30;
+  border:1px solid var(--line-strong); border-radius:10px; background:var(--panel);
+  box-shadow:0 4px 14px var(--shadow); max-height:60vh; overflow-y:auto;
+}
+.dd-item{padding:8px 12px; cursor:pointer; border-bottom:1px solid var(--line)}
+.dd-item:last-child{border-bottom:none}
+.dd-item:hover, .dd-item.active{background:var(--bg)}
+.dd-item .name{font-weight:600}
+.dd-item .meta{font-size:11.5px; color:var(--muted); margin-top:2px}
+.dd-label{padding:6px 12px 2px; font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted)}
+.btn{
+  border:1px solid var(--line-strong); background:var(--panel); color:var(--fg);
+  padding:7px 13px; font:inherit; font-weight:600; font-size:12.5px; cursor:pointer; border-radius:6px;
+}
+
+.count{font-size:13px; font-weight:600; margin:0 0 8px}
+.newbar{margin:-2px 0 10px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:13px}
+.newbar .btn{padding:3px 10px; font-size:12px}
+.newbar input, .newbar select{font:inherit; font-size:13px; padding:5px 8px; border:1px solid var(--line-strong); border-radius:6px; background:var(--panel); color:var(--fg); max-width:100%}
+.newbar input{flex:1 1 220px; min-width:0}
+.newbar .err{font-size:11.5px; color:#a6402a; flex-basis:100%}
+.layout{display:flex; gap:14px; align-items:flex-start}
+.table-scroll{flex:1 1 auto; min-width:0; overflow:auto; max-height:calc(100vh - 150px); border:1px solid var(--line); background:var(--panel); border-radius:8px}
+table{border-collapse:separate; border-spacing:0; width:max-content; min-width:100%; font-size:13px}
+th,td{border-bottom:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top}
+th{font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); background:var(--panel); position:sticky; top:0; z-index:1; white-space:nowrap}
+th .sort{cursor:pointer}
+th .sort:hover{color:var(--fg)}
+th .x{cursor:pointer; margin-left:6px; font-weight:400}
+th .x:hover{color:var(--fg)}
+td{max-width:300px; min-width:90px}
+td .clamp{display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; white-space:pre-line}
+a.ref{color:var(--tag); text-decoration:underline; text-underline-offset:2px; cursor:pointer}
+.col-entity{position:sticky; left:0; background:var(--panel); z-index:2; font-weight:700; max-width:240px; box-shadow:6px 0 6px -4px var(--shadow); cursor:pointer}
+th.col-entity{z-index:3; cursor:default}
+td.col-entity:hover{text-decoration:underline}
+tr.selected td{background:var(--bg)}
+.unnamed{color:var(--muted); font-weight:400; font-style:italic}
+.chip{
+  display:inline-block; border:1px solid var(--line-strong); background:var(--bg);
+  color:var(--muted); font-weight:600; font-size:10.5px; padding:2px 8px; margin:2px 3px 2px 0;
+  border-radius:20px; cursor:pointer; user-select:none; white-space:nowrap; text-transform:none; letter-spacing:0;
+}
+.chip:hover{background:var(--line)}
+.chip.on{background:var(--accent); color:var(--accent-fg); border-color:var(--accent)}
+.more{padding:12px; text-align:center}
+
+.detail-panel{
+  flex:0 0 440px; max-width:440px; border:1px solid var(--line-strong); background:var(--panel); border-radius:8px;
+  padding:14px 16px; max-height:calc(100vh - 150px); overflow-y:auto; position:sticky; top:12px;
+}
+.detail-panel .close{float:right; cursor:pointer; color:var(--muted); font-size:18px; line-height:1; padding:2px 4px; background:none; border:none}
+.detail-panel h2{font-family:"Vollkorn",serif; font-size:18px; margin:0 28px 4px 0; overflow-wrap:anywhere}
+.detail-panel .id{font-family:ui-monospace,monospace; font-size:11px; color:var(--muted); overflow-wrap:anywhere}
+.detail-panel h3{font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:16px 0 4px; border-top:1px solid var(--line); padding-top:10px}
+.field{margin-top:9px}
+.flabel{font-size:11px; font-weight:700; color:var(--muted)}
+.fval{font-size:13px; margin-top:2px; white-space:pre-wrap; overflow-wrap:anywhere}
+.fval + .fval{border-top:1px dashed var(--line); padding-top:3px}
+.setname{font-size:10.5px; color:var(--muted); margin-left:6px; white-space:nowrap}
+details.meta{margin:2px 0 0 10px; font-size:11.5px; color:var(--muted)}
+details.meta summary{cursor:pointer}
+details.meta div{margin:2px 0 0 4px; overflow-wrap:anywhere}
+.note{font-size:12.5px; color:var(--muted); margin-top:8px}
+
+/* editing a text value on the item page */
+.fval .ed{background:none; border:none; color:var(--muted); cursor:pointer; font-size:13px; padding:0 4px; margin-left:4px}
+.fval .ed:hover{color:var(--fg)}
+.editor textarea{width:100%; min-height:60px; font:inherit; font-size:13px; padding:7px 9px; border:1px solid var(--line-strong); border-radius:6px; background:var(--bg); color:var(--fg); resize:vertical; white-space:pre-wrap}
+.editor .row{display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-top:6px; flex-wrap:wrap}
+.editor .err{font-size:11.5px; color:#a6402a; margin-right:auto}
+.editor .hint{font-size:11px; color:var(--muted)}
+.chip.addcomp{border-style:dashed; background:none; color:var(--muted); cursor:pointer; font:inherit; font-size:11.5px}
+.comppick{margin-top:8px}
+.comppick input{width:100%; font:inherit; font-size:13px; padding:6px 9px; border:1px solid var(--line-strong); border-radius:6px; background:var(--bg); color:var(--fg)}
+.comppick #comp-list{margin-top:6px}
+.comppick #comp-list .chip{cursor:pointer; font:inherit; font-size:11.5px}
+.comppick .row{display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-top:6px}
+.comppick .err{font-size:11.5px; color:#a6402a; margin-right:auto}
+.slot{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:6px; font-size:13px}
+.slot .kind{font-size:11px; color:var(--muted)}
+.slot .btn{padding:2px 9px; font-size:11.5px}
+.slot .editor{flex-basis:100%}
+.editor .warn{font-size:11.5px; background:var(--q); border-left:3px solid var(--q-line); padding:4px 8px; margin-bottom:6px; white-space:normal}
+.status{font-size:12.5px; color:var(--muted); margin:10px 0 0}
+
+/* questions on statements */
+td.q{background:var(--q); box-shadow:inset 3px 0 0 var(--q-line); cursor:help}
+.chip.q{background:var(--q); border-color:var(--q-line); color:var(--fg)}
+.qnote{font-size:12.5px; color:var(--muted); margin:-4px 0 8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.qnote .btn{padding:3px 10px; font-size:11.5px}
+.qpop{
+  position:fixed; z-index:50; width:min(380px, calc(100vw - 32px)); max-height:min(70vh, 520px); overflow-y:auto;
+  background:var(--panel); border:1px solid var(--q-line); border-radius:8px; box-shadow:0 6px 18px var(--shadow);
+  padding:12px 14px; font-size:13px;
+}
+.qpop .qtext{font-weight:600; white-space:pre-wrap; overflow-wrap:anywhere}
+.qpop .qmeta{font-size:11.5px; color:var(--muted); margin-top:4px}
+.qpop .qstmt{font-size:11.5px; color:var(--muted); margin-top:8px; overflow-wrap:anywhere}
+.qpop .reply{border-left:2px solid var(--line-strong); padding:2px 0 2px 8px; margin-top:8px; white-space:pre-wrap; overflow-wrap:anywhere}
+.qpop .reply .who{font-size:11px; color:var(--muted)}
+.qpop textarea{width:100%; min-height:70px; margin-top:10px; font:inherit; font-size:13px; padding:7px 9px; border:1px solid var(--line-strong); border-radius:6px; background:var(--bg); color:var(--fg); resize:vertical}
+.qpop .row{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:6px}
+.qpop .err{font-size:11.5px; color:#a6402a}
+
+@media (max-width: 760px){
+  body{padding:14px 16px}
+  h1{font-size:20px}
+  .toolbar select{flex:1 1 100%}
+  .table-scroll{max-height:none}
+  .col-entity{max-width:150px}
+  .detail-panel{position:fixed; inset:0; max-width:none; max-height:none; border-radius:0; border:none; z-index:40; padding:16px}
+  body.detail-open{overflow:hidden}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Trunky Explorer</h1>
+  <p class="sub" id="sub"></p>
+</header>
+
+<div class="toolbar">
+  <select id="set-select" aria-label="Statement set"></select>
+  <select id="comp-select" aria-label="Component"></select>
+  <div class="omni-wrap">
+    <input class="omnibar" id="omnibar" type="search" placeholder="Filter rows, or find any item by name&hellip;" autocomplete="off">
+    <div class="dropdown" id="dropdown" hidden></div>
+  </div>
+</div>
+
+<p class="count" id="count"></p>
+<div class="newbar" id="newbar"></div>
+<p class="qnote" id="qnote" hidden></p>
+<div class="layout">
+  <div class="table-scroll" id="table-scroll"><table id="table"><tr><td style="padding:20px">Loading&hellip;</td></tr></table></div>
+  <div class="detail-panel" id="detail" hidden></div>
+</div>
+<p class="status" id="status"></p>
+<div class="qpop" id="qpop" hidden></div>
+
+<script>
+const NAME = "acf5cebb-8d80-45ad-9a1f-a3dd48682ef6";
+const COMP = "90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a";
+const DEFAULT_COLUMNS = 5, PAGE = 300;
+const PROV = "d9496c5d-6e55-43ca-84bf-72d565c33419", NOTE = "29a25e0e-3f32-4787-965e-3ecc917d6fef";
+const QUESTION = "305ecea2-6a7e-4a84-98e9-af4ee25e6a69", THE_QUESTION = "1308043b-7b14-44e5-9dc0-eef41c0cdbb1";
+const ASKER = "a9ede25b-b646-46d2-b3fe-78c99f2ab1cd", AUDIENCE = "2a0922c5-83fc-459c-8b92-855f8a843636";
+const REPLY = "f7b91816-d622-4178-bf0e-10bad96d7745", QUESTION_STATUS = "4aaadc3d-0810-4fa4-b352-d352346474c6";
+const COMMITMENT = "b219cd44-28bd-4ad3-b4a1-404e6a4de3ee";
+
+// Views by component: each component's table can differ from the default. A component not listed gets
+// DEFAULT_VIEW. questions: open Questions on its statements are highlighted from the start (the viewer
+// can still switch them off; elsewhere they are off until switched on, and a note says they exist).
+const DEFAULT_VIEW = { questions: false };
+const VIEWS = {
+  [COMMITMENT]: { questions: true },
+};
+const viewFor = c => ({ ...DEFAULT_VIEW, ...(VIEWS[c] || {}) });
+const questionsOn = () => recall("q:" + ui.comp) ?? viewFor(ui.comp).questions;
+
+// rows: [handle, attribute, entity, value, value_type, set index]
+let D = null;
+const ix = {};
+const ui = { set: "", comp: "", item: "", filter: "", sort: null, desc: false, shown: PAGE, editing: null, creating: false };
+
+const $ = id => document.getElementById(id);
+const esc = s => (s ?? "").toString().replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const push = (m, k, v) => { (m[k] || (m[k] = [])).push(v); };
+const short = id => id.slice(0, 8);
+const nameOf = id => ix.name[id];
+const label = id => nameOf(id) ?? short(id);
+// an unnamed item reads as its component and its first named or text value, e.g. "OrderedListItem: Some paper"
+function display(id) {
+  if (nameOf(id) != null) return nameOf(id);
+  if (!(id in ix.display)) {
+    let first = "";
+    for (const i of ix.byEntity[id] || []) {
+      const [, a, , v, vt] = D.rows[i];
+      if (a === COMP) continue;
+      first = vt === "uuid" ? (nameOf(v) ?? "") : v;
+      if (first) break;
+    }
+    const comp = (ix.comps[id] || [])[0];
+    first = first.length > 70 ? first.slice(0, 69) + "…" : first;
+    ix.display[id] = comp ? (first ? `${label(comp)}: ${first}` : `${label(comp)} ${short(id)}`) : (first || short(id));
+  }
+  return ix.display[id];
+}
+
+function build() {
+  const R = D.rows;
+  Object.assign(ix, { display: {}, name: {}, byEntity: {}, byValue: {}, byHandle: {}, comps: {}, instances: {}, attrUses: {} });
+  R.forEach((r, i) => {
+    const [h, a, e, v, vt] = r;
+    ix.byHandle[h] = i;
+    push(ix.byEntity, e, i);
+    if (vt === "uuid") push(ix.byValue, v, i);
+    ix.attrUses[a] = (ix.attrUses[a] || 0) + 1;
+    if (a === NAME && !(e in ix.name)) ix.name[e] = v;
+    if (a === COMP) { push(ix.comps, e, v); push(ix.instances, v, e); }
+  });
+  for (const c in ix.instances) ix.instances[c] = [...new Set(ix.instances[c])];
+  // open Questions: statement handles tagged Question, not marked answered (a replaced statement drops out
+  // of the current rows, and its Question with it)
+  ix.question = new Set((ix.instances[QUESTION] || []).filter(h => h in ix.byHandle &&
+    !valuesOf(h, QUESTION_STATUS).some(i => D.rows[i][3] === "answered")));
+  ix.setOfEntity = {};
+  R.forEach(r => { (ix.setOfEntity[r[2]] || (ix.setOfEntity[r[2]] = new Set())).add(r[5]); });
+}
+
+// ---------------- state in the URL hash: #s=<set>&c=<component>&i=<item> ----------------
+function readHash() {
+  const p = new URLSearchParams(location.hash.slice(1));
+  ui.set = p.get("s") || ""; ui.comp = p.get("c") || ""; ui.item = p.get("i") || "";
+}
+function go(changes, replace) {
+  const p = new URLSearchParams(location.hash.slice(1));
+  for (const [k, v] of Object.entries(changes)) v ? p.set(k, v) : p.delete(k);
+  const h = "#" + p.toString();
+  if (h === location.hash) return;
+  replace ? history.replaceState(null, "", h) : history.pushState(null, "", h);
+  route();
+}
+function store(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {} }
+function recall(key) { try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; } }
+
+// ---------------- toolbar ----------------
+function setIndex() { return ui.set === "" ? -1 : D.sets.findIndex(s => s.id === ui.set); }
+function inSet(e) { const si = setIndex(); return si < 0 || (ix.setOfEntity[e] && ix.setOfEntity[e].has(si)); }
+
+function renderToolbar() {
+  const ss = $("set-select");
+  ss.innerHTML = `<option value="">All readable sets (${D.sets.length})</option>` +
+    [...D.sets].sort((a, b) => a.name.localeCompare(b.name))
+      .map(s => `<option value="${esc(s.id)}">${esc(s.name)} (${s.statements})</option>`).join("");
+  ss.value = ui.set;
+  const comps = Object.keys(ix.instances).map(c => [c, ix.instances[c].filter(inSet).length])
+    .filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1] || label(a[0]).localeCompare(label(b[0])));
+  if (!comps.some(([c]) => c === ui.comp)) {
+    const named = c => ix.instances[c].filter(e => inSet(e) && nameOf(e) != null).length;
+    ui.comp = comps.length ? comps.map(([c]) => c).sort((a, b) => named(b) - named(a))[0] : "";
+  }
+  const cs = $("comp-select");
+  cs.innerHTML = comps.map(([c, n]) => `<option value="${esc(c)}">${esc(label(c))} (${n})</option>`).join("");
+  cs.value = ui.comp;
+}
+
+// ---------------- table ----------------
+function valueHtml(i) {
+  const [, , , v, vt] = D.rows[i];
+  if (vt === "uuid") return `<a class="ref" data-id="${esc(v)}">${nameOf(v) != null ? esc(nameOf(v)) : `<span class="unnamed">${esc(display(v))}</span>`}</a>`;
+  if (/^https?:\/\/\S+$/.test(v)) return `<a class="ref" href="${esc(v)}" target="_blank" rel="noopener">${esc(v)}</a>`;
+  return esc(v);
+}
+function valuesOf(e, a) { return (ix.byEntity[e] || []).filter(i => D.rows[i][1] === a); }
+function textOf(e, a) { return valuesOf(e, a).map(i => { const [, , , v, vt] = D.rows[i]; return vt === "uuid" ? display(v) : v; }).join("; "); }
+
+function columnsFor(entities) {
+  const use = {};
+  for (const e of entities) {
+    const seen = new Set();
+    for (const i of ix.byEntity[e] || []) {
+      const a = D.rows[i][1];
+      if (a !== NAME && a !== COMP && !seen.has(a)) { seen.add(a); use[a] = (use[a] || 0) + 1; }
+    }
+  }
+  return Object.keys(use).sort((a, b) => use[b] - use[a] || label(a).localeCompare(label(b)));
+}
+
+function shownColumns(all) {
+  const saved = recall("cols:" + ui.comp);
+  return saved ? saved.filter(a => all.includes(a)) : all.slice(0, DEFAULT_COLUMNS);
+}
+
+function renderTable() {
+  const all = (ix.instances[ui.comp] || []).filter(inSet);
+  const cols = columnsFor(all);
+  const qAttrs = new Set();
+  const qItems = all.filter(e => (ix.byEntity[e] || []).filter(i => ix.question.has(D.rows[i][0]))
+    .map(i => qAttrs.add(D.rows[i][1])).length);
+  const qOn = qItems.length > 0 && questionsOn();
+  // with questions on, a column holding a question is shown too, unless the viewer hid that column by its ×
+  const base = shownColumns(cols), hid = recall("hid:" + ui.comp) || [];
+  const shown = [...base, ...(qOn ? [...qAttrs].filter(a => !base.includes(a) && !hid.includes(a)) : [])];
+  const hidden = cols.filter(a => !shown.includes(a));
+  const f = ui.filter.trim().toLowerCase();
+  let rows = all.map(e => ({ e, name: nameOf(e) ?? "" }));
+  if (f) rows = rows.filter(r => r.name.toLowerCase().includes(f) ||
+    shown.some(a => textOf(r.e, a).toLowerCase().includes(f)));
+  const key = ui.sort && shown.includes(ui.sort) ? (r => textOf(r.e, ui.sort)) : (r => r.name || "￿" + r.e);
+  rows.sort((a, b) => key(a).localeCompare(key(b), undefined, { numeric: true }) * (ui.desc ? -1 : 1));
+
+  $("count").textContent = `${rows.length} ${label(ui.comp)} item${rows.length === 1 ? "" : "s"}` +
+    (f ? ` matching "${ui.filter.trim()}"` : "") + (rows.length > ui.shown ? `, showing ${ui.shown}` : "");
+  renderNewbar();
+  const qOf = (e, a) => valuesOf(e, a).map(i => D.rows[i][0]).filter(h => ix.question.has(h));
+  const qn = $("qnote");
+  qn.hidden = !qItems.length;
+  if (qItems.length) {
+    qn.innerHTML = `${qItems.length} item${qItems.length === 1 ? " here has" : "s here have"} open questions.` +
+      ` <button class="btn" id="qtoggle">${qOn ? "Hide" : "Show"} questions</button>`;
+    $("qtoggle").onclick = () => { store("q:" + ui.comp, !qOn); renderTable(); };
+  }
+
+  const arrow = a => (ui.sort === a || (a === null && !ui.sort)) ? (ui.desc ? " ▾" : " ▴") : "";
+  let html = `<thead><tr><th class="col-entity"><span class="sort" data-sort="">Name${arrow(null)}</span></th>`;
+  shown.forEach(a => html += `<th><span class="sort" data-sort="${esc(a)}">${esc(label(a))}${arrow(a)}</span><span class="x" data-hide="${esc(a)}" title="Hide column">×</span></th>`);
+  if (hidden.length) html += "<th>More</th>";
+  html += "</tr></thead><tbody>";
+  for (const r of rows.slice(0, ui.shown)) {
+    html += `<tr data-entity="${esc(r.e)}"${r.e === ui.item ? ' class="selected"' : ""}>` +
+      `<td class="col-entity" data-open="${esc(r.e)}">${r.name ? esc(r.name) : `<span class="unnamed">${esc(display(r.e))}</span>`}</td>`;
+    shown.forEach(a => {
+      const qs = qOn ? qOf(r.e, a) : [];
+      html += `<td${qs.length ? ` class="q" data-q="${esc(qs.join(" "))}"` : ""}><div class="clamp">${valuesOf(r.e, a).map(valueHtml).join("; ")}</div></td>`;
+    });
+    if (hidden.length) {
+      html += "<td>" + hidden.filter(a => valuesOf(r.e, a).length)
+        .map(a => `<span class="chip${qOn && qOf(r.e, a).length ? " q" : ""}" data-show="${esc(a)}"${qOn && qOf(r.e, a).length ? ' title="Has an open question"' : ""}>${esc(label(a))}</span>`).join("") + "</td>";
+    }
+    html += "</tr>";
+  }
+  html += "</tbody>";
+  if (rows.length > ui.shown) html += `<tfoot><tr><td colspan="${shown.length + 2}" class="more"><button class="btn" id="show-more">Show ${Math.min(PAGE, rows.length - ui.shown)} more</button></td></tr></tfoot>`;
+  $("table").innerHTML = html;
+
+  const t = $("table");
+  t.querySelectorAll("[data-sort]").forEach(el => el.onclick = () => {
+    const a = el.dataset.sort || null;
+    ui.desc = ui.sort === a ? !ui.desc : false; ui.sort = a; renderTable();
+  });
+  t.querySelectorAll("[data-hide]").forEach(el => el.onclick = () => {
+    const a = el.dataset.hide;
+    store("cols:" + ui.comp, base.filter(x => x !== a));
+    store("hid:" + ui.comp, [...hid.filter(x => x !== a), a]); renderTable();
+  });
+  t.querySelectorAll("[data-show]").forEach(el => el.onclick = () => {
+    const a = el.dataset.show;
+    store("cols:" + ui.comp, [...base.filter(x => x !== a), a]);
+    store("hid:" + ui.comp, hid.filter(x => x !== a)); renderTable();
+  });
+  t.querySelectorAll("[data-open]").forEach(el => el.onclick = () => go({ i: el.dataset.open }));
+  t.querySelectorAll("td.q").forEach(el => {
+    el.onmouseenter = () => qShowSoon(el);
+    el.onmouseleave = qHideSoon;
+    el.onclick = ev => { if (!ev.target.closest("a")) qShow(el); };
+  });
+  const more = $("show-more");
+  if (more) more.onclick = () => { ui.shown += PAGE; renderTable(); };
+}
+
+// ---------------- a new item carrying the table's component ----------------
+// the set to suggest: the selected set if editable, else the one last used for this component, else the
+// editable set holding most of this component's tags
+function newSetFor(c) {
+  const ok = D.sets.map((s, k) => s.edit ? k : -1).filter(k => k >= 0);
+  if (!ok.length) return null;
+  const sel = D.sets.findIndex(s => s.id === ui.set);
+  if (sel >= 0 && D.sets[sel].edit) return sel;
+  const last = D.sets.findIndex(s => s.id === recall("newset:" + c));
+  if (last >= 0 && D.sets[last].edit) return last;
+  const n = {};
+  for (const e of ix.instances[c] || [])
+    for (const i of ix.byEntity[e] || []) if (D.rows[i][1] === COMP && D.rows[i][3] === c && D.sets[D.rows[i][5]].edit) n[D.rows[i][5]] = (n[D.rows[i][5]] || 0) + 1;
+  const best = Object.keys(n).sort((a, b) => n[b] - n[a])[0];
+  return best != null ? +best : ok[0];
+}
+function renderNewbar() {
+  const bar = $("newbar"), c = ui.comp, k = c ? newSetFor(c) : null;
+  if (k == null) { bar.innerHTML = ""; delete bar.dataset.form; return; }
+  if (!ui.creating) {
+    delete bar.dataset.form;
+    bar.innerHTML = `<button class="btn" id="new-open">+ New ${esc(label(c))}</button>`;
+    $("new-open").onclick = () => { ui.creating = true; renderNewbar(); $("new-name").focus(); };
+    return;
+  }
+  if (bar.dataset.form === c) return;   // keep what's typed when the table redraws (filtering, sorting)
+  bar.dataset.form = c;
+  const sets = D.sets.map((s, j) => [s, j]).filter(([s]) => s.edit).sort((a, b) => a[0].name.localeCompare(b[0].name));
+  bar.innerHTML = `<input id="new-name" placeholder="Name of the new ${esc(label(c))}" autocomplete="off">` +
+    `<select id="new-set" aria-label="Set to write it in">${sets.map(([s, j]) => `<option value="${j}"${j === k ? " selected" : ""}>in ${esc(s.name)}</option>`).join("")}</select>` +
+    `<button class="btn" id="new-save">Create</button><button class="btn" id="new-cancel">Cancel</button><span class="err" id="new-err"></span>`;
+  const close = () => { ui.creating = false; renderNewbar(); };
+  $("new-cancel").onclick = close;
+  $("new-save").onclick = createItem;
+  $("new-name").onkeydown = ev => { if (ev.key === "Enter") createItem(); else if (ev.key === "Escape") { ev.stopPropagation(); close(); } };
+}
+async function createItem() {
+  const name = $("new-name").value.trim(), err = $("new-err"), b = $("new-save");
+  if (!name) { err.textContent = "Give it a name first."; return; }
+  b.disabled = true; err.textContent = "Creating…";
+  try {
+    const res = await fetch("api/new", { method: "POST",
+      headers: { "Content-Type": "application/json", "X-Trunky-Explorer": "1" },
+      body: JSON.stringify({ component: ui.comp, set: D.sets[+$("new-set").value].id, name }) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
+    ui.creating = false;
+    store("newset:" + ui.comp, D.sets[+$("new-set").value].id);
+    await reload();
+    go({ i: out.id });
+  } catch (e) {
+    err.textContent = "Not created: " + e.message;
+    b.disabled = false;
+  }
+}
+
+// ---------------- questions: hover panel with the question, its thread and a reply box ----------------
+let qTimer = null, qCell = null;
+const writer = () => D.viewer !== "anonymous";
+function qShowSoon(el) { clearTimeout(qTimer); qTimer = setTimeout(() => qShow(el), 150); }
+function qHideSoon() {
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => {
+    const pop = $("qpop"), ta = pop.querySelector("textarea");
+    if (pop.matches(":hover") || (ta && (ta === document.activeElement || ta.value.trim()))) return;
+    qClose();
+  }, 300);
+}
+function qClose() { $("qpop").hidden = true; qCell = null; }
+// a reply's author, from its provenance note ("Written by X in the Trunky Explorer.")
+function author(h) {
+  for (const i of valuesOf(h, PROV)) for (const j of valuesOf(D.rows[i][3], NOTE)) {
+    const m = /Written by (.+?) in /.exec(D.rows[j][3]);
+    if (m) return m[1];
+  }
+  return "";
+}
+// the thread under a Question: replies in the order of what answers what (depth first)
+function thread(h) {
+  const out = [];
+  const walk = x => valuesOf(x, REPLY).forEach(i => { out.push(i); walk(D.rows[i][0]); });
+  walk(h);
+  return out;
+}
+function qShow(el) {
+  clearTimeout(qTimer);
+  const pop = $("qpop");
+  if (qCell === el && !pop.hidden) return;
+  qCell = el;
+  const hs = el.dataset.q.split(" ");
+  pop.innerHTML = hs.map(h => {
+    const [, a, e] = D.rows[ix.byHandle[h]];
+    const who = x => textOf(h, x) || "?";
+    const replies = thread(h);
+    const last = replies.length ? D.rows[replies[replies.length - 1]][0] : h;
+    return `<div data-question="${esc(h)}">` +
+      `<div class="qtext">${esc(textOf(h, THE_QUESTION) || "(no question text)")}</div>` +
+      `<div class="qmeta">Asked by ${esc(who(ASKER))} of ${esc(who(AUDIENCE))}</div>` +
+      `<div class="qstmt">On: ${esc(label(a))} of ${esc(display(e))} is ${valueHtml(ix.byHandle[h])}</div>` +
+      replies.map(i => `<div class="reply"><div class="who">${esc(author(D.rows[i][0]) || "Reply")}</div>${esc(D.rows[i][3])}</div>`).join("") +
+      (writer() ? `<textarea aria-label="Reply" placeholder="Reply…"></textarea>` +
+        `<div class="row"><span class="err"></span><button class="btn" data-to="${esc(last)}">Reply</button></div>` : "") +
+      `</div>`;
+  }).join(`<hr style="border:none;border-top:1px solid var(--line);margin:12px 0">`);
+  pop.hidden = false;
+  const r = el.getBoundingClientRect(), w = pop.offsetWidth, ht = pop.offsetHeight;
+  const left = Math.max(16, Math.min(r.left, innerWidth - w - 16));
+  const top = r.bottom + 6 + ht < innerHeight ? r.bottom + 6 : Math.max(16, r.top - ht - 6);
+  pop.style.left = left + "px"; pop.style.top = top + "px";
+  pop.onmouseenter = () => clearTimeout(qTimer);
+  pop.onmouseleave = qHideSoon;
+  pop.querySelectorAll("button[data-to]").forEach(b => b.onclick = () => sendReply(b));
+}
+async function sendReply(b) {
+  const box = b.closest("[data-question]"), ta = box.querySelector("textarea"), err = box.querySelector(".err");
+  const text = ta.value.trim();
+  if (!text) { err.textContent = "Write a reply first."; return; }
+  b.disabled = true; err.textContent = "Sending…";
+  try {
+    const res = await fetch("api/reply", { method: "POST",
+      headers: { "Content-Type": "application/json", "X-Trunky-Explorer": "1" },
+      body: JSON.stringify({ question: box.dataset.question, to: b.dataset.to, text }) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
+    ta.value = "";
+    await reload();
+  } catch (e) {
+    err.textContent = "Not sent: " + e.message;
+    b.disabled = false;
+  }
+}
+// fetch the statements again (after a reply) and redraw, reopening the panel on the same cell
+async function reload() {
+  const q = qCell && qCell.dataset.q;
+  const res = await fetch("api/data");
+  D = await res.json();
+  build();
+  qClose();
+  route();
+  const el = q && [...document.querySelectorAll("td.q")].find(x => x.dataset.q === q);
+  if (el) qShow(el);
+}
+document.addEventListener("keydown", ev => { if (ev.key === "Escape" && !$("qpop").hidden) qClose(); });
+document.addEventListener("click", ev => {
+  if (!$("qpop").hidden && !ev.target.closest("#qpop") && !ev.target.closest("td.q")) qClose();
+});
+
+// ---------------- detail panel ----------------
+function metaHtml(h) {
+  const notes = ix.byEntity[h];
+  if (!notes || !notes.length) return "";
+  return `<details class="meta"><summary>${notes.length} statement${notes.length === 1 ? "" : "s"} about this statement</summary>` +
+    notes.map(i => `<div>${esc(label(D.rows[i][1]))}: ${valueHtml(i)}</div>`).join("") + "</details>";
+}
+
+function renderDetail() {
+  const el = $("detail"), e = ui.item;
+  if (!e) { el.hidden = true; document.body.classList.remove("detail-open"); return; }
+  el.hidden = false; document.body.classList.add("detail-open");
+  const own = ix.byEntity[e] || [];
+  let html = `<button class="close" id="close" aria-label="Close">×</button>` +
+    `<h2>${nameOf(e) != null ? esc(nameOf(e)) : `<span class="unnamed">${esc(display(e))}</span>`}</h2>` +
+    `<div class="id">${esc(e)}</div>`;
+  const comps = ix.comps[e] || [];
+  const canTag = taggable(e);
+  if (comps.length || canTag) html += `<div style="margin-top:8px">` + comps.map(c => `<span class="chip${c === ui.comp ? " on" : ""}" data-comp="${esc(c)}" title="Show all ${esc(label(c))} items">${esc(label(c))}</span>`).join("") +
+    (canTag && ui.editing !== "comp" ? `<button class="chip addcomp" id="addcomp" title="Give this item another component">+ Component</button>` : "") + "</div>";
+  if (ui.editing === "comp") html += `<div class="comppick"><input id="comp-find" placeholder="Find a component" autocomplete="off">` +
+    `<div id="comp-list"></div><div class="row"><span class="err" id="comp-err"></span><button class="btn" id="comp-cancel">Cancel</button></div></div>`;
+
+  if (e in ix.byHandle) {
+    const i = ix.byHandle[e], [, a, s] = D.rows[i];
+    html += `<p class="note">This is a statement: ${esc(label(a))} of <a class="ref" data-id="${esc(s)}">${esc(label(s))}</a> is ${valueHtml(i)} <span class="setname">${esc(D.sets[D.rows[i][5]].name)}</span></p>`;
+  }
+  if (ix.attrUses[e]) html += `<p class="note">Used as an attribute in ${ix.attrUses[e]} statement${ix.attrUses[e] === 1 ? "" : "s"}.</p>`;
+
+  const groups = {};
+  own.forEach(i => { if (D.rows[i][1] !== COMP) push(groups, D.rows[i][1], i); });
+  const order = Object.keys(groups).sort((a, b) => (a === NAME ? -1 : b === NAME ? 1 : label(a).localeCompare(label(b))));
+  if (order.length) html += "<h3>Statements</h3>";
+  for (const a of order) {
+    html += `<div class="field"><div class="flabel"><a class="ref" data-id="${esc(a)}" style="color:inherit">${esc(label(a))}</a></div>` +
+      groups[a].map(i => `<div class="fval">${D.rows[i][0] === ui.editing ? editorHtml(i) : valueHtml(i) +
+        (editable(i) ? `<button class="ed" data-edit="${esc(D.rows[i][0])}" title="Edit this value" aria-label="Edit">✎</button>` : "")}` +
+        `<span class="setname">${esc(D.sets[D.rows[i][5]].name)}</span>${metaHtml(D.rows[i][0])}</div>`).join("") + "</div>";
+  }
+
+  const empty = emptySlots(e, groups);
+  if (empty.length) html += "<h3>Empty slots</h3>" + empty.map(([a, kind]) => `<div class="slot">` +
+    `<a class="ref" data-id="${esc(a)}" style="color:inherit; font-weight:700; font-size:11px">${esc(label(a))}</a><span class="kind">${kind}</span>` +
+    (ui.editing === "add:" + a ? editorHtml(null, e, a) :
+      addable(e, a) ? `<button class="btn" data-add="${esc(a)}">Add</button>` : "") + "</div>").join("");
+
+  const refs = {};
+  (ix.byValue[e] || []).forEach(i => { if (D.rows[i][1] !== COMP) push(refs, D.rows[i][1], i); });
+  const refAttrs = Object.keys(refs).sort((a, b) => label(a).localeCompare(label(b)));
+  if (refAttrs.length) html += "<h3>Referenced by</h3>";
+  for (const a of refAttrs) {
+    const list = refs[a], cap = 50;
+    html += `<div class="field"><div class="flabel">${esc(label(a))} of (${list.length})</div>` +
+      list.slice(0, cap).map(i => `<div class="fval"><a class="ref" data-id="${esc(D.rows[i][2])}">${esc(display(D.rows[i][2]))}</a></div>`).join("") +
+      (list.length > cap ? `<div class="note">and ${list.length - cap} more</div>` : "") + "</div>";
+  }
+  const instances = (ix.instances[e] || []).length;
+  if (instances) html += `<p class="note"><a class="ref" data-comp="${esc(e)}">Show the ${instances} ${esc(label(e))} item${instances === 1 ? "" : "s"} in the table</a></p>`;
+  const si = D.sets.findIndex(x => x.id === e);
+  if (si >= 0) html += `<p class="note"><a class="ref" data-set="${esc(e)}">Show the items in this set</a></p>`;
+  if (!own.length && !(ix.byValue[e] || []).length) html += `<p class="note">No statements you can read mention this item.</p>`;
+  el.innerHTML = html;
+  el.scrollTop = 0;
+  $("close").onclick = () => go({ i: "" });
+  el.querySelectorAll("[data-edit]").forEach(b => b.onclick = () => { ui.editing = b.dataset.edit; renderDetail(); });
+  if ($("addcomp")) $("addcomp").onclick = () => { ui.editing = "comp"; renderDetail(); };
+  if ($("comp-find")) {
+    const f = $("comp-find");
+    const list = () => {
+      $("comp-list").innerHTML = componentChoices(e, f.value).map(c =>
+        `<button class="chip" data-pick="${esc(c)}">${esc(label(c))}</button>`).join("") || `<span class="kind">No component matches.</span>`;
+      $("comp-list").querySelectorAll("[data-pick]").forEach(b => b.onclick = () => addComponent(e, b.dataset.pick));
+    };
+    f.oninput = list; list(); f.focus();
+    f.onkeydown = ev => { if (ev.key === "Escape") { ev.stopPropagation(); ui.editing = null; renderDetail(); }
+      else if (ev.key === "Enter") { const b = $("comp-list").querySelector("[data-pick]"); if (b) b.click(); } };
+    $("comp-cancel").onclick = () => { ui.editing = null; renderDetail(); };
+  }
+  el.querySelectorAll("[data-add]").forEach(b => b.onclick = () => { ui.editing = "add:" + b.dataset.add; renderDetail(); });
+  const ed = el.querySelector(".editor");
+  if (ed) {
+    const ta = ed.querySelector("textarea");
+    ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length);
+    ta.onkeydown = ev => {
+      if (ev.key === "Escape") { ev.stopPropagation(); ui.editing = null; renderDetail(); }
+      else if (ev.key === "Enter" && (ev.metaKey || ev.ctrlKey)) saveEdit(ed);
+    };
+    ed.querySelector("[data-cancel]").onclick = () => { ui.editing = null; renderDetail(); };
+    ed.querySelector("[data-save]").onclick = () => saveEdit(ed);
+  }
+  // on a phone the panel covers the table, so opening a table closes it
+  const phone = () => matchMedia("(max-width: 760px)").matches;
+  el.querySelectorAll("[data-set]").forEach(x => x.onclick = () => go({ s: x.dataset.set, c: ui.comp, i: "" }));
+  el.querySelectorAll("[data-comp]").forEach(x => x.onclick = () => go({ c: x.dataset.comp, s: inSetFor(x.dataset.comp), ...(phone() ? { i: "" } : {}) }));
+}
+// ---------------- editing a text value: appends the new value and aReplacement of the old one ----------------
+let SYNCED = {};
+function editable(i) { return D.sets[D.rows[i][5]].edit; }
+// what the edit box shows for a value: {{uuid}} for a link, '{{ for text that starts with {{ (see server.py entry_value)
+function entryOf(v, vt) { return vt === "uuid" ? "{{" + v + "}}" : v.startsWith("{{") ? "'" + v : v; }
+// the slots (required, desirable, optional) of this item's components that it has no value for
+const SLOT_KINDS = { "24762266-9337-4930-b88c-55b6af4e7642": "required", "8a707bcb-7ff7-488f-b7e3-b1679f823c95": "desirable",
+                     "e8d0e88d-a8ea-4612-8e8c-a4be732d1a93": "optional" };
+function emptySlots(e, have) {
+  const comps = new Set(ix.comps[e] || []), out = {};
+  for (const [, a, c, v] of D.rows)
+    if (a in SLOT_KINDS && comps.has(c) && !(v in have) && v !== COMP && !(v in out)) out[v] = SLOT_KINDS[a];
+  const rank = { required: 0, desirable: 1, optional: 2 };
+  return Object.entries(out).sort((x, y) => rank[x[1]] - rank[y[1]] || label(x[0]).localeCompare(label(y[0])));
+}
+// ---------------- giving an item another component ----------------
+// the server writes it to the set of one of the item's aComponent statements, else its theName
+function taggable(e) {
+  return (ix.byEntity[e] || []).some(i => (D.rows[i][1] === COMP || D.rows[i][1] === NAME) && D.sets[D.rows[i][5]].edit);
+}
+// components the item lacks: with no query, those most often found alongside its components; else name matches
+function componentChoices(e, q) {
+  const have = new Set(ix.comps[e] || []);
+  const all = Object.keys(ix.instances).filter(c => !have.has(c));
+  q = q.trim().toLowerCase();
+  if (q) return all.filter(c => label(c).toLowerCase().includes(q))
+    .sort((a, b) => (label(a).toLowerCase().startsWith(q) ? 0 : 1) - (label(b).toLowerCase().startsWith(q) ? 0 : 1) || label(a).localeCompare(label(b))).slice(0, 12);
+  const n = {};
+  for (const c of have) for (const x of ix.instances[c] || []) for (const k of ix.comps[x] || []) if (!have.has(k)) n[k] = (n[k] || 0) + 1;
+  const near = Object.keys(n).sort((a, b) => n[b] - n[a] || label(a).localeCompare(label(b)));
+  return (near.length ? near : all.sort((a, b) => label(a).localeCompare(label(b)))).slice(0, 12);
+}
+async function addComponent(e, c) {
+  const err = $("comp-err");
+  err.textContent = "Adding…";
+  try {
+    const res = await fetch("api/component", { method: "POST",
+      headers: { "Content-Type": "application/json", "X-Trunky-Explorer": "1" },
+      body: JSON.stringify({ entity: e, component: c }) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
+    ui.editing = null;
+    await reload();
+  } catch (x) {
+    err.textContent = "Not added: " + x.message;
+  }
+}
+
+// slots of a component whose aComponent statement is in a set the viewer may edit
+function addable(e, a) {
+  return (ix.byEntity[e] || []).some(i => D.rows[i][1] === COMP && D.sets[D.rows[i][5]].edit);
+}
+function editorHtml(i, ae, aa) {
+  const [h, a, e, v0, vt] = i == null ? [null, aa, ae, "", "str"] : D.rows[i], v = entryOf(v0, vt);
+  const warn = (SYNCED[e] || []).includes(a) ? `<div class="warn">This value comes from a Paug note in Obsidian. ` +
+    `An edit here changes Trunky only; the note keeps its old value until the sync can write to Obsidian.</div>` : "";
+  return `<div class="editor" ${h ? `data-h="${esc(h)}"` : `data-e="${esc(e)}" data-a="${esc(a)}"`}>${warn}<textarea rows="${Math.min(12, v.split("\n").length + 1)}">${esc(v)}</textarea>` +
+    `<div class="row"><span class="err"></span><span class="hint">{{uuid}} links to an item</span><button class="btn" data-cancel>Cancel</button><button class="btn" data-save>Save</button></div></div>`;
+}
+async function saveEdit(ed) {
+  const text = ed.querySelector("textarea").value.trim(), err = ed.querySelector(".err"), b = ed.querySelector("[data-save]");
+  if (!text) { err.textContent = "A value can't be empty."; return; }
+  b.disabled = true; err.textContent = "Saving…";
+  try {
+    const add = !ed.dataset.h;
+    const res = await fetch(add ? "api/add" : "api/edit", { method: "POST",
+      headers: { "Content-Type": "application/json", "X-Trunky-Explorer": "1" },
+      body: JSON.stringify(add ? { entity: ed.dataset.e, attribute: ed.dataset.a, text } : { handle: ed.dataset.h, text }) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
+    ui.editing = null;
+    await reload();
+  } catch (e) {
+    err.textContent = "Not saved: " + e.message;
+    b.disabled = false;
+  }
+}
+// keep the set filter if the component has items in it, otherwise widen to all sets
+function inSetFor(c) { return (ix.instances[c] || []).some(inSet) ? ui.set : ""; }
+
+// ---------------- find any item by name ----------------
+let ddActive = -1;
+function renderDropdown() {
+  const q = ui.filter.trim().toLowerCase(), dd = $("dropdown");
+  if (q.length < 2) { dd.hidden = true; return; }
+  const hits = [];
+  for (const id in ix.name) {
+    const n = ix.name[id].toLowerCase();
+    if (n.includes(q)) hits.push([id, n.startsWith(q) ? 0 : 1]);
+  }
+  if (/^[0-9a-f-]{4,}$/.test(q)) for (const id in ix.byEntity) if (id.startsWith(q) && !(id in ix.name)) hits.push([id, 0]);
+  hits.sort((a, b) => a[1] - b[1] || label(a[0]).length - label(b[0]).length);
+  const top = hits.slice(0, 12);
+  if (!top.length) { dd.hidden = true; return; }
+  dd.innerHTML = `<div class="dd-label">Items (${hits.length})</div>` + top.map(([id], k) =>
+    `<div class="dd-item${k === ddActive ? " active" : ""}" data-id="${esc(id)}"><div class="name">${esc(label(id))}</div>` +
+    `<div class="meta">${esc((ix.comps[id] || []).map(label).join(", ") || "no component")} · ${esc(short(id))}</div></div>`).join("");
+  dd.hidden = false;
+  dd.querySelectorAll(".dd-item").forEach(x => x.onmousedown = ev => { ev.preventDefault(); pick(x.dataset.id); });
+}
+function pick(id) { $("dropdown").hidden = true; ddActive = -1; go({ i: id }); }
+
+// ---------------- wiring ----------------
+function route() {
+  const before = { set: ui.set, comp: ui.comp, item: ui.item };
+  readHash();
+  if (before.item !== ui.item) ui.editing = null;
+  if (before.set !== ui.set || before.comp !== ui.comp) { ui.sort = null; ui.desc = false; ui.shown = PAGE; ui.creating = false; }
+  renderToolbar();
+  renderTable();
+  renderDetail();
+}
+
+document.addEventListener("click", ev => {
+  const a = ev.target.closest("a.ref[data-id]");
+  if (a) { ev.preventDefault(); go({ i: a.dataset.id }); }
+});
+$("set-select").onchange = ev => go({ s: ev.target.value, c: ui.comp });
+$("comp-select").onchange = ev => go({ c: ev.target.value });
+$("omnibar").oninput = ev => { ui.filter = ev.target.value; ui.shown = PAGE; ddActive = -1; renderTable(); renderDropdown(); };
+$("omnibar").onblur = () => setTimeout(() => $("dropdown").hidden = true, 100);
+$("omnibar").onfocus = renderDropdown;
+$("omnibar").onkeydown = ev => {
+  const items = [...$("dropdown").querySelectorAll(".dd-item")];
+  if (ev.key === "ArrowDown" || ev.key === "ArrowUp") {
+    ev.preventDefault();
+    ddActive = Math.max(-1, Math.min(items.length - 1, ddActive + (ev.key === "ArrowDown" ? 1 : -1)));
+    renderDropdown();
+  } else if (ev.key === "Enter" && ddActive >= 0 && items[ddActive]) {
+    pick(items[ddActive].dataset.id);
+  } else if (ev.key === "Escape") {
+    $("dropdown").hidden = true;
+  }
+};
+document.addEventListener("keydown", ev => { if (ev.key === "Escape" && ui.item && document.activeElement !== $("omnibar")) go({ i: "" }); });
+window.addEventListener("popstate", route);
+
+async function main() {
+  try {
+    const res = await fetch("api/data");
+    if (!res.ok) throw new Error(res.status + " " + res.statusText);
+    D = await res.json();
+  } catch (err) {
+    $("table").innerHTML = `<tr><td style="padding:20px">Could not load the statements (${esc(err.message)}).</td></tr>`;
+    return;
+  }
+  build();
+  try { const r = await fetch("api/synced"); if (r.ok) SYNCED = await r.json(); } catch (e) {}
+  $("sub").textContent = `${D.rows.length.toLocaleString()} current statements in ${D.sets.length} sets you can read`;
+  if (!location.hash.includes("c=")) {
+    const last = recall("lastComp");
+    if (last && ix.instances[last]) history.replaceState(null, "", "#c=" + last);
+  }
+  route();
+  $("comp-select").addEventListener("change", ev => store("lastComp", ev.target.value));
+}
+main();
+</script>
+</body>
+</html>

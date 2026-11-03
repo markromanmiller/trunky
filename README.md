@@ -149,11 +149,11 @@ I want to be clear about what Trunky can't do due to logical impossibilities. It
 
 Stuff I haven't gotten around to yet mainly.
 
-**Authentication.** Nothing in the data model or the API stops anyone from writing to it. Any access control on the current deployment is external to Trunky, not part of the data model itself.
+**Authentication.** Who may read and edit each statement set is itself data (`aReaderGroup` and `anEditorGroup`, in the permissions set), and the explorer honors it, but there is no login yet: the explorer assumes a single owner and is reached privately (over Tailscale) or read-only in public.
 
-**Sharing.** There's no protocol for sharing data yet, even though sharing is central to what I intend this project to eventually support.
+**Sharing.** Each statement set is its own CSV file, so sharing a set means publishing its file. This repository carries the sets everyone may read; the rest stay on my machine. There's still no protocol for exchanging statements between instances, even though sharing is central to what I intend this project to eventually support.
 
-**Maturity.** The idea itself is something I've been developing for three years or more, but this specific implementation only dates back to August 2026.
+**Maturity.** The idea itself is something I've been developing for three years or more, but the first implementation only dates back to August 2026, and this one (v0.7, per-set files) to October 2026.
 
 ## Comparisons
 
@@ -161,7 +161,7 @@ Why not use…
 
 **Markdown files with links?** YAML frontmatter already gets you most of the way there, it's just key-value pairs. But a link between two files carries no attribute of its own, so there's nowhere to say anything about the relationship itself, and no way to attach a note to one specific fact the way a statement's own handle lets you attach one here.
 
-**A regular database?** A relational database only has one schema active at a time, and adding a column or splitting a table means a migration touching every row that already exists. Trunky isn't different storage underneath, `trunky.db` is SQLite too, the difference is entirely in what gets enforced at write time versus left as data to be checked later.
+**A regular database?** A relational database only has one schema active at a time, and adding a column or splitting a table means a migration touching every row that already exists. Trunky isn't exotic storage underneath (v0.6 was one SQLite table; v0.7 is plain CSV files, one per statement set), the difference is entirely in what gets enforced at write time versus left as data to be checked later.
 
 **Agents plus a SQL database whose schema can modify?** In short, I haven't figured out how to let agents adapt schemata correctly. I'm just assuming how I'm thinking about something is basically impossible to be explicit enough about to an agent - at that point, I may as well just define the schemata myself.
 
@@ -178,8 +178,13 @@ Why not use…
 
 ## How to start?
 
-Clone the repository, install `requirements.txt`, apply `starter.sql` (`sqlite3 lignin.db < starter.sql`) to seed the bootstrap vocabulary `llms.txt` refers to, and run `python3 api_server.py`. Point your own coding agent at `llms.txt` in this repo, it's written for exactly this: an agent-facing guide to the domain model and conventions, so it can start making the same kind of raw `/statements` API calls I do, on your own local copy of the data.
+Clone the repository and install `requirements.txt` (Python 3.11 or later). The statements are in `sets/`, one CSV file per statement set, named by the set's UUID, with the columns `handle,attribute,entity,value,value_type`. This repository includes only the sets everyone may read. On a full instance, a `registry` set names and describes every set and a `permissions` set says who may read and edit each; both stay private, since they list the private sets too. Without them the explorer shows every set file present, under the start of its UUID.
+
+- `python3 explorer/server.py` serves a browser view on `http://127.0.0.1:8850`: tables of items by component, item pages, and small edits (each edit appends statements; nothing is overwritten). See `explorer/README.md`.
+- `python3 tools/check.py` reports problems in the statements, such as missing required slots, items with several names, and statements without provenance.
+- To write, append rows to a set's file; `tools/trunky_lock.py` holds the lock every writer takes. `aReplacement` and `anErratum` are how anything is changed or retracted.
+
+Point your own coding agent at `llms.txt` in this repo, it's written for exactly this: an agent-facing guide to the domain model and conventions. `SYSARCH.md` describes how the pieces fit together, and `INTENT.md` why they are the way they are.
 
 TODO:
-- A filterable explorer view (columns, search, by-component browsing) aimed at a less technical audience than "read `llms.txt` and call the API yourself."
-- A lightweight web starter kit for viewing and making minor edits to spreadsheet-like data, for contributors who want to add to a shared dataset (e.g. the VR-motion-data literature review) without running their own agent.
+- A lightweight way for contributors to add to a shared dataset (e.g. the VR-motion-data literature review) without running their own instance or agent. The explorer edits a local copy; there is no way yet to send those edits upstream.

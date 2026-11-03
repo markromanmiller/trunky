@@ -1,0 +1,370 @@
+handle,attribute,entity,value,value_type
+32a62aaa-84ff-4d58-8c17-0175de3ca5eb,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,7ac6907a-576d-4b13-81f8-1acb2f182c27,theStartTime,str
+0845fbeb-1e96-4428-a345-1415e14cc821,d9496c5d-6e55-43ca-84bf-72d565c33419,32a62aaa-84ff-4d58-8c17-0175de3ca5eb,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+17367eb0-2e4f-4363-b642-9450e1f65645,9ca34038-1a65-4ede-88c5-1492ab4bc249,7ac6907a-576d-4b13-81f8-1acb2f182c27,"Start of a time window, as a 24-hour ""HH:MM"" string.",str
+92068902-7ff5-46a4-8d3c-8ed199310c47,d9496c5d-6e55-43ca-84bf-72d565c33419,17367eb0-2e4f-4363-b642-9450e1f65645,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+732dbf2b-18e1-4e96-9494-e9a1b37d28e2,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,92f65c1d-aa74-4b46-93cc-8b400616f1ae,theEndTime,str
+44313f51-4a46-4935-b87b-04b1ba83e421,d9496c5d-6e55-43ca-84bf-72d565c33419,732dbf2b-18e1-4e96-9494-e9a1b37d28e2,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+2b11c84b-dc59-4f0f-a6c8-cdaca3a256f5,9ca34038-1a65-4ede-88c5-1492ab4bc249,92f65c1d-aa74-4b46-93cc-8b400616f1ae,"End of a time window, as a 24-hour ""HH:MM"" string.",str
+801a6827-d2e1-44a0-9a25-6c6ede49f12a,d9496c5d-6e55-43ca-84bf-72d565c33419,2b11c84b-dc59-4f0f-a6c8-cdaca3a256f5,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+82454656-a719-4a63-ae3f-874eff5d3fd2,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d6408b4d-94af-4ad8-8707-711e2614df79,Person,str
+d5c7ed44-23ee-4bbc-a4ce-eccdac2b137c,9ca34038-1a65-4ede-88c5-1492ab4bc249,d6408b4d-94af-4ad8-8707-711e2614df79,A human being that other records refer to by name.,str
+ca5d5aee-144d-4265-8e0d-67f605762ca1,24762266-9337-4930-b88c-55b6af4e7642,d6408b4d-94af-4ad8-8707-711e2614df79,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+91071b51-a130-499a-8459-d55c428154b7,d9496c5d-6e55-43ca-84bf-72d565c33419,82454656-a719-4a63-ae3f-874eff5d3fd2,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+f0c81cb3-a49e-4fef-bf29-b01a9ae7a3c9,d9496c5d-6e55-43ca-84bf-72d565c33419,ca5d5aee-144d-4265-8e0d-67f605762ca1,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+bb16511b-8bcc-4e7b-b861-03fa12082972,d9496c5d-6e55-43ca-84bf-72d565c33419,d5c7ed44-23ee-4bbc-a4ce-eccdac2b137c,9306002a-5093-4fa1-ae39-e315b10f7465,uuid
+0a0bbd7c-3c82-4fce-98fd-608bee677014,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,90aa3a26-326a-42f7-8a66-0f89d4e73b6c,AgentInstructions,str
+a54437d1-8ed5-4cd3-8105-9d3227f1f940,d9496c5d-6e55-43ca-84bf-72d565c33419,0a0bbd7c-3c82-4fce-98fd-608bee677014,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+f20b0688-0309-4d76-9d45-6fdabd39318e,9ca34038-1a65-4ede-88c5-1492ab4bc249,90aa3a26-326a-42f7-8a66-0f89d4e73b6c,"Tags an entity as a standing procedure meant to be read and followed by an AI agent when performing some recurring task -- as opposed to aNote's general provenance/free-text use, or a fact record meant primarily for human reference. Distinguishes 'this is something an agent should search for and execute' from the KB's ordinary data.",str
+bb781d1d-cbc9-4294-aeef-d67446594eb5,d9496c5d-6e55-43ca-84bf-72d565c33419,f20b0688-0309-4d76-9d45-6fdabd39318e,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+b2f2bc1a-016f-4bfb-82fc-2eacfd95e0bb,8a707bcb-7ff7-488f-b7e3-b1679f823c95,90aa3a26-326a-42f7-8a66-0f89d4e73b6c,29a25e0e-3f32-4787-965e-3ecc917d6fef,uuid
+a6d0ef43-c177-4c6a-b287-b7fd0a007250,d9496c5d-6e55-43ca-84bf-72d565c33419,b2f2bc1a-016f-4bfb-82fc-2eacfd95e0bb,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+70dc74ef-3a91-4262-aba5-1e333eb031d7,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,e1f0b9ec-74cc-4fa0-b824-ab9eae0aee17,aToDo,str
+e81cd9b6-48e8-4148-9296-f5d936177210,d9496c5d-6e55-43ca-84bf-72d565c33419,70dc74ef-3a91-4262-aba5-1e333eb031d7,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+66ae59dc-68ef-4066-a3f4-972cf4055aa3,9ca34038-1a65-4ede-88c5-1492ab4bc249,e1f0b9ec-74cc-4fa0-b824-ab9eae0aee17,"Free-text follow-up task not yet done, attached to whatever entity it's relevant to. First intended use: a query that walks a Requisite/aPrerequisite DAG to find stages with no satisfied prerequisite, as a completeness/validity check -- not yet built.",str
+34a00eb7-e1d9-4251-8bb9-28f33a9f200f,d9496c5d-6e55-43ca-84bf-72d565c33419,66ae59dc-68ef-4066-a3f4-972cf4055aa3,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+49308916-8aaf-4bd7-b909-72058edbfe1f,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,b2bb2a2a-8fe6-4812-98dc-17364ab93e4a,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+e798f9b3-b224-404e-bbef-2028fd723b65,29a25e0e-3f32-4787-965e-3ecc917d6fef,b2bb2a2a-8fe6-4812-98dc-17364ab93e4a,"General aFile definition replacing the HW0a-specific one; agreed with Mark in a Claude Code chat, 2026-10-10.",str
+0e78a1a6-4a60-46ae-b4a8-d4317a0a406b,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,805e4858-3e0c-4914-ac72-3913785a1b0d,aFile,str
+49b11733-b675-48b2-800f-f2ffcd2881be,9ca34038-1a65-4ede-88c5-1492ab4bc249,805e4858-3e0c-4914-ac72-3913785a1b0d,URL of a file representing this item and/or the file that this item is representing.,str
+bd26cd78-2ce1-4c7c-b03a-a3c3243fe068,d9496c5d-6e55-43ca-84bf-72d565c33419,0e78a1a6-4a60-46ae-b4a8-d4317a0a406b,b2bb2a2a-8fe6-4812-98dc-17364ab93e4a,uuid
+f7355c0d-8bdb-4985-a16d-3293017938c6,d9496c5d-6e55-43ca-84bf-72d565c33419,49b11733-b675-48b2-800f-f2ffcd2881be,b2bb2a2a-8fe6-4812-98dc-17364ab93e4a,uuid
+534d0a31-df73-42d6-8d6c-b5d4a610dc63,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,43fac24a-a407-4197-bbdc-21ad8c054b70,thePronouns,str
+c0410a66-3dde-4958-8a11-f4287e01937b,9ca34038-1a65-4ede-88c5-1492ab4bc249,43fac24a-a407-4197-bbdc-21ad8c054b70,"The pronouns a person uses, written the way they state them (e.g. ""she/her"", ""he/him"", ""they/them""). Use them when referring to the person in anything written; when no value is recorded, use they/them rather than guessing from a name.",str
+ff19da45-d0c0-410b-b21c-85accf59c194,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,ac4205b4-ddd3-4547-a63f-55d123df3ff8,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+e55c01eb-7866-4df2-b8ae-a20d7c43adf9,29a25e0e-3f32-4787-965e-3ecc917d6fef,ac4205b4-ddd3-4547-a63f-55d123df3ff8,"thePronouns definition moved here from iit-public so it sits with Person. Per Mark in a Claude Code chat, 2026-10-15.",str
+4a5122d9-6b22-4ded-8af2-49f90ccac753,a1e6a161-773d-4011-aaa6-13869931f59f,ac4205b4-ddd3-4547-a63f-55d123df3ff8,2026-10-15T11:58:43-05:00,str
+5248617c-7234-462c-a509-54074532a20c,d9496c5d-6e55-43ca-84bf-72d565c33419,534d0a31-df73-42d6-8d6c-b5d4a610dc63,ac4205b4-ddd3-4547-a63f-55d123df3ff8,uuid
+4d393f1e-f30c-4f2b-8aa0-330c1dd6b583,d9496c5d-6e55-43ca-84bf-72d565c33419,c0410a66-3dde-4958-8a11-f4287e01937b,ac4205b4-ddd3-4547-a63f-55d123df3ff8,uuid
+459c4ea5-0057-477f-8c7a-d7133cdd78dd,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d3a4f07b-6c2e-42e5-8cd6-cf32767cd1fd,theEmailAddress,str
+e2138b62-c352-4da5-90b3-353cba0b64c9,9ca34038-1a65-4ede-88c5-1492ab4bc249,d3a4f07b-6c2e-42e5-8cd6-cf32767cd1fd,"A person's email address, the one to use when contacting them. For Illinois Tech students this is their university address, <login_id>@hawk.illinoistech.edu.",str
+3995dcc7-92f7-4554-84d0-be5a04bfcd8d,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,b745ce01-5d0f-481a-bbfb-ec80aa99044e,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+39f3d37a-3da6-4410-b85c-3fc92836b2bf,29a25e0e-3f32-4787-965e-3ecc917d6fef,b745ce01-5d0f-481a-bbfb-ec80aa99044e,"theEmailAddress definition moved here from iit-public so it sits with Person, and its intention broadened from students to any person (was: ""The student's Illinois Tech email address, in the form <login_id>@hawk.illinoistech.edu.""). Per Mark in a Claude Code chat, 2026-10-15.",str
+d8bc8385-a6ec-4fbe-9c50-218e7a9be86d,a1e6a161-773d-4011-aaa6-13869931f59f,b745ce01-5d0f-481a-bbfb-ec80aa99044e,2026-10-15T12:03:15-05:00,str
+2f74a3e4-b714-49d5-bc3b-908eba3dcffb,d9496c5d-6e55-43ca-84bf-72d565c33419,459c4ea5-0057-477f-8c7a-d7133cdd78dd,b745ce01-5d0f-481a-bbfb-ec80aa99044e,uuid
+7d0b0832-ac96-4cec-821c-08034ce74491,d9496c5d-6e55-43ca-84bf-72d565c33419,e2138b62-c352-4da5-90b3-353cba0b64c9,b745ce01-5d0f-481a-bbfb-ec80aa99044e,uuid
+8cb4411b-c158-45a0-905a-782bc0ae39d3,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,CalendarEvent,str
+44b9b36f-2cb1-485e-bba1-1a85d7c47351,9ca34038-1a65-4ede-88c5-1492ab4bc249,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,"One occurrence of an event on a calendar, mirrored from a CalendarFeed. A repeating series gives one CalendarEvent per occurrence.",str
+c95c2adf-8b57-4cb1-a26d-655efa11155d,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,2601b5f1-143b-403b-a2b4-1872ada03857,CalendarFeed,str
+a0b2e40a-b421-4084-8fe2-9f4d854a48a0,9ca34038-1a65-4ede-88c5-1492ab4bc249,2601b5f1-143b-403b-a2b4-1872ada03857,"A calendar published as an iCalendar (.ics) feed, which a System mirrors into CalendarEvent items.",str
+6ebd391b-67e3-46dd-8c18-989106a8335e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,add98a95-7e97-4160-9017-476710afe97c,theStartDateTime,str
+bcf5866b-708e-429e-835f-eb26f2ab762b,9ca34038-1a65-4ede-88c5-1492ab4bc249,add98a95-7e97-4160-9017-476710afe97c,"When something starts: an ISO 8601 date-time with its UTC offset, written in the local time of the zone named by theTimeZone (e.g. 2026-10-16T09:00:00-05:00 for America/Chicago), or a date alone (2026-10-16) for an all-day event. Unlike theStartTime, which is a time of day.",str
+25a76a6b-44b3-473f-8f72-556907e5efbc,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,f83cd505-501b-4c07-9910-5781f0bf02e2,theEndDateTime,str
+6a803bc8-a428-4191-aef6-9a5d20659c25,9ca34038-1a65-4ede-88c5-1492ab4bc249,f83cd505-501b-4c07-9910-5781f0bf02e2,"When something ends, in the same form as theStartDateTime. Exclusive: an all-day event on 2026-10-16 ends 2026-10-17.",str
+82042476-3d82-4dd7-946d-90b9ab047295,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d75ad5d3-1a0f-4052-8518-831b5b10356c,theICalendarUID,str
+4ea26cd0-084b-4aca-b426-48b2028b5263,9ca34038-1a65-4ede-88c5-1492ab4bc249,d75ad5d3-1a0f-4052-8518-831b5b10356c,The event's UID in its source calendar (iCalendar UID). Shared by every occurrence of a repeating series.,str
+a1038251-ad56-421d-977b-55f993ce3540,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,1ac82ec0-ff86-4fd0-b899-e9ba404d605d,theOriginalStartDateTime,str
+0be2c3e4-22a9-49a3-af42-4fe460ba439d,9ca34038-1a65-4ede-88c5-1492ab4bc249,1ac82ec0-ff86-4fd0-b899-e9ba404d605d,"For an occurrence of a repeating series: the start the series' rule gives it (iCalendar RECURRENCE-ID), which stays fixed when this one occurrence is moved. Together with theICalendarUID it identifies the occurrence. Absent for events that do not repeat.",str
+0a20de3e-0004-4039-bc99-1f082ac0cce1,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,40d24795-9b2f-4ad1-92dd-e1acfaaaab3f,theCalendarFeed,str
+54ce5d03-fd6d-43a7-a889-956c2cc12540,9ca34038-1a65-4ede-88c5-1492ab4bc249,40d24795-9b2f-4ad1-92dd-e1acfaaaab3f,The CalendarFeed an event was mirrored from (value: the feed's UUID).,str
+cd6297cc-5f1f-4fac-b082-904bcbe25441,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,c8545a8a-12d7-402f-b742-42ce0e6ad8d5,theLocation,str
+0a31e648-ca1b-438d-879d-a1bc582744d3,9ca34038-1a65-4ede-88c5-1492ab4bc249,c8545a8a-12d7-402f-b742-42ce0e6ad8d5,"Where an event takes place, as written in its calendar: a room, an address, or a meeting link.",str
+95baa2db-15eb-4ee3-8afd-7482c6fafd56,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d1697ad1-ea8f-4b75-9a48-4e6074ad3045,theTimeZone,str
+539d0205-42b2-4324-b666-f6873c16eff0,9ca34038-1a65-4ede-88c5-1492ab4bc249,d1697ad1-ea8f-4b75-9a48-4e6074ad3045,"The IANA time zone (e.g. America/Chicago, America/Bogota) whose local time something's timestamps are written in. The offset in a timestamp fixes the instant; the zone also gives the daylight-saving rules and the place, which two zones with the same offset do not share. Absent for all-day events.",str
+6edbcc80-22b9-4b4f-beaa-4836cf46197d,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,theBusyStatus,str
+1e5cb058-47a4-4253-8b01-a9ff40450372,9ca34038-1a65-4ede-88c5-1492ab4bc249,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,How an event shows on its calendar's free/busy view.,str
+25b2b986-4f0f-4046-81b3-1c55adb88474,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,52f1a174-a1da-4594-9e7e-9e72fca7ba08,uuid
+8cd554f1-7a8f-4e24-9d2f-adb118f98c63,eb7d9144-af89-4b89-9958-8bbcc533a6d3,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,busy,str
+b6ee6f11-c2f6-48c9-a959-cbf072ffa78e,eb7d9144-af89-4b89-9958-8bbcc533a6d3,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,tentative,str
+2c5a9f7c-fcba-4e21-97a9-6059f51c684f,eb7d9144-af89-4b89-9958-8bbcc533a6d3,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,free,str
+23607dee-7d67-440c-9a01-6d38f158860a,eb7d9144-af89-4b89-9958-8bbcc533a6d3,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,out-of-office,str
+5a0c1340-d7b9-4419-82c6-a27acfb8c845,eb7d9144-af89-4b89-9958-8bbcc533a6d3,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,working-elsewhere,str
+49643765-ce0a-48f4-b28f-245ab363255a,24762266-9337-4930-b88c-55b6af4e7642,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+107adc22-9536-497f-9330-877bcb8a21b8,24762266-9337-4930-b88c-55b6af4e7642,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,add98a95-7e97-4160-9017-476710afe97c,uuid
+5ca5d566-b474-41b2-adc0-2474f619e842,24762266-9337-4930-b88c-55b6af4e7642,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,f83cd505-501b-4c07-9910-5781f0bf02e2,uuid
+4fb95711-4e6e-42f7-86a7-526c5e8cc0af,24762266-9337-4930-b88c-55b6af4e7642,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,d75ad5d3-1a0f-4052-8518-831b5b10356c,uuid
+72b241ab-154f-4110-9539-e055d5177dba,24762266-9337-4930-b88c-55b6af4e7642,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,40d24795-9b2f-4ad1-92dd-e1acfaaaab3f,uuid
+47ef12dd-5ea5-419a-8e38-55a59ed2cca6,8a707bcb-7ff7-488f-b7e3-b1679f823c95,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,d1697ad1-ea8f-4b75-9a48-4e6074ad3045,uuid
+4088ffb5-bc78-4a61-8ed8-c615a90fef11,8a707bcb-7ff7-488f-b7e3-b1679f823c95,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,c8545a8a-12d7-402f-b742-42ce0e6ad8d5,uuid
+c780d226-6ede-4943-b264-277682fa6017,8a707bcb-7ff7-488f-b7e3-b1679f823c95,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,f08d9b3d-483d-4cb0-9d8e-3fa667842bfa,uuid
+f72acfcb-0155-48a4-b97d-83aaa37adeb3,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,1ac82ec0-ff86-4fd0-b899-e9ba404d605d,uuid
+8e518d00-26b4-4c0d-baa2-ca6a4d0e8ff4,24762266-9337-4930-b88c-55b6af4e7642,2601b5f1-143b-403b-a2b4-1872ada03857,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+8826adcf-ff07-440d-9a9d-7a7b8ce0f162,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,198cbdb5-7014-40fb-a9bd-78065070ca49,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+328dd24a-c515-4646-8ef2-882d9459a864,29a25e0e-3f32-4787-965e-3ecc917d6fef,198cbdb5-7014-40fb-a9bd-78065070ca49,"Calendar mirroring: CalendarEvent/CalendarFeed vocabulary, the outlook-calendar set, and the System Pull calendar feeds; agreed with Mark in a Claude Code chat, 2026-10-16.",str
+b233edb5-eff0-4f34-a702-8770ceeece12,a1e6a161-773d-4011-aaa6-13869931f59f,198cbdb5-7014-40fb-a9bd-78065070ca49,2026-10-16T11:53:51-05:00,str
+03c14771-ac7c-4f12-8ba0-db87d21e4b22,d9496c5d-6e55-43ca-84bf-72d565c33419,8cb4411b-c158-45a0-905a-782bc0ae39d3,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+73b126ef-7090-4556-a185-3f5d44e70daa,d9496c5d-6e55-43ca-84bf-72d565c33419,44b9b36f-2cb1-485e-bba1-1a85d7c47351,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+c4cf8720-8c20-4350-a67e-62efba324c51,d9496c5d-6e55-43ca-84bf-72d565c33419,c95c2adf-8b57-4cb1-a26d-655efa11155d,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+e8fec312-adbb-4236-9417-2d0b0bda3775,d9496c5d-6e55-43ca-84bf-72d565c33419,a0b2e40a-b421-4084-8fe2-9f4d854a48a0,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+e203917d-bb54-4737-9d5c-14eef9b99378,d9496c5d-6e55-43ca-84bf-72d565c33419,6ebd391b-67e3-46dd-8c18-989106a8335e,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+c00ef207-1cb6-418c-b632-87e45f87d5b5,d9496c5d-6e55-43ca-84bf-72d565c33419,bcf5866b-708e-429e-835f-eb26f2ab762b,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+dbedc7a1-40eb-41bf-a15b-1869c68adc26,d9496c5d-6e55-43ca-84bf-72d565c33419,25a76a6b-44b3-473f-8f72-556907e5efbc,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+9934fb32-dab3-4d79-8cc4-b7aa1f605de4,d9496c5d-6e55-43ca-84bf-72d565c33419,6a803bc8-a428-4191-aef6-9a5d20659c25,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+3d2092c2-cd4e-4421-aa12-adbd2b86d69b,d9496c5d-6e55-43ca-84bf-72d565c33419,82042476-3d82-4dd7-946d-90b9ab047295,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+94e49579-98ca-40c2-9048-a66a08a2ee58,d9496c5d-6e55-43ca-84bf-72d565c33419,4ea26cd0-084b-4aca-b426-48b2028b5263,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+3e647a07-65e0-4ab5-b9f8-245df3b9e9eb,d9496c5d-6e55-43ca-84bf-72d565c33419,a1038251-ad56-421d-977b-55f993ce3540,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+402c4cce-5a8f-48f3-ae85-0fe032117d0c,d9496c5d-6e55-43ca-84bf-72d565c33419,0be2c3e4-22a9-49a3-af42-4fe460ba439d,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+542fa98b-0f6f-4e47-8390-3d708725fabf,d9496c5d-6e55-43ca-84bf-72d565c33419,0a20de3e-0004-4039-bc99-1f082ac0cce1,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+b5ec9741-1b31-4b61-b748-212698dfccd1,d9496c5d-6e55-43ca-84bf-72d565c33419,54ce5d03-fd6d-43a7-a889-956c2cc12540,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+1eeb24bd-a3ad-4551-ab57-db899a3f633d,d9496c5d-6e55-43ca-84bf-72d565c33419,cd6297cc-5f1f-4fac-b082-904bcbe25441,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+bcf5c535-1d13-4855-b51c-428207755ad7,d9496c5d-6e55-43ca-84bf-72d565c33419,0a31e648-ca1b-438d-879d-a1bc582744d3,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+45afaa39-814f-475c-b0e9-929541c4c78a,d9496c5d-6e55-43ca-84bf-72d565c33419,95baa2db-15eb-4ee3-8afd-7482c6fafd56,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+0200a7f4-60a7-4ef3-b051-7ec2743f9657,d9496c5d-6e55-43ca-84bf-72d565c33419,539d0205-42b2-4324-b666-f6873c16eff0,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+a4af88eb-c544-4121-a54f-c6b754ace2ff,d9496c5d-6e55-43ca-84bf-72d565c33419,6edbcc80-22b9-4b4f-beaa-4836cf46197d,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+5c6cb081-dc6d-476f-bc7e-72053b7d18ab,d9496c5d-6e55-43ca-84bf-72d565c33419,1e5cb058-47a4-4253-8b01-a9ff40450372,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+9d33102c-d3f9-4d79-9c97-3a4dea8cbf46,d9496c5d-6e55-43ca-84bf-72d565c33419,25b2b986-4f0f-4046-81b3-1c55adb88474,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+3299842b-1bd1-4492-9b84-8ebe833f558d,d9496c5d-6e55-43ca-84bf-72d565c33419,8cd554f1-7a8f-4e24-9d2f-adb118f98c63,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+35dd2f07-bfec-4b83-ae01-f1fe455532f8,d9496c5d-6e55-43ca-84bf-72d565c33419,b6ee6f11-c2f6-48c9-a959-cbf072ffa78e,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+cd810fc4-f01e-453b-8cb6-6ae04658395e,d9496c5d-6e55-43ca-84bf-72d565c33419,2c5a9f7c-fcba-4e21-97a9-6059f51c684f,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+c9b8b509-4846-4bcd-a034-5478003882b3,d9496c5d-6e55-43ca-84bf-72d565c33419,23607dee-7d67-440c-9a01-6d38f158860a,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+f44514cc-d710-4294-8b61-74a6efad0c6d,d9496c5d-6e55-43ca-84bf-72d565c33419,5a0c1340-d7b9-4419-82c6-a27acfb8c845,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+6c807d8c-82ab-4906-9ae0-7c44c7e98843,d9496c5d-6e55-43ca-84bf-72d565c33419,49643765-ce0a-48f4-b28f-245ab363255a,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+3b45d1c9-60ee-432e-beb9-0bd9326bc60d,d9496c5d-6e55-43ca-84bf-72d565c33419,107adc22-9536-497f-9330-877bcb8a21b8,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+389f380e-32de-4865-bde0-4e1641fcce05,d9496c5d-6e55-43ca-84bf-72d565c33419,5ca5d566-b474-41b2-adc0-2474f619e842,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+cf3bb0c4-22dc-4965-af6d-b43d3b0614c5,d9496c5d-6e55-43ca-84bf-72d565c33419,4fb95711-4e6e-42f7-86a7-526c5e8cc0af,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+614fec4f-592e-423a-aa71-0afabe619164,d9496c5d-6e55-43ca-84bf-72d565c33419,72b241ab-154f-4110-9539-e055d5177dba,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+b11ca5d3-7464-48be-bc3b-5a89ee65cbd2,d9496c5d-6e55-43ca-84bf-72d565c33419,47ef12dd-5ea5-419a-8e38-55a59ed2cca6,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+3535776f-75f5-4d25-878f-c399364523b0,d9496c5d-6e55-43ca-84bf-72d565c33419,4088ffb5-bc78-4a61-8ed8-c615a90fef11,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+339823d2-f502-46b1-ae57-bd1f5e1eb3ba,d9496c5d-6e55-43ca-84bf-72d565c33419,c780d226-6ede-4943-b264-277682fa6017,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+ebd5a3c3-a829-463c-9d30-d199463ee43c,d9496c5d-6e55-43ca-84bf-72d565c33419,f72acfcb-0155-48a4-b97d-83aaa37adeb3,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+8b977242-233c-47dc-adf0-c98374fd269f,d9496c5d-6e55-43ca-84bf-72d565c33419,8e518d00-26b4-4c0d-baa2-ca6a4d0e8ff4,198cbdb5-7014-40fb-a9bd-78065070ca49,uuid
+075817fc-700c-4518-bbf7-15052b487a37,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d7a1fc00-055d-4f5b-8071-3c242b2742e5,CategoryRule,str
+6a08d682-976b-4463-80f0-2f05fd95a6a9,9ca34038-1a65-4ede-88c5-1492ab4bc249,d7a1fc00-055d-4f5b-8071-3c242b2742e5,"A rule giving CalendarEvent items a Category: an event matches when every condition the rule has holds (theICalendarUID equal to the event's, so a whole repeating series; theTitlePattern found in its theName; theCalendarFeed equal to its feed). Applied by the System Classify calendar events to events without a theCategory.",str
+e503b6d8-8443-4323-95f8-534915c4d9c5,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,295185fa-ffe2-4c85-b534-61c673983b58,theTitlePattern,str
+55bec25b-e88f-413e-af2d-6e2f03fae21f,9ca34038-1a65-4ede-88c5-1492ab4bc249,295185fa-ffe2-4c85-b534-61c673983b58,"A regular expression (Python syntax, case-insensitive) searched for in an item's theName.",str
+a797b558-5d68-4b42-aafa-fc16a434838f,24762266-9337-4930-b88c-55b6af4e7642,d7a1fc00-055d-4f5b-8071-3c242b2742e5,e316c25d-6439-4545-b5c8-4d2b0fd7103c,uuid
+e010a597-1c61-4cf4-ac97-8241037b9d64,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,d7a1fc00-055d-4f5b-8071-3c242b2742e5,d75ad5d3-1a0f-4052-8518-831b5b10356c,uuid
+b8f496ac-14ce-4813-8ff4-24b7c0b4594a,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,d7a1fc00-055d-4f5b-8071-3c242b2742e5,295185fa-ffe2-4c85-b534-61c673983b58,uuid
+ca76768c-1922-4c1b-ba3c-798a424bfd18,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,d7a1fc00-055d-4f5b-8071-3c242b2742e5,40d24795-9b2f-4ad1-92dd-e1acfaaaab3f,uuid
+57c14b2c-dae0-430f-badf-47dce5c879a0,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,d7a1fc00-055d-4f5b-8071-3c242b2742e5,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+773f6b12-02e7-42b0-86ff-2064ca8027db,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,b7375bb0-3ed1-45fc-bcac-6eb20ebbb8d3,e316c25d-6439-4545-b5c8-4d2b0fd7103c,uuid
+87c99a7b-d32d-41b9-9312-d6a353a4d5fc,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,8686d8a2-8326-484c-859d-15cb928cb2bd,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+6309987d-1819-4616-8c0e-939a09383d07,29a25e0e-3f32-4787-965e-3ecc917d6fef,8686d8a2-8326-484c-859d-15cb928cb2bd,"Calendar categories: Category items copied from Meta/Time Budgets/Categories, CategoryRule, and the System Classify calendar events; agreed with Mark in a Claude Code chat, 2026-10-17.",str
+3d624dc1-3eee-4fbc-b296-5a948fe8c845,a1e6a161-773d-4011-aaa6-13869931f59f,8686d8a2-8326-484c-859d-15cb928cb2bd,2026-10-17T05:36:39-05:00,str
+9352af5a-ef2e-4a05-aea2-ef599ca58b2b,d9496c5d-6e55-43ca-84bf-72d565c33419,075817fc-700c-4518-bbf7-15052b487a37,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+fbd71bec-c739-4110-8001-5f6ef29c6e90,d9496c5d-6e55-43ca-84bf-72d565c33419,6a08d682-976b-4463-80f0-2f05fd95a6a9,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+bfc0ffa2-ea2c-48f5-8c8b-48172eb7051d,d9496c5d-6e55-43ca-84bf-72d565c33419,e503b6d8-8443-4323-95f8-534915c4d9c5,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+2fc5c1ab-fee7-4267-ad79-151c67574cb0,d9496c5d-6e55-43ca-84bf-72d565c33419,55bec25b-e88f-413e-af2d-6e2f03fae21f,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+389fdd1d-49d1-4e9d-ba3a-a0c03952e9b3,d9496c5d-6e55-43ca-84bf-72d565c33419,a797b558-5d68-4b42-aafa-fc16a434838f,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+4bde2ffb-bf07-4703-aa2d-b3d5fafd7e04,d9496c5d-6e55-43ca-84bf-72d565c33419,e010a597-1c61-4cf4-ac97-8241037b9d64,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+20a2d315-ce35-4733-866f-6c6987dfe937,d9496c5d-6e55-43ca-84bf-72d565c33419,b8f496ac-14ce-4813-8ff4-24b7c0b4594a,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+ba5914c0-b879-4c7e-a8d6-e7f3a3748eb4,d9496c5d-6e55-43ca-84bf-72d565c33419,ca76768c-1922-4c1b-ba3c-798a424bfd18,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+b10d7964-122a-4583-a9f9-0665f041acde,d9496c5d-6e55-43ca-84bf-72d565c33419,57c14b2c-dae0-430f-badf-47dce5c879a0,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+397201d3-872b-4a98-a191-05a2f478f437,d9496c5d-6e55-43ca-84bf-72d565c33419,773f6b12-02e7-42b0-86ff-2064ca8027db,8686d8a2-8326-484c-859d-15cb928cb2bd,uuid
+3c163dfb-9be0-4720-9a88-b967df527db8,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,b3e9d27c-61a4-4f0e-8c5a-7d2f1e6a9b30,CalendarNoteFilter,str
+3c2edbd6-c9c8-4b77-8467-60a77130c8da,9ca34038-1a65-4ede-88c5-1492ab4bc249,b3e9d27c-61a4-4f0e-8c5a-7d2f1e6a9b30,"A filter keeping CalendarEvent items out of the Memento Mori notes: an event matching theTitlePattern (and, when the filter has one, from that theCalendarFeed) gets no note from the System Write calendar notes, and an existing note of it is removed like a cancelled event's. Trunky still holds the event.",str
+c65ef4d2-662f-44d8-a46c-396d39e44e67,24762266-9337-4930-b88c-55b6af4e7642,b3e9d27c-61a4-4f0e-8c5a-7d2f1e6a9b30,295185fa-ffe2-4c85-b534-61c673983b58,uuid
+599b3be7-3d39-4d42-9250-cf3487738595,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,b3e9d27c-61a4-4f0e-8c5a-7d2f1e6a9b30,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+1f4e98e1-6da7-4723-acda-e17198956c29,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,b3e9d27c-61a4-4f0e-8c5a-7d2f1e6a9b30,40d24795-9b2f-4ad1-92dd-e1acfaaaab3f,uuid
+1b80947a-ef29-4476-b8a2-5f506a4d515d,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,279c2d7e-9500-49a0-99f2-b14bacce75d5,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+1be7d38d-0be2-472c-8dec-2ef12e680e85,29a25e0e-3f32-4787-965e-3ecc917d6fef,279c2d7e-9500-49a0-99f2-b14bacce75d5,"Google personal calendar feed and CalendarNoteFilter (no notes for daily logistics); agreed with Mark in a Claude Code chat, 2026-10-17.",str
+b7ef279c-c1a0-4ef2-b1f7-8826de3dbe3f,a1e6a161-773d-4011-aaa6-13869931f59f,279c2d7e-9500-49a0-99f2-b14bacce75d5,2026-10-17T10:37:39-05:00,str
+6bdfb9f8-da3c-42fe-bcd6-3d4762f4fb40,d9496c5d-6e55-43ca-84bf-72d565c33419,3c163dfb-9be0-4720-9a88-b967df527db8,279c2d7e-9500-49a0-99f2-b14bacce75d5,uuid
+7384d826-a286-4d3b-a431-a8982dc3fe02,d9496c5d-6e55-43ca-84bf-72d565c33419,3c2edbd6-c9c8-4b77-8467-60a77130c8da,279c2d7e-9500-49a0-99f2-b14bacce75d5,uuid
+f8a6f0e8-7baa-4a7e-8426-311b798cd7ba,d9496c5d-6e55-43ca-84bf-72d565c33419,c65ef4d2-662f-44d8-a46c-396d39e44e67,279c2d7e-9500-49a0-99f2-b14bacce75d5,uuid
+f679b29d-bb09-4803-97be-5f84dc05a534,d9496c5d-6e55-43ca-84bf-72d565c33419,599b3be7-3d39-4d42-9250-cf3487738595,279c2d7e-9500-49a0-99f2-b14bacce75d5,uuid
+39ab6543-c3f8-4660-b5d4-337b52ecd5fe,d9496c5d-6e55-43ca-84bf-72d565c33419,1f4e98e1-6da7-4723-acda-e17198956c29,279c2d7e-9500-49a0-99f2-b14bacce75d5,uuid
+9069138b-5b44-4759-a227-cc42e5c09272,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,9a0f3e4c-0ac8-4f21-a945-683c82cf0044,theEmailName,str
+425e957f-4ccb-450d-8d8c-5f0b1849404c,9ca34038-1a65-4ede-88c5-1492ab4bc249,9a0f3e4c-0ac8-4f21-a945-683c82cf0044,"The name a person's email shows up under (the display name on messages from their account, usually their name in university records), when it differs from theName, the name they go by. Use it to match email, rosters, and invites to the person; refer to them by theName in anything written.",str
+153d093a-b031-4eb8-bc37-84f8a369d0cc,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,9bfb76d1-2969-4130-a26a-5152b9858ba1,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+7dfee3e4-ad20-4e37-a7fb-02a2d9e87328,29a25e0e-3f32-4787-965e-3ecc917d6fef,9bfb76d1-2969-4130-a26a-5152b9858ba1,"theEmailName added; Lorenzo Villanova's email name (Eleazar Villanova) and email address recorded. Per Mark in a Claude Code chat, 2026-10-19: ""Eleazar = Lorenzo.""",str
+f7e23dbb-0477-4259-9aae-eaadd94bf63f,a1e6a161-773d-4011-aaa6-13869931f59f,9bfb76d1-2969-4130-a26a-5152b9858ba1,2026-10-19T09:52:08-05:00,str
+49604f9f-1bb3-4d93-a4f6-55b7fb809e26,d9496c5d-6e55-43ca-84bf-72d565c33419,9069138b-5b44-4759-a227-cc42e5c09272,9bfb76d1-2969-4130-a26a-5152b9858ba1,uuid
+531d05f9-5de4-4143-80b6-749a1fac3a74,d9496c5d-6e55-43ca-84bf-72d565c33419,425e957f-4ccb-450d-8d8c-5f0b1849404c,9bfb76d1-2969-4130-a26a-5152b9858ba1,uuid
+277bdadd-bc05-451b-8f1b-bc4cc8d2a75d,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,0863af89-b868-4397-8e2e-038767d3257d,ObsidianVault,str
+4bc2ccbc-b788-4313-a85d-8c31ef96f6b8,9ca34038-1a65-4ede-88c5-1492ab4bc249,0863af89-b868-4397-8e2e-038767d3257d,A folder of Markdown notes and canvases edited in Obsidian.,str
+a1920036-8acd-47c4-9203-a988cefdb357,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d21f987e-562f-430c-b729-8bc954d94a14,theFolderPath,str
+66903316-6818-4438-a733-687301b8862b,9ca34038-1a65-4ede-88c5-1492ab4bc249,d21f987e-562f-430c-b729-8bc954d94a14,"Where a folder is on the computer the ECS engine runs on: an absolute path, or one starting with ~ for the home folder.",str
+6fb3de1b-6dd8-4de3-b0fb-18b5483096b9,24762266-9337-4930-b88c-55b6af4e7642,0863af89-b868-4397-8e2e-038767d3257d,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+de7aaa64-e2a7-452a-a6e5-dde2d0c0c61f,24762266-9337-4930-b88c-55b6af4e7642,0863af89-b868-4397-8e2e-038767d3257d,d21f987e-562f-430c-b729-8bc954d94a14,uuid
+eb067866-6b77-4427-b698-86baf7b060da,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,42635a38-6bf4-499d-bbb5-bc1d2172deb4,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+9062208e-9e17-4dd8-bebc-4fe778205797,29a25e0e-3f32-4787-965e-3ecc917d6fef,42635a38-6bf4-499d-bbb5-bc1d2172deb4,"Paug sync as an engine System: theSource (a System's input when it imports from outside Trunky), ObsidianVault and theFolderPath, theCanvasInterfaceVersion on spans, and the System Sync Paug notes and canvases; agreed with Mark in a Claude Code chat, 2026-10-18 and 2026-10-19.",str
+d407734c-79b3-4b85-9de9-c76bc82f24bb,a1e6a161-773d-4011-aaa6-13869931f59f,42635a38-6bf4-499d-bbb5-bc1d2172deb4,2026-10-19T17:00:49-05:00,str
+fb0e6c0f-ed9b-4f72-bd41-a84481a66676,d9496c5d-6e55-43ca-84bf-72d565c33419,277bdadd-bc05-451b-8f1b-bc4cc8d2a75d,42635a38-6bf4-499d-bbb5-bc1d2172deb4,uuid
+2a212f71-7647-4052-b441-9061f7ffe558,d9496c5d-6e55-43ca-84bf-72d565c33419,4bc2ccbc-b788-4313-a85d-8c31ef96f6b8,42635a38-6bf4-499d-bbb5-bc1d2172deb4,uuid
+a614d433-8753-4554-a800-a43ce346829c,d9496c5d-6e55-43ca-84bf-72d565c33419,a1920036-8acd-47c4-9203-a988cefdb357,42635a38-6bf4-499d-bbb5-bc1d2172deb4,uuid
+1818e39c-60eb-4ea9-ae5c-d7f2806e78c9,d9496c5d-6e55-43ca-84bf-72d565c33419,66903316-6818-4438-a733-687301b8862b,42635a38-6bf4-499d-bbb5-bc1d2172deb4,uuid
+1f6cb41e-734f-483e-9e9f-12bfa0b9bf8a,d9496c5d-6e55-43ca-84bf-72d565c33419,6fb3de1b-6dd8-4de3-b0fb-18b5483096b9,42635a38-6bf4-499d-bbb5-bc1d2172deb4,uuid
+fc571940-a242-43c7-963d-286e4b9392cb,d9496c5d-6e55-43ca-84bf-72d565c33419,de7aaa64-e2a7-452a-a6e5-dde2d0c0c61f,42635a38-6bf4-499d-bbb5-bc1d2172deb4,uuid
+498f6e1f-cccd-4d3b-a3be-7df88f9973a6,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,64880dc9-b617-40bd-8eb9-7fe46d0575f4,AcademicInstitution,str
+8357d500-dd31-499c-8c6e-3341491dcef0,9ca34038-1a65-4ede-88c5-1492ab4bc249,64880dc9-b617-40bd-8eb9-7fe46d0575f4,"A degree-granting school as a whole: a university or college. Its colleges, schools, departments and programs are separate items.",str
+8295c56e-c0c3-4c98-86c9-fa6c96af7c9b,24762266-9337-4930-b88c-55b6af4e7642,64880dc9-b617-40bd-8eb9-7fe46d0575f4,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+4d813e1f-d25f-4b9e-85b1-c72e2eaefe73,8a707bcb-7ff7-488f-b7e3-b1679f823c95,64880dc9-b617-40bd-8eb9-7fe46d0575f4,1042e222-6da6-4053-818e-1f6fc10e376a,uuid
+76edbcf0-8622-4c07-94fb-68a3b045a5e4,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,64880dc9-b617-40bd-8eb9-7fe46d0575f4,5643a4bf-141c-4e8f-b630-3459338a8a0b,uuid
+fa85cb17-985e-498c-ab6e-3986083b00d5,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,677873f4-b0de-4797-a795-2d275d97fd00,Place,str
+76f5d35a-fdb6-41be-9c43-80ea8f50df0f,9ca34038-1a65-4ede-88c5-1492ab4bc249,677873f4-b0de-4797-a795-2d275d97fd00,"A physical location people can go to, such as a campus, building or venue, that has a postal address.",str
+60bebeba-a6b6-470c-8079-cb3a4203d96f,24762266-9337-4930-b88c-55b6af4e7642,677873f4-b0de-4797-a795-2d275d97fd00,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+c42e1f94-efa2-4a61-b130-667d350f24ee,8a707bcb-7ff7-488f-b7e3-b1679f823c95,677873f4-b0de-4797-a795-2d275d97fd00,e89f02d2-8e80-4ed1-ad73-158636875e33,uuid
+baa9b81c-76c5-466e-8c87-6b4764b0a7b4,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,677873f4-b0de-4797-a795-2d275d97fd00,ea119c31-6a7d-4b32-95c7-23b381668080,uuid
+4f4c88a3-a3ca-45f3-a6a0-89ad3889b6ab,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,677873f4-b0de-4797-a795-2d275d97fd00,64d0829d-30b6-4716-a9fd-ff9122c4f854,uuid
+3fb09106-f6b9-4670-bc04-aaa97aae1722,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,81f04b5a-6001-4827-bc8b-0b1cc014d2e5,TravelEstimate,str
+d07b67f6-f9fa-4527-8291-a9f2151e9e6b,9ca34038-1a65-4ede-88c5-1492ab4bc249,81f04b5a-6001-4827-bc8b-0b1cc014d2e5,"How long it takes to get between two Places, treated as the same in both directions.",str
+455358c3-e525-416f-8293-6e31e9af1276,24762266-9337-4930-b88c-55b6af4e7642,81f04b5a-6001-4827-bc8b-0b1cc014d2e5,0f83ac6f-9081-4fb2-9590-60227e67a5cd,uuid
+a5818abe-7d9e-4bd4-85d4-ffbdcd6c4a7d,24762266-9337-4930-b88c-55b6af4e7642,81f04b5a-6001-4827-bc8b-0b1cc014d2e5,2c639bd2-d0c3-4f9e-981f-472a36eb2670,uuid
+366b5d07-2206-49f2-98d9-4bb0e58cac03,8a707bcb-7ff7-488f-b7e3-b1679f823c95,81f04b5a-6001-4827-bc8b-0b1cc014d2e5,9ba547f5-1996-4295-8e9c-73f3a94428b9,uuid
+0cf7ba81-1639-48de-89e7-ba8a47b740ba,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,1042e222-6da6-4053-818e-1f6fc10e376a,aCampus,str
+ed926eaf-e09f-4056-b4e5-8d87f0370481,9ca34038-1a65-4ede-88c5-1492ab4bc249,1042e222-6da6-4053-818e-1f6fc10e376a,A Place where an AcademicInstitution holds classes or has offices. One statement per campus.,str
+3a9da100-bf57-4631-8e7a-c27f2354dcaf,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,e89f02d2-8e80-4ed1-ad73-158636875e33,theAddress,str
+0efefb5a-5386-4cc5-b132-ec625205b2dc,9ca34038-1a65-4ede-88c5-1492ab4bc249,e89f02d2-8e80-4ed1-ad73-158636875e33,"The full postal address of a Place, as one line of text.",str
+a5042cbe-47cf-4b4c-a866-27c2ea9031d5,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,ea119c31-6a7d-4b32-95c7-23b381668080,theLatitude,str
+889cc0c2-4057-4b13-bba5-1cdb8dd48a84,9ca34038-1a65-4ede-88c5-1492ab4bc249,ea119c31-6a7d-4b32-95c7-23b381668080,The latitude of a Place in decimal degrees (WGS84).,str
+dc215456-58b3-4e3a-9b34-b2c8220ca1e7,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,64d0829d-30b6-4716-a9fd-ff9122c4f854,theLongitude,str
+9b1c2200-c194-4d21-8ef1-495f0dacb0c0,9ca34038-1a65-4ede-88c5-1492ab4bc249,64d0829d-30b6-4716-a9fd-ff9122c4f854,The longitude of a Place in decimal degrees (WGS84).,str
+fec76fba-d3cc-4584-a2d2-d051ff4bfd39,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,0f83ac6f-9081-4fb2-9590-60227e67a5cd,anEndpoint,str
+2211fad0-9465-41a1-bf68-e2413238205d,9ca34038-1a65-4ede-88c5-1492ab4bc249,0f83ac6f-9081-4fb2-9590-60227e67a5cd,One of the two Places a TravelEstimate connects.,str
+3430b9e8-aa70-412a-b972-325c06d2fd6b,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,2c639bd2-d0c3-4f9e-981f-472a36eb2670,theDriveMinutes,str
+10af0fdf-9b51-47cf-af9e-776737a36c02,9ca34038-1a65-4ede-88c5-1492ab4bc249,2c639bd2-d0c3-4f9e-981f-472a36eb2670,"Typical off-peak driving time between a TravelEstimate's endpoints, in whole minutes.",str
+aeeb79d0-e615-4ef6-a3cc-9298888bc74f,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,9ba547f5-1996-4295-8e9c-73f3a94428b9,theEstimateSource,str
+91862279-d9ab-4358-a36a-3f09d4478b3a,9ca34038-1a65-4ede-88c5-1492ab4bc249,9ba547f5-1996-4295-8e9c-73f3a94428b9,"Where a TravelEstimate's time came from and when, e.g. a routing service and date, or a hand estimate.",str
+1307f2b4-0b7e-427d-a48e-d602ef80704c,bacac363-2456-4214-a2dd-515b50b886e7,0f83ac6f-9081-4fb2-9590-60227e67a5cd,2,int
+6f79a331-502a-4592-b422-35a84f938df9,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,5643a4bf-141c-4e8f-b630-3459338a8a0b,theURL,str
+0b39f6a6-b80c-481a-86ca-ac33da0ef518,9ca34038-1a65-4ede-88c5-1492ab4bc249,5643a4bf-141c-4e8f-b630-3459338a8a0b,"The primary landing/source page URL for an entity, e.g. a paper's publisher or arXiv page.",str
+9e6be7d6-32f7-4d16-8d8e-683a54cb1a91,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,b2381541-6533-435f-8c8f-34523e338c15,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+bbef751e-38a5-4c22-b963-fd0ed2e59294,29a25e0e-3f32-4787-965e-3ecc917d6fef,b2381541-6533-435f-8c8f-34523e338c15,"AcademicInstitution, Place and TravelEstimate vocabulary, and theURL's definition moved here from research-paper-schemata; agreed with Mark in a Claude Code chat, 2026-10-22.",str
+83bc7d22-5855-4b13-9f98-b16bf78ecdb1,a1e6a161-773d-4011-aaa6-13869931f59f,b2381541-6533-435f-8c8f-34523e338c15,2026-10-22T08:03:51-05:00,str
+89316498-4de1-4aee-ac36-c7228303b360,d9496c5d-6e55-43ca-84bf-72d565c33419,498f6e1f-cccd-4d3b-a3be-7df88f9973a6,b2381541-6533-435f-8c8f-34523e338c15,uuid
+ab50d1ac-d7af-4402-9ee7-4744d73eef4e,d9496c5d-6e55-43ca-84bf-72d565c33419,8357d500-dd31-499c-8c6e-3341491dcef0,b2381541-6533-435f-8c8f-34523e338c15,uuid
+8d66ca76-2ba8-4631-8cf5-491bc41957e3,d9496c5d-6e55-43ca-84bf-72d565c33419,8295c56e-c0c3-4c98-86c9-fa6c96af7c9b,b2381541-6533-435f-8c8f-34523e338c15,uuid
+5ebfa04d-779c-402a-83fe-ee2cd7945f80,d9496c5d-6e55-43ca-84bf-72d565c33419,4d813e1f-d25f-4b9e-85b1-c72e2eaefe73,b2381541-6533-435f-8c8f-34523e338c15,uuid
+bcfedaa9-d0d8-4b50-886f-2ebdae5a47b5,d9496c5d-6e55-43ca-84bf-72d565c33419,76edbcf0-8622-4c07-94fb-68a3b045a5e4,b2381541-6533-435f-8c8f-34523e338c15,uuid
+d26406c8-d14c-420f-afbe-f1540a2c3d50,d9496c5d-6e55-43ca-84bf-72d565c33419,fa85cb17-985e-498c-ab6e-3986083b00d5,b2381541-6533-435f-8c8f-34523e338c15,uuid
+206131e7-35d0-4462-9c22-f85c0dfd534d,d9496c5d-6e55-43ca-84bf-72d565c33419,76f5d35a-fdb6-41be-9c43-80ea8f50df0f,b2381541-6533-435f-8c8f-34523e338c15,uuid
+fc7745a7-c992-498d-8a2c-1be291227e1b,d9496c5d-6e55-43ca-84bf-72d565c33419,60bebeba-a6b6-470c-8079-cb3a4203d96f,b2381541-6533-435f-8c8f-34523e338c15,uuid
+6eb74951-bdd0-4b19-9486-788318fe599c,d9496c5d-6e55-43ca-84bf-72d565c33419,c42e1f94-efa2-4a61-b130-667d350f24ee,b2381541-6533-435f-8c8f-34523e338c15,uuid
+0e5315e9-a514-4546-b095-a7fa05415ffd,d9496c5d-6e55-43ca-84bf-72d565c33419,baa9b81c-76c5-466e-8c87-6b4764b0a7b4,b2381541-6533-435f-8c8f-34523e338c15,uuid
+bec917d3-5ac2-4f13-9dc4-fe4421c07cef,d9496c5d-6e55-43ca-84bf-72d565c33419,4f4c88a3-a3ca-45f3-a6a0-89ad3889b6ab,b2381541-6533-435f-8c8f-34523e338c15,uuid
+d4c17da5-97e8-40ce-a791-39f72bbc6f14,d9496c5d-6e55-43ca-84bf-72d565c33419,3fb09106-f6b9-4670-bc04-aaa97aae1722,b2381541-6533-435f-8c8f-34523e338c15,uuid
+12a4e55a-f7fb-4991-9055-0a21878eee4a,d9496c5d-6e55-43ca-84bf-72d565c33419,d07b67f6-f9fa-4527-8291-a9f2151e9e6b,b2381541-6533-435f-8c8f-34523e338c15,uuid
+21368309-a8ae-41a9-9db8-c0c670f09e69,d9496c5d-6e55-43ca-84bf-72d565c33419,455358c3-e525-416f-8293-6e31e9af1276,b2381541-6533-435f-8c8f-34523e338c15,uuid
+adddae26-3070-4e44-acd0-8df3d455a254,d9496c5d-6e55-43ca-84bf-72d565c33419,a5818abe-7d9e-4bd4-85d4-ffbdcd6c4a7d,b2381541-6533-435f-8c8f-34523e338c15,uuid
+32595c14-bb1c-465e-b9e0-b2b8c9536a9a,d9496c5d-6e55-43ca-84bf-72d565c33419,366b5d07-2206-49f2-98d9-4bb0e58cac03,b2381541-6533-435f-8c8f-34523e338c15,uuid
+90e35565-a087-46f5-a94d-b980dd7d0846,d9496c5d-6e55-43ca-84bf-72d565c33419,0cf7ba81-1639-48de-89e7-ba8a47b740ba,b2381541-6533-435f-8c8f-34523e338c15,uuid
+ce233ce7-127b-4884-b4c1-1d5c4785a91a,d9496c5d-6e55-43ca-84bf-72d565c33419,ed926eaf-e09f-4056-b4e5-8d87f0370481,b2381541-6533-435f-8c8f-34523e338c15,uuid
+244b4bae-a770-4d0a-a374-d9e133289c8f,d9496c5d-6e55-43ca-84bf-72d565c33419,3a9da100-bf57-4631-8e7a-c27f2354dcaf,b2381541-6533-435f-8c8f-34523e338c15,uuid
+6def861a-06f3-4683-9ccf-53133954160c,d9496c5d-6e55-43ca-84bf-72d565c33419,0efefb5a-5386-4cc5-b132-ec625205b2dc,b2381541-6533-435f-8c8f-34523e338c15,uuid
+d7c7e5fc-1904-48b7-9236-812beae930b0,d9496c5d-6e55-43ca-84bf-72d565c33419,a5042cbe-47cf-4b4c-a866-27c2ea9031d5,b2381541-6533-435f-8c8f-34523e338c15,uuid
+389fdfe2-bb10-417e-9735-e1d79e61beff,d9496c5d-6e55-43ca-84bf-72d565c33419,889cc0c2-4057-4b13-bba5-1cdb8dd48a84,b2381541-6533-435f-8c8f-34523e338c15,uuid
+f50b8058-ca34-418e-834f-da072358356e,d9496c5d-6e55-43ca-84bf-72d565c33419,dc215456-58b3-4e3a-9b34-b2c8220ca1e7,b2381541-6533-435f-8c8f-34523e338c15,uuid
+2055835e-81b8-461c-8b4d-495a0a088d2b,d9496c5d-6e55-43ca-84bf-72d565c33419,9b1c2200-c194-4d21-8ef1-495f0dacb0c0,b2381541-6533-435f-8c8f-34523e338c15,uuid
+50d338d9-1f91-4682-8bd3-282aaa0127cc,d9496c5d-6e55-43ca-84bf-72d565c33419,fec76fba-d3cc-4584-a2d2-d051ff4bfd39,b2381541-6533-435f-8c8f-34523e338c15,uuid
+763a3bc9-6d13-411a-8172-b06906954dc7,d9496c5d-6e55-43ca-84bf-72d565c33419,2211fad0-9465-41a1-bf68-e2413238205d,b2381541-6533-435f-8c8f-34523e338c15,uuid
+1d4730de-7861-471d-8807-1ae8a0c6b380,d9496c5d-6e55-43ca-84bf-72d565c33419,3430b9e8-aa70-412a-b972-325c06d2fd6b,b2381541-6533-435f-8c8f-34523e338c15,uuid
+dc2ade11-0694-4470-ab38-3b486bbe4543,d9496c5d-6e55-43ca-84bf-72d565c33419,10af0fdf-9b51-47cf-af9e-776737a36c02,b2381541-6533-435f-8c8f-34523e338c15,uuid
+afe54d20-76c5-4b02-bfc5-565e8eb5b803,d9496c5d-6e55-43ca-84bf-72d565c33419,aeeb79d0-e615-4ef6-a3cc-9298888bc74f,b2381541-6533-435f-8c8f-34523e338c15,uuid
+45f9add2-8477-4da9-9998-6f144900f39d,d9496c5d-6e55-43ca-84bf-72d565c33419,91862279-d9ab-4358-a36a-3f09d4478b3a,b2381541-6533-435f-8c8f-34523e338c15,uuid
+d11c7c02-d025-46ea-bfba-403978eacd8c,d9496c5d-6e55-43ca-84bf-72d565c33419,1307f2b4-0b7e-427d-a48e-d602ef80704c,b2381541-6533-435f-8c8f-34523e338c15,uuid
+81713c7b-2f0f-4e6e-bb8b-b32c842377ea,d9496c5d-6e55-43ca-84bf-72d565c33419,6f79a331-502a-4592-b422-35a84f938df9,b2381541-6533-435f-8c8f-34523e338c15,uuid
+82a5547e-688d-4429-89ca-b93866280b9b,d9496c5d-6e55-43ca-84bf-72d565c33419,0b39f6a6-b80c-481a-86ca-ac33da0ef518,b2381541-6533-435f-8c8f-34523e338c15,uuid
+e872e8a4-a48c-4287-9cab-2f9ef30270bf,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,15dd690e-cd75-4225-a22c-1687b3042b16,theIPEDSUnitID,str
+1405d77c-efd8-42c5-9c0b-4fa6ff00676d,9ca34038-1a65-4ede-88c5-1492ab4bc249,15dd690e-cd75-4225-a22c-1687b3042b16,The six-digit UNITID the U.S. Department of Education's IPEDS system gives an AcademicInstitution (e.g. 145725 for Illinois Tech). Stable across years; use it to match a school to IPEDS data.,str
+c339e952-8176-4754-a9ee-563ba8037fb9,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,64880dc9-b617-40bd-8eb9-7fe46d0575f4,15dd690e-cd75-4225-a22c-1687b3042b16,uuid
+fe1e8883-2e46-4f01-990a-85402b70b87b,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,8b75f59f-54d2-4b0f-b5ae-224a0b666187,theCarnegieResearchDesignation,str
+c3b48b4f-b095-469d-96ab-b547801bb053,9ca34038-1a65-4ede-88c5-1492ab4bc249,8b75f59f-54d2-4b0f-b5ae-224a0b666187,"An AcademicInstitution's 2025 Carnegie Classification research activity designation: R1, R2, or RCU (Research Colleges and Universities). Absent when the school has none.",str
+196c2900-509d-46ec-aa08-11de24a139a0,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,64880dc9-b617-40bd-8eb9-7fe46d0575f4,8b75f59f-54d2-4b0f-b5ae-224a0b666187,uuid
+f00559b6-7c97-42af-a62e-e5f43efdb06a,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,8b75f59f-54d2-4b0f-b5ae-224a0b666187,52f1a174-a1da-4594-9e7e-9e72fca7ba08,uuid
+aa8d01c9-9b78-483e-b4d9-ca46bbd2224e,eb7d9144-af89-4b89-9958-8bbcc533a6d3,8b75f59f-54d2-4b0f-b5ae-224a0b666187,R1,str
+55483f09-1ee7-4c3c-8fe3-9c8f1678076f,eb7d9144-af89-4b89-9958-8bbcc533a6d3,8b75f59f-54d2-4b0f-b5ae-224a0b666187,R2,str
+f0ed2ac8-f563-424c-927b-59c712b82c81,eb7d9144-af89-4b89-9958-8bbcc533a6d3,8b75f59f-54d2-4b0f-b5ae-224a0b666187,RCU,str
+2a7240fa-848f-407c-931d-b42d26ee77a0,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,bf8be85a-e720-4666-a5f3-daf3a4dd406b,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+176fefb0-5240-4acb-9b3b-6ed5f3a7bcfc,29a25e0e-3f32-4787-965e-3ecc917d6fef,bf8be85a-e720-4666-a5f3-daf3a4dd406b,"theIPEDSUnitID and theCarnegieResearchDesignation; agreed with Mark in a Claude Code chat, 2026-10-22.",str
+3bdeee94-0e3f-4a47-b21e-5e028921ade3,a1e6a161-773d-4011-aaa6-13869931f59f,bf8be85a-e720-4666-a5f3-daf3a4dd406b,2026-10-22T08:18:03-05:00,str
+2da76603-8f9c-47dc-8d98-9385474d60fd,d9496c5d-6e55-43ca-84bf-72d565c33419,e872e8a4-a48c-4287-9cab-2f9ef30270bf,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+57f7c9f5-6f1f-4fab-8f0a-1d09e71f1538,d9496c5d-6e55-43ca-84bf-72d565c33419,1405d77c-efd8-42c5-9c0b-4fa6ff00676d,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+da36329c-4b48-4aca-a27a-6bca66b80ada,d9496c5d-6e55-43ca-84bf-72d565c33419,c339e952-8176-4754-a9ee-563ba8037fb9,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+86d17d85-4e09-4b01-ae2e-1f47972d14e8,d9496c5d-6e55-43ca-84bf-72d565c33419,fe1e8883-2e46-4f01-990a-85402b70b87b,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+52fcc4d3-dd88-4164-96be-b42c1fa25f5b,d9496c5d-6e55-43ca-84bf-72d565c33419,c3b48b4f-b095-469d-96ab-b547801bb053,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+13a611fc-2eab-490b-8131-27a14a839a3f,d9496c5d-6e55-43ca-84bf-72d565c33419,196c2900-509d-46ec-aa08-11de24a139a0,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+d1ca86b1-3c13-4473-af60-4858b567c88f,d9496c5d-6e55-43ca-84bf-72d565c33419,f00559b6-7c97-42af-a62e-e5f43efdb06a,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+27eb3599-3a01-4f9d-b734-edd9257e8bdf,d9496c5d-6e55-43ca-84bf-72d565c33419,aa8d01c9-9b78-483e-b4d9-ca46bbd2224e,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+8ac5b4f4-78ee-4fc9-a22b-f98963a8ed94,d9496c5d-6e55-43ca-84bf-72d565c33419,55483f09-1ee7-4c3c-8fe3-9c8f1678076f,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+4929b716-a4ff-47eb-8b1e-669a5721c356,d9496c5d-6e55-43ca-84bf-72d565c33419,f0ed2ac8-f563-424c-927b-59c712b82c81,bf8be85a-e720-4666-a5f3-daf3a4dd406b,uuid
+8a56ed9d-5b94-4579-876d-732a88448dd4,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,41676f65-513a-4a07-ba23-4024eb8eeb18,theOpenAlexAuthorID,str
+334b0aa7-96cf-4ef1-97ab-049f5f153907,9ca34038-1a65-4ede-88c5-1492ab4bc249,41676f65-513a-4a07-ba23-4024eb8eeb18,"A Person's OpenAlex author id (e.g. A5024401317). OpenAlex groups a person's papers under it; when it merges two ids, the old one redirects to the new.",str
+4c4c38c7-7105-418f-8b09-b4154e5fd275,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,d6408b4d-94af-4ad8-8707-711e2614df79,41676f65-513a-4a07-ba23-4024eb8eeb18,uuid
+a1724976-7fa7-4490-a4b8-737ca73042ba,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,9f714022-050c-4d86-84fe-1697adccab02,theORCID,str
+8f7a1db1-6b52-4ae1-b8ba-24424bb00817,9ca34038-1a65-4ede-88c5-1492ab4bc249,9f714022-050c-4d86-84fe-1697adccab02,"A Person's ORCID iD in bare form (e.g. 0000-0002-1825-0097), with no https://orcid.org/ prefix.",str
+1e169dfb-ac34-4193-bbcb-adf34e467041,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,d6408b4d-94af-4ad8-8707-711e2614df79,9f714022-050c-4d86-84fe-1697adccab02,uuid
+7a831651-5cca-4548-b2bd-fb9bcafb7552,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,b245b809-61b6-4675-ae2f-d016d79832b3,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+a24f9e4c-f6b0-435c-a3f3-97cb8988e7a6,29a25e0e-3f32-4787-965e-3ecc917d6fef,b245b809-61b6-4675-ae2f-d016d79832b3,"theOpenAlexAuthorID and theORCID on Person; agreed with Mark in a Claude Code chat, 2026-10-22.",str
+a91c91ec-5935-45ef-bb75-6e806e2eeecb,a1e6a161-773d-4011-aaa6-13869931f59f,b245b809-61b6-4675-ae2f-d016d79832b3,2026-10-22T09:29:22-05:00,str
+decdd881-fa22-4be7-ab8a-9848d82dc7d1,d9496c5d-6e55-43ca-84bf-72d565c33419,8a56ed9d-5b94-4579-876d-732a88448dd4,b245b809-61b6-4675-ae2f-d016d79832b3,uuid
+8cce1f89-f06e-4ee5-aafa-ad17cb418068,d9496c5d-6e55-43ca-84bf-72d565c33419,334b0aa7-96cf-4ef1-97ab-049f5f153907,b245b809-61b6-4675-ae2f-d016d79832b3,uuid
+70d74d86-a707-4d03-b012-bf11cb77a73f,d9496c5d-6e55-43ca-84bf-72d565c33419,4c4c38c7-7105-418f-8b09-b4154e5fd275,b245b809-61b6-4675-ae2f-d016d79832b3,uuid
+f00c2389-afb8-4242-a4d0-dbc1e59804ec,d9496c5d-6e55-43ca-84bf-72d565c33419,a1724976-7fa7-4490-a4b8-737ca73042ba,b245b809-61b6-4675-ae2f-d016d79832b3,uuid
+a624ae70-dbe8-4b2b-b5e9-ac6b833740f3,d9496c5d-6e55-43ca-84bf-72d565c33419,8f7a1db1-6b52-4ae1-b8ba-24424bb00817,b245b809-61b6-4675-ae2f-d016d79832b3,uuid
+ed5a18a6-c3b7-42b8-b2ac-419a9f4fee55,d9496c5d-6e55-43ca-84bf-72d565c33419,1e169dfb-ac34-4193-bbcb-adf34e467041,b245b809-61b6-4675-ae2f-d016d79832b3,uuid
+ba84c2c8-4365-497d-97b8-55ca144dca82,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,beee2654-a4c9-469c-bbe2-13865e5f4965,Appointment,str
+d63ecb33-2d39-4c35-a03b-9a8b937c5e2e,9ca34038-1a65-4ede-88c5-1492ab4bc249,beee2654-a4c9-469c-bbe2-13865e5f4965,"One position a Person held at one institution over a span of time, such as a professorship, postdoc, PhD studentship or industry job. Each promotion starts a new Appointment; a PhD Appointment ends at the defense.",str
+e7307c7d-1afb-43ad-a038-62cdf0792c99,24762266-9337-4930-b88c-55b6af4e7642,beee2654-a4c9-469c-bbe2-13865e5f4965,c8ca4b56-1df5-4515-9c6c-5cffd2786170,uuid
+a4e6354f-348f-438d-99aa-ff9344db1f88,24762266-9337-4930-b88c-55b6af4e7642,beee2654-a4c9-469c-bbe2-13865e5f4965,0d8aa4f1-9b01-434d-8648-dbc659d0afdd,uuid
+9c7a5165-8098-4746-a60c-4ae3569f9a8e,24762266-9337-4930-b88c-55b6af4e7642,beee2654-a4c9-469c-bbe2-13865e5f4965,f58f513e-7880-4256-9cd9-8788324cea74,uuid
+55c55074-dc03-45aa-83df-33cb33be049a,8a707bcb-7ff7-488f-b7e3-b1679f823c95,beee2654-a4c9-469c-bbe2-13865e5f4965,4b5da623-92d3-43a7-9cd3-228cacb25555,uuid
+2a1638c6-ec16-49c4-b4cd-c833eb670230,8a707bcb-7ff7-488f-b7e3-b1679f823c95,beee2654-a4c9-469c-bbe2-13865e5f4965,90533997-05fa-4362-bfbd-0d463c064819,uuid
+4e92729b-8dc5-40f9-a7a6-618f8a719939,8a707bcb-7ff7-488f-b7e3-b1679f823c95,beee2654-a4c9-469c-bbe2-13865e5f4965,a7800480-43e2-4ce5-aba6-a3016a90d412,uuid
+575d8db7-59bc-48f7-8369-53d59bc63cea,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,beee2654-a4c9-469c-bbe2-13865e5f4965,056c9a3a-eb37-4939-82f3-c21e8b34a960,uuid
+d6b7542e-b1b7-497a-8048-d761a4f34a36,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,beee2654-a4c9-469c-bbe2-13865e5f4965,5643a4bf-141c-4e8f-b630-3459338a8a0b,uuid
+7c215af5-ef38-40ef-a426-b1382cbc7bf4,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,9e5463aa-e432-405c-9f60-c076f5550845,Organization,str
+9a7cf43f-6fc7-464b-b459-fd18aaa83124,9ca34038-1a65-4ede-88c5-1492ab4bc249,9e5463aa-e432-405c-9f60-c076f5550845,"A company, laboratory or other body people work for that is not an AcademicInstitution.",str
+4a4e3f94-2c24-45cd-ac76-42a46a90e394,24762266-9337-4930-b88c-55b6af4e7642,9e5463aa-e432-405c-9f60-c076f5550845,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+a90b56b2-13fa-4d9a-aa81-58e52cb56d4c,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,9e5463aa-e432-405c-9f60-c076f5550845,5643a4bf-141c-4e8f-b630-3459338a8a0b,uuid
+2d53210d-0184-4dbe-ab79-c0e283d79cee,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,c8ca4b56-1df5-4515-9c6c-5cffd2786170,theAppointee,str
+8f916102-4d53-4aa5-8ea3-4f7d40dc819c,9ca34038-1a65-4ede-88c5-1492ab4bc249,c8ca4b56-1df5-4515-9c6c-5cffd2786170,The Person who holds an Appointment.,str
+85cfa3a8-2e1e-42b9-a6a8-e8ddf785fae4,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,0d8aa4f1-9b01-434d-8648-dbc659d0afdd,theInstitution,str
+bec10042-7eb0-43a4-8eca-491b1166ee90,9ca34038-1a65-4ede-88c5-1492ab4bc249,0d8aa4f1-9b01-434d-8648-dbc659d0afdd,The AcademicInstitution or Organization an Appointment is at.,str
+ed38530f-5db4-4f54-b997-ca5b3cd73446,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,f58f513e-7880-4256-9cd9-8788324cea74,theTitle,str
+d69aae74-7b59-4c52-90ae-036a5f95f3d6,9ca34038-1a65-4ede-88c5-1492ab4bc249,f58f513e-7880-4256-9cd9-8788324cea74,"A position's title as the institution writes it, including any named chair (e.g. 'Lisa Wissner-Slivka and Benjamin Slivka Assistant Professor').",str
+91ef868f-81c7-4c4e-8830-06362c119549,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,a7800480-43e2-4ce5-aba6-a3016a90d412,theDepartment,str
+02f07571-af9d-4e88-a806-17d3d3b6b644,9ca34038-1a65-4ede-88c5-1492ab4bc249,a7800480-43e2-4ce5-aba6-a3016a90d412,"The department, school or lab an Appointment is in, as text.",str
+1305c2f1-d746-4ed9-8fca-aa505d7b99af,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,4b5da623-92d3-43a7-9cd3-228cacb25555,theCareerStage,str
+1747a9c8-f032-41fc-a496-20bb7b0267b8,9ca34038-1a65-4ede-88c5-1492ab4bc249,4b5da623-92d3-43a7-9cd3-228cacb25555,"The kind of position an Appointment is, for comparing careers across institutions.",str
+12812828-1533-4d36-8a77-46d48aee979f,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,056c9a3a-eb37-4939-82f3-c21e8b34a960,theEndDate,str
+b2e648d3-028c-4a12-979d-7eeb9bc8ce70,9ca34038-1a65-4ede-88c5-1492ab4bc249,056c9a3a-eb37-4939-82f3-c21e8b34a960,"The date something ends or ended, in ISO form at whatever precision is known: YYYY, YYYY-MM or YYYY-MM-DD. When only an upper bound is known, 'before YYYY' or 'before YYYY-MM'; when it is known to have ended but not when, 'unknown'. Absent while it is ongoing.",str
+d53c5d6e-ea60-4e7b-b472-b4ba40a0ae12,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,4b5da623-92d3-43a7-9cd3-228cacb25555,52f1a174-a1da-4594-9e7e-9e72fca7ba08,uuid
+15506110-65e6-4c1c-ac74-2ca1b33ad7f5,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,PhD student,str
+8b957e83-81af-4835-9f3a-d7a3ace654ce,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,postdoc,str
+0477853b-05e5-4670-a6c7-6c1d52d802b6,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,tenure-track faculty,str
+d24f5473-9cff-4975-b9c4-ebc258fefdb1,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,tenured faculty,str
+ec225c64-4c87-4aa4-b5e7-6363575fc30f,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,non-tenure-track faculty,str
+ccb254bd-1432-4323-b6d7-a65eeeb73aac,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,industry researcher,str
+5121b3f6-9460-4dbf-af87-df301f42ad96,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,industry,str
+56e45adb-aa2d-426c-914c-a81b32f396cf,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,emeritus,str
+56a27298-318d-4877-850d-4abac1ab7e5b,eb7d9144-af89-4b89-9958-8bbcc533a6d3,4b5da623-92d3-43a7-9cd3-228cacb25555,staff,str
+720a8f1d-0bab-431b-898b-60ad0152b631,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,d6408b4d-94af-4ad8-8707-711e2614df79,43fac24a-a407-4197-bbdc-21ad8c054b70,uuid
+35ec6ab5-1555-4612-8291-aadbbe798f2b,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,90533997-05fa-4362-bfbd-0d463c064819,theStartDate,str
+16d6d53a-d8d6-46a5-886c-74ab90ad38e6,9ca34038-1a65-4ede-88c5-1492ab4bc249,90533997-05fa-4362-bfbd-0d463c064819,"The date something starts or started, in ISO form at whatever precision is known: YYYY, YYYY-MM or YYYY-MM-DD.",str
+d65ba202-bfac-42c9-8d9b-479846f78d62,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,6207970c-15c0-492d-b4aa-2f246ce6d496,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+ccec5f4c-b20e-421d-98d3-525aa2f5ddc1,29a25e0e-3f32-4787-965e-3ecc917d6fef,6207970c-15c0-492d-b4aa-2f246ce6d496,"Appointment and Organization, their attributes, thePronouns as a slot of Person, and theStartDate's definition moved here from paug-schema; agreed with Mark in a Claude Code chat, 2026-10-22.",str
+bb98496f-cfe4-4a4d-b001-a69f7689b0f2,a1e6a161-773d-4011-aaa6-13869931f59f,6207970c-15c0-492d-b4aa-2f246ce6d496,2026-10-22T14:40:11-05:00,str
+b2a08da2-3b7e-430d-b923-69cf575ec17d,d9496c5d-6e55-43ca-84bf-72d565c33419,ba84c2c8-4365-497d-97b8-55ca144dca82,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+92144fab-288f-4a23-b42d-946ab6332025,d9496c5d-6e55-43ca-84bf-72d565c33419,d63ecb33-2d39-4c35-a03b-9a8b937c5e2e,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+70d30618-b1cd-4d0f-98f8-1b79c869bd64,d9496c5d-6e55-43ca-84bf-72d565c33419,e7307c7d-1afb-43ad-a038-62cdf0792c99,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+ac691cf6-62cb-4615-bcc4-2cdf6bcd32c1,d9496c5d-6e55-43ca-84bf-72d565c33419,a4e6354f-348f-438d-99aa-ff9344db1f88,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+4bebde3b-528d-4d1a-8262-9e9b49e02890,d9496c5d-6e55-43ca-84bf-72d565c33419,9c7a5165-8098-4746-a60c-4ae3569f9a8e,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+4e1f41da-a2b1-46e5-90f5-4af166b12069,d9496c5d-6e55-43ca-84bf-72d565c33419,55c55074-dc03-45aa-83df-33cb33be049a,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+730d7d82-07e4-41e2-9428-2f17d8c62017,d9496c5d-6e55-43ca-84bf-72d565c33419,2a1638c6-ec16-49c4-b4cd-c833eb670230,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+d4e3e635-6d54-4dcc-9cf4-035eacbc2823,d9496c5d-6e55-43ca-84bf-72d565c33419,4e92729b-8dc5-40f9-a7a6-618f8a719939,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+4f5c0332-72fe-44eb-9c9c-8f0b653cceb6,d9496c5d-6e55-43ca-84bf-72d565c33419,575d8db7-59bc-48f7-8369-53d59bc63cea,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+b37ead4b-5708-488b-b21b-4c175318fc62,d9496c5d-6e55-43ca-84bf-72d565c33419,d6b7542e-b1b7-497a-8048-d761a4f34a36,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+cfde9fef-1f01-4f5e-882e-51af05e3a26f,d9496c5d-6e55-43ca-84bf-72d565c33419,7c215af5-ef38-40ef-a426-b1382cbc7bf4,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+6512cb6f-a9af-4a70-a46c-b73d0adc5e92,d9496c5d-6e55-43ca-84bf-72d565c33419,9a7cf43f-6fc7-464b-b459-fd18aaa83124,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+ab085504-9de4-4afd-9639-de6c91b324a4,d9496c5d-6e55-43ca-84bf-72d565c33419,4a4e3f94-2c24-45cd-ac76-42a46a90e394,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+bc739fa2-1822-4194-8bc9-ae932da638f1,d9496c5d-6e55-43ca-84bf-72d565c33419,a90b56b2-13fa-4d9a-aa81-58e52cb56d4c,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+ef6e2545-9a29-499d-8712-5c8252e28033,d9496c5d-6e55-43ca-84bf-72d565c33419,2d53210d-0184-4dbe-ab79-c0e283d79cee,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+cac09472-afcb-4889-9081-7f3cab5fd1d5,d9496c5d-6e55-43ca-84bf-72d565c33419,8f916102-4d53-4aa5-8ea3-4f7d40dc819c,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+1433b31d-c1dc-4397-b35b-821246073329,d9496c5d-6e55-43ca-84bf-72d565c33419,85cfa3a8-2e1e-42b9-a6a8-e8ddf785fae4,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+6bd14104-16da-4725-907b-28bd35e1b8f9,d9496c5d-6e55-43ca-84bf-72d565c33419,bec10042-7eb0-43a4-8eca-491b1166ee90,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+0ce1dd2c-dd40-4a29-8f54-69c8325f9813,d9496c5d-6e55-43ca-84bf-72d565c33419,ed38530f-5db4-4f54-b997-ca5b3cd73446,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+1292034a-2b0b-4596-9f88-6a2d0e54d562,d9496c5d-6e55-43ca-84bf-72d565c33419,d69aae74-7b59-4c52-90ae-036a5f95f3d6,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+1a77bdd3-4de1-474d-8417-45969a4b4c15,d9496c5d-6e55-43ca-84bf-72d565c33419,91ef868f-81c7-4c4e-8830-06362c119549,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+2d5590ce-df42-44bc-b7ec-f6968b938ac8,d9496c5d-6e55-43ca-84bf-72d565c33419,02f07571-af9d-4e88-a806-17d3d3b6b644,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+d6b01db9-4038-44db-aea8-af93a027a33f,d9496c5d-6e55-43ca-84bf-72d565c33419,1305c2f1-d746-4ed9-8fca-aa505d7b99af,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+805422a5-005f-4960-a6e2-ad0d0bfd58f6,d9496c5d-6e55-43ca-84bf-72d565c33419,1747a9c8-f032-41fc-a496-20bb7b0267b8,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+3f7cbeaa-ea88-46c6-8654-1902002cc201,d9496c5d-6e55-43ca-84bf-72d565c33419,12812828-1533-4d36-8a77-46d48aee979f,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+4b307ad2-6358-413e-8415-9e4a8ff31ff2,d9496c5d-6e55-43ca-84bf-72d565c33419,b2e648d3-028c-4a12-979d-7eeb9bc8ce70,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+57188b20-8b0f-4bb3-8ccb-f68ad7aece5a,d9496c5d-6e55-43ca-84bf-72d565c33419,d53c5d6e-ea60-4e7b-b472-b4ba40a0ae12,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+0dadd228-b923-430f-a409-4d1e7e0b7e64,d9496c5d-6e55-43ca-84bf-72d565c33419,15506110-65e6-4c1c-ac74-2ca1b33ad7f5,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+936fd592-87a0-4953-9837-579f9c937b57,d9496c5d-6e55-43ca-84bf-72d565c33419,8b957e83-81af-4835-9f3a-d7a3ace654ce,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+d7aca27b-b91b-4f5e-ab09-bb378a2dce09,d9496c5d-6e55-43ca-84bf-72d565c33419,0477853b-05e5-4670-a6c7-6c1d52d802b6,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+230445fd-ed20-4489-8057-f3c857797c97,d9496c5d-6e55-43ca-84bf-72d565c33419,d24f5473-9cff-4975-b9c4-ebc258fefdb1,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+de40821d-d982-4ce5-9b11-ad41095d4d24,d9496c5d-6e55-43ca-84bf-72d565c33419,ec225c64-4c87-4aa4-b5e7-6363575fc30f,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+8e9c2e6b-5537-42e5-8b03-5a216b1caa11,d9496c5d-6e55-43ca-84bf-72d565c33419,ccb254bd-1432-4323-b6d7-a65eeeb73aac,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+563a8fa5-51db-4c3d-b12e-354cbd37f493,d9496c5d-6e55-43ca-84bf-72d565c33419,5121b3f6-9460-4dbf-af87-df301f42ad96,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+00c42c09-e886-47b6-8923-7f81b85bbf34,d9496c5d-6e55-43ca-84bf-72d565c33419,56e45adb-aa2d-426c-914c-a81b32f396cf,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+9a4bd3d5-cfe4-4e80-bb82-5107a29badcd,d9496c5d-6e55-43ca-84bf-72d565c33419,56a27298-318d-4877-850d-4abac1ab7e5b,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+e4a0fbfb-e09f-4fa2-9e4b-d1c0f554e992,d9496c5d-6e55-43ca-84bf-72d565c33419,720a8f1d-0bab-431b-898b-60ad0152b631,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+ce6ebe8d-e211-43db-b7f5-e7cfec56d711,d9496c5d-6e55-43ca-84bf-72d565c33419,35ec6ab5-1555-4612-8291-aadbbe798f2b,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+e17ba0ab-dfbc-46b5-b287-0ccdec998bd0,d9496c5d-6e55-43ca-84bf-72d565c33419,16d6d53a-d8d6-46a5-886c-74ab90ad38e6,6207970c-15c0-492d-b4aa-2f246ce6d496,uuid
+191323a0-e537-4f87-84a6-f46ecb525bc7,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,2c3cea94-51b6-4904-9e5c-4b8c0bb5f591,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+0fe56022-fc4a-49ca-843a-9da8820b5581,29a25e0e-3f32-4787-965e-3ecc917d6fef,2c3cea94-51b6-4904-9e5c-4b8c0bb5f591,"theIntention of theEndDate reworded in place to allow 'before ...' and 'unknown'; agreed with Mark in a Claude Code chat, 2026-10-22.",str
+3415341f-572b-4bb5-b87f-b7e64ac58dd5,a1e6a161-773d-4011-aaa6-13869931f59f,2c3cea94-51b6-4904-9e5c-4b8c0bb5f591,2026-10-22T14:48:37-05:00,str
+13a601c4-e12e-4320-8c42-e3206eb44fe7,d9496c5d-6e55-43ca-84bf-72d565c33419,b2e648d3-028c-4a12-979d-7eeb9bc8ce70,2c3cea94-51b6-4904-9e5c-4b8c0bb5f591,uuid

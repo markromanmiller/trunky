@@ -1,6 +1,6 @@
-# lignindb — agent guide
+# Trunky — agent guide
 
-LigninDB is a single-user (as of August 2026) knowledge base for low-commitment, add-only, single-source-of-truth, LLM-friendly, iteratively developed knowledge.
+Trunky is a single-owner (as of November 2026) knowledge base for low-commitment, add-only, single-source-of-truth, LLM-friendly, iteratively developed knowledge.
 
 This document's own UUID: `317df636-6d11-47b5-83d9-2daf3f5b335c`
 
@@ -38,7 +38,7 @@ This design shift from storing mathematical equality to a linguistic statement i
 
 Note that items (the UUIDs) are not constrained to be only one of attributes, values, or entities - all items are valid all the time at this base level.
 
-Direct access to this data format as well as the convenience methods of current version of the wrapper API are described at `openapi.yaml`.
+In v0.7 the rows are kept in plain CSV files, one per statement set: `sets/<set uuid>.csv`, with the header `handle,attribute,entity,value,value_type`. Read them through `tools/ecs/view.py`, which drops replaced, voided and removed statements; write by appending rows to the right set's file while holding the lock in `tools/trunky_lock.py`, with provenance. `SYSARCH.md` describes the pieces. (v0.6 served the same rows through an HTTP API described in `openapi.yaml`; it is in the git history.)
 
 ## Useful Patterns
 
@@ -59,7 +59,7 @@ Attribute names starting with `a`/`an` signal multi-valued: expect one row per v
 ### Entity-Component Architecture
 While a Class-Instance architecture can be built with this data model, the design philosophy favors an Entity-Component scheme.
 
-**Slot declarations are advisory, not enforced.** `aRequiredSlot`/`aDesirableSlot`/`anOptionalSlot` describe the intended shape of a component for discovery, tooling, and the explorer's missing-slot highlighting — but `POST /statements` and `POST /statements/bulk` do not check them. You can write an entity that violates a required slot and the write will succeed; nothing will reject it until something reads the data and chooses to validate against the declared shape.
+**Slot declarations are advisory, not enforced.** `aRequiredSlot`/`aDesirableSlot`/`anOptionalSlot` describe the intended shape of a component for discovery, tooling, and the explorer's list of empty slots — but nothing checks them when rows are appended. You can write an entity that violates a required slot and the write will succeed; nothing will reject it until something reads the data and chooses to validate against the declared shape (`tools/check.py`).
 
 **Defining a new component — worked example.** No new mechanism is needed beyond what's already in this glossary:
 
@@ -94,15 +94,15 @@ When something you're told fits a shape this store already tracks — an availab
 
 ### Correction & Supersession
 
-Two distinct mechanisms, easy to conflate — pick based on whether the old item was ever legitimately true:
+Two distinct mechanisms, easy to conflate — pick based on whether something should be used in the old item's place, not on whether the old item was ever legitimately true:
 
-- `aReplacement` — for a sequence of states each true in their own time (a schedule changes, a definition gets refined). Written `aReplacement of <old> is <new>` — the old item is the entity, the new item(s) are the value(s). Multi-valued: an old item may have been superseded by more than one new item (e.g. split into two). Chain-walk from an old item forward to find the current one; nothing here carries a timestamp, so recency is inferred only by following the chain, never by row order.
-- `anErratum` — for something that should never have existed as asserted in the first place: a mistake, not a later legitimate change. Multi-valued, since an item can be wrong for more than one reason.
+- `aReplacement` — "if you were using this before, use this now." Covers both a sequence of states each true in their own time (a schedule changes, a definition gets refined) *and* fixing a mistake when there is a corrected value to point to (a wrong DOI gets its right DOI). Written `aReplacement of <old> is <new>` — the old item is the entity, the new item(s) are the value(s). Multi-valued: an old item may have been superseded by more than one new item (e.g. split into two). Chain-walk from an old item forward to find the current one; nothing here carries a timestamp, so recency is inferred only by following the chain, never by row order.
+- `anErratum` — "this is void; nothing takes its place." For something that should never have existed as asserted and has no successor to use instead. If a corrected value exists, write `aReplacement` (an `anErratum` explaining the mistake may be added alongside it, but is not a substitute for it). Multi-valued, since an item can be wrong for more than one reason.
 
 | name | UUID | intention |
 |---|---|---|
-| aReplacement | `8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9` | Points from an older statement's handle (or an older entity) to the newer statement or entity that supersedes it. A reader should prefer the value(s) here over the item bearing this statement's entity, unless something else in turn has an aReplacement pointing away from that item too — walk the chain to find the current one. Multi-valued: an old item may have been superseded by more than one new item (e.g. split into two). Nothing in this store carries a timestamp, so recency is inferred only by following this chain, never by row order. |
-| anErratum | `1c260a46-c907-4efc-adb2-9345aebd9500` | Free text flagging that the statement or entity carrying this (by UUID) should never have existed as asserted — a mistake, not a later legitimate change. Multi-valued (anErratum, not theErratum) since an item could be wrong for more than one reason. Distinct from aReplacement, which chains a sequence of states each true in their own time — anErratum instead marks something void from the start. Could become a full component later if a flagged item ever needs more than free text attached. |
+| aReplacement | `8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9` | Points from an older statement's handle (or an older entity) to the newer statement or entity that supersedes it: "if you were using this before, use this now" — including when the older item was a mistake and this is its correction. A reader should prefer the value(s) here over the item bearing this statement's entity, unless something else in turn has an aReplacement pointing away from that item too — walk the chain to find the current one. Multi-valued: an old item may have been superseded by more than one new item (e.g. split into two). Nothing in this store carries a timestamp, so recency is inferred only by following this chain, never by row order. |
+| anErratum | `1c260a46-c907-4efc-adb2-9345aebd9500` | Free text flagging that the statement or entity carrying this (by UUID) should never have existed as asserted and that nothing takes its place — void, not superseded. Multi-valued (anErratum, not theErratum) since an item could be wrong for more than one reason. Distinct from aReplacement, which says what to use instead (whether the old item was a since-changed truth or a mistake with a known correction) — anErratum alone means there is no successor. Could become a full component later if a flagged item ever needs more than free text attached. |
 
 ### Intentional Miscellany
 In contrast to a database, it is explicitly supported and even encouraged to add data that has no particular structure or has a structure to be made later.
@@ -116,7 +116,7 @@ In contrast to a database, it is explicitly supported and even encouraged to add
 `aReferencedUUID of (thisdoc) is (X)` — declares that a document or piece of code hardcodes UUID X. This guide practices what it declares: every UUID named above has a corresponding `aReferencedUUID of 317df636-6d11-47b5-83d9-2daf3f5b335c is <that-uuid>` row already in the store, so a steward can query for this document's own dependencies directly:
 
 ```
-GET /statements?attribute=9084efd2-1fcf-492e-9ec1-63ef91691f47&entity=317df636-6d11-47b5-83d9-2daf3f5b335c
+grep -h ',9084efd2-1fcf-492e-9ec1-63ef91691f47,317df636-6d11-47b5-83d9-2daf3f5b335c,' sets/*.csv
 ```
 
 | name | UUID | intention |
@@ -131,9 +131,9 @@ Defer to the human user, but as guidelines for users that show evidence of being
 While this system is designed with the intention that no action should be "expensive" (beyond the number of rows it creates), if you are in doubt whether an item exists, search first. Even if the item isn't the same, it may be worth building on or referencing as a synonym.
 
 ```
-GET /statements?attribute=acf5cebb-8d80-45ad-9a1f-a3dd48682ef6&value=<NameYouAreLookingFor>
+grep -hi ',acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,[^,]*,<NameYouAreLookingFor>' sets/*.csv
 ```
-(`acf5cebb-8d80-45ad-9a1f-a3dd48682ef6` is `theName`.) Note this match is exact, not fuzzy or substring — a near-miss on spelling or casing will not surface an existing item.
+(`acf5cebb-8d80-45ad-9a1f-a3dd48682ef6` is `theName`.) Names are not unique and need not be: the same name can mean different things in different contexts, so read each candidate's `theIntention` before reusing it. The explorer's search box does the same match by substring.
 
 ### Add backlinks when UUIDs are used in code and documents
 

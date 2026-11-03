@@ -1,0 +1,144 @@
+handle,attribute,entity,value,value_type
+02fd0154-1fe1-4d8b-ba3a-d71b09732d79,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,efe2d554-61f9-4931-9514-7a3bc2bc0d17,ResearchPaper,str
+c83c3529-deb3-43a3-a472-8f138be37c34,d9496c5d-6e55-43ca-84bf-72d565c33419,02fd0154-1fe1-4d8b-ba3a-d71b09732d79,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+7063bea6-9740-4dda-872c-626339b77984,9ca34038-1a65-4ede-88c5-1492ab4bc249,efe2d554-61f9-4931-9514-7a3bc2bc0d17,Tags an entity as a research paper being tracked in this knowledge base.,str
+928507b8-10c9-497f-b170-9716657e5463,d9496c5d-6e55-43ca-84bf-72d565c33419,7063bea6-9740-4dda-872c-626339b77984,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+0ef5ee4b-d1db-4494-b0c5-2bde0c4aecb0,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,ede2bbed-13ad-45e5-9c63-9025a545e71e,ResearchPaperTag,str
+c32a5585-00ef-4c60-8607-0bd4a316f515,d9496c5d-6e55-43ca-84bf-72d565c33419,0ef5ee4b-d1db-4494-b0c5-2bde0c4aecb0,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+143769db-4342-4e38-8967-adac352318a5,9ca34038-1a65-4ede-88c5-1492ab4bc249,ede2bbed-13ad-45e5-9c63-9025a545e71e,Meta-tag collecting all category/topic tags used to classify research papers.,str
+b5747053-ef61-4d03-b9b0-455d7bd7b216,d9496c5d-6e55-43ca-84bf-72d565c33419,143769db-4342-4e38-8967-adac352318a5,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+0dead502-c591-4461-87bd-f9da0a055c12,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,b6d0e1e4-7472-47df-935d-ecdecef92345,anAuthor,str
+b8ae2b5d-4033-4dc1-98d6-3029aa5f8956,d9496c5d-6e55-43ca-84bf-72d565c33419,0dead502-c591-4461-87bd-f9da0a055c12,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+4a774945-b7fb-444b-961f-a8319e1921bf,9ca34038-1a65-4ede-88c5-1492ab4bc249,b6d0e1e4-7472-47df-935d-ecdecef92345,One row per author name credited on a research paper.,str
+3dbd0c74-4565-4b8f-9aa5-43f8c1d2a5a2,d9496c5d-6e55-43ca-84bf-72d565c33419,4a774945-b7fb-444b-961f-a8319e1921bf,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+85b18088-533c-4df8-8bef-ac6d6a2171a8,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,a8aecffd-c667-46e3-8f4f-ad3a642d31fe,theDOI,str
+95ca2fc3-38db-43c5-a812-a4f805f3b621,d9496c5d-6e55-43ca-84bf-72d565c33419,85b18088-533c-4df8-8bef-ac6d6a2171a8,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+e1480513-7310-4fae-a6a4-c6361dfcbd4a,9ca34038-1a65-4ede-88c5-1492ab4bc249,a8aecffd-c667-46e3-8f4f-ad3a642d31fe,The Digital Object Identifier for a research paper.,str
+023876fb-600d-4ae8-8c8e-dd089b1dcff8,d9496c5d-6e55-43ca-84bf-72d565c33419,e1480513-7310-4fae-a6a4-c6361dfcbd4a,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+6795821d-1b4c-447d-a220-78d9a79b3f11,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,8df284b1-73e5-4c52-ba1a-8c556c2554d8,thePDFLocation,str
+0b382b12-c514-45bc-9c29-9da9187d96a2,d9496c5d-6e55-43ca-84bf-72d565c33419,6795821d-1b4c-447d-a220-78d9a79b3f11,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+3550fd77-ebb3-4a73-a2b4-f32f339fcfec,9ca34038-1a65-4ede-88c5-1492ab4bc249,8df284b1-73e5-4c52-ba1a-8c556c2554d8,"URL of the archived PDF copy of a research paper, stored at attic.markromanmiller.com.",str
+b0f51ecf-63eb-4260-8e93-f6f2ef1e644f,d9496c5d-6e55-43ca-84bf-72d565c33419,3550fd77-ebb3-4a73-a2b4-f32f339fcfec,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+9522d258-fa20-443b-a748-0bd990d1ffb9,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,0edf762a-9a26-4849-8002-bc071fb74d9c,theVenue,str
+f856ff8a-2379-4108-8479-aef01dbae1bb,d9496c5d-6e55-43ca-84bf-72d565c33419,9522d258-fa20-443b-a748-0bd990d1ffb9,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+84f23b1f-6da2-4e14-8e9a-f4687ee827d9,9ca34038-1a65-4ede-88c5-1492ab4bc249,0edf762a-9a26-4849-8002-bc071fb74d9c,"The journal, conference, or preprint server a research paper was published in or on.",str
+d1b2bd64-97bb-4926-98ee-dbc98062a10d,d9496c5d-6e55-43ca-84bf-72d565c33419,84f23b1f-6da2-4e14-8e9a-f4687ee827d9,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+0d7502a7-45c0-4115-a42b-a02fc4796765,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,d610fcca-8f7f-48bd-a14c-fa744e5de8a6,thePublicationDate,str
+9b9f1879-485e-4084-ba49-9cfb297d6b8b,d9496c5d-6e55-43ca-84bf-72d565c33419,0d7502a7-45c0-4115-a42b-a02fc4796765,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+d0aeb773-6735-4846-a9cb-20429f96ab76,9ca34038-1a65-4ede-88c5-1492ab4bc249,d610fcca-8f7f-48bd-a14c-fa744e5de8a6,The publication or online-release date of a research paper (ISO 8601).,str
+f4001ca9-ba41-4aaa-86b5-0c94929b8fdb,d9496c5d-6e55-43ca-84bf-72d565c33419,d0aeb773-6735-4846-a9cb-20429f96ab76,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+4f2ba4f0-62b2-49a8-97bc-512d142cccff,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,8da56a78-03af-4a22-b119-e052f686e3fb,theAbstract,str
+d633e156-bd59-4be1-baf9-df158a182aad,d9496c5d-6e55-43ca-84bf-72d565c33419,4f2ba4f0-62b2-49a8-97bc-512d142cccff,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+b91c6b98-90ff-45b5-a7b8-4d68ee6cc21e,9ca34038-1a65-4ede-88c5-1492ab4bc249,8da56a78-03af-4a22-b119-e052f686e3fb,The abstract text of a research paper.,str
+afbb162b-f006-471a-a91e-8fc5dba07e65,d9496c5d-6e55-43ca-84bf-72d565c33419,b91c6b98-90ff-45b5-a7b8-4d68ee6cc21e,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+14683863-b5f9-4c72-ad6d-d08b749e61eb,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,797a9da1-e858-45dc-a364-22695c90a2c1,aTag,str
+73c02871-60f4-4b4b-9683-352f9dfebd2b,d9496c5d-6e55-43ca-84bf-72d565c33419,14683863-b5f9-4c72-ad6d-d08b749e61eb,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+b96d3c23-6b92-4559-8275-c190abae14c6,9ca34038-1a65-4ede-88c5-1492ab4bc249,797a9da1-e858-45dc-a364-22695c90a2c1,One row per category/topic tag entity (aComponent=ResearchPaperTag) attached to a research paper.,str
+47cf5abb-bef1-471f-81ca-5f82da95ef73,d9496c5d-6e55-43ca-84bf-72d565c33419,b96d3c23-6b92-4559-8275-c190abae14c6,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+204aff95-015c-4b97-b602-22fcdd89153f,24762266-9337-4930-b88c-55b6af4e7642,efe2d554-61f9-4931-9514-7a3bc2bc0d17,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+baddd1d3-426a-491e-ac18-a946e6fdd889,d9496c5d-6e55-43ca-84bf-72d565c33419,204aff95-015c-4b97-b602-22fcdd89153f,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+3b5c1e4c-1323-4419-9be6-e9335c2b6e00,8a707bcb-7ff7-488f-b7e3-b1679f823c95,efe2d554-61f9-4931-9514-7a3bc2bc0d17,b6d0e1e4-7472-47df-935d-ecdecef92345,uuid
+beb5fb10-b281-4feb-b74b-038920f30e88,d9496c5d-6e55-43ca-84bf-72d565c33419,3b5c1e4c-1323-4419-9be6-e9335c2b6e00,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+3f2deac7-d6d0-432c-90cc-9bc843e28f24,8a707bcb-7ff7-488f-b7e3-b1679f823c95,efe2d554-61f9-4931-9514-7a3bc2bc0d17,5643a4bf-141c-4e8f-b630-3459338a8a0b,uuid
+4e5368ba-819d-4f33-a367-044082c35bf0,d9496c5d-6e55-43ca-84bf-72d565c33419,3f2deac7-d6d0-432c-90cc-9bc843e28f24,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+11caa08a-51df-4919-9e32-c449ac816409,8a707bcb-7ff7-488f-b7e3-b1679f823c95,efe2d554-61f9-4931-9514-7a3bc2bc0d17,a8aecffd-c667-46e3-8f4f-ad3a642d31fe,uuid
+54dd729b-ef4c-47f6-9882-33b3347f0df4,d9496c5d-6e55-43ca-84bf-72d565c33419,11caa08a-51df-4919-9e32-c449ac816409,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+f784b1b8-dec6-4398-949d-de943b1afa5b,8a707bcb-7ff7-488f-b7e3-b1679f823c95,efe2d554-61f9-4931-9514-7a3bc2bc0d17,8df284b1-73e5-4c52-ba1a-8c556c2554d8,uuid
+1ece6e18-0853-45dc-b222-87334a3dcb10,d9496c5d-6e55-43ca-84bf-72d565c33419,f784b1b8-dec6-4398-949d-de943b1afa5b,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+daef72cd-9dca-4a91-aa97-371a5b37b3ec,8a707bcb-7ff7-488f-b7e3-b1679f823c95,efe2d554-61f9-4931-9514-7a3bc2bc0d17,0edf762a-9a26-4849-8002-bc071fb74d9c,uuid
+126e9888-d666-4196-a717-b34d5c0a68ca,d9496c5d-6e55-43ca-84bf-72d565c33419,daef72cd-9dca-4a91-aa97-371a5b37b3ec,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+ac513db1-0c00-4e09-ada3-3c99ea2b9645,8a707bcb-7ff7-488f-b7e3-b1679f823c95,efe2d554-61f9-4931-9514-7a3bc2bc0d17,d610fcca-8f7f-48bd-a14c-fa744e5de8a6,uuid
+b282a9f2-26a5-4d12-bd91-ff7d6048aea4,d9496c5d-6e55-43ca-84bf-72d565c33419,ac513db1-0c00-4e09-ada3-3c99ea2b9645,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+44bbe17c-77c0-4feb-93fd-682e46c5032d,8a707bcb-7ff7-488f-b7e3-b1679f823c95,efe2d554-61f9-4931-9514-7a3bc2bc0d17,8da56a78-03af-4a22-b119-e052f686e3fb,uuid
+3b6aa258-6225-4eab-be2d-7243fca8de02,d9496c5d-6e55-43ca-84bf-72d565c33419,44bbe17c-77c0-4feb-93fd-682e46c5032d,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+7a7dee73-4754-4010-9970-d536b78ba3f1,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,efe2d554-61f9-4931-9514-7a3bc2bc0d17,797a9da1-e858-45dc-a364-22695c90a2c1,uuid
+2652cbd0-c063-4247-aa35-aae4032365d1,d9496c5d-6e55-43ca-84bf-72d565c33419,7a7dee73-4754-4010-9970-d536b78ba3f1,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+2f12d736-b7da-42aa-9d01-4d769206d5c3,24762266-9337-4930-b88c-55b6af4e7642,ede2bbed-13ad-45e5-9c63-9025a545e71e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,uuid
+9972e378-19d5-46c3-a4f7-2af3cf53dbe4,d9496c5d-6e55-43ca-84bf-72d565c33419,2f12d736-b7da-42aa-9d01-4d769206d5c3,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+479e7f77-f0ad-4b9f-bf32-233678033bad,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,ac161d35-7286-4640-88d5-a72d645d9de1,IPQ (Igroup Presence Questionnaire),str
+feaab715-971b-4887-8b6c-479b79103d97,d9496c5d-6e55-43ca-84bf-72d565c33419,479e7f77-f0ad-4b9f-bf32-233678033bad,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+da3da36c-24be-4a06-a9b0-d0cfe200cc40,05d61805-e171-4bdc-a770-3cf2ed75cf44,ac161d35-7286-4640-88d5-a72d645d9de1,"A 14-item self-report scale measuring sense of presence in a virtual environment, originally developed by Schubert, Friedmann, and Regenbrecht (2001).",str
+daec90c9-7103-4cc2-ad3b-29236bf843e6,d9496c5d-6e55-43ca-84bf-72d565c33419,da3da36c-24be-4a06-a9b0-d0cfe200cc40,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+f99d0be7-bc2d-4802-b80f-7f1d6ca7c788,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,9d42de3b-d743-4601-86b3-772af8b21444,VRSQ (Virtual Reality Sickness Questionnaire),str
+0f67e83c-19d1-45a6-a2fa-c805f2f2fc96,d9496c5d-6e55-43ca-84bf-72d565c33419,f99d0be7-bc2d-4802-b80f-7f1d6ca7c788,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+67e82744-6055-4e8b-9baf-26492a811963,05d61805-e171-4bdc-a770-3cf2ed75cf44,9d42de3b-d743-4601-86b3-772af8b21444,"A self-report questionnaire measuring VR-induced sickness/discomfort symptoms, adapted from the Simulator Sickness Questionnaire for VR contexts.",str
+b14eae8f-d062-4a5e-9033-c9e6b91998ba,d9496c5d-6e55-43ca-84bf-72d565c33419,67e82744-6055-4e8b-9baf-26492a811963,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+060c8248-5efc-4ea6-88d8-c7b54bb92212,eeef930b-c3f9-41c7-b14a-ced6ec1502ab,6589f5c0-a48c-421a-b234-ac4c2afe487a,ac161d35-7286-4640-88d5-a72d645d9de1,uuid
+73185963-9601-4b6a-85eb-f99548205960,d9496c5d-6e55-43ca-84bf-72d565c33419,060c8248-5efc-4ea6-88d8-c7b54bb92212,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+e3f41524-56d8-4ec5-bf21-cbd6a9ba4404,eeef930b-c3f9-41c7-b14a-ced6ec1502ab,66844ff7-3630-4b65-81f6-16b749f4d381,9d42de3b-d743-4601-86b3-772af8b21444,uuid
+89bbbb5c-c678-4228-810f-046301ab1dc4,d9496c5d-6e55-43ca-84bf-72d565c33419,e3f41524-56d8-4ec5-bf21-cbd6a9ba4404,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+6bae8ace-d4f0-487b-b33e-d055a18e0602,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,e224355b-f867-4812-859b-bbbe8b911d9b,theAuthorOrder,str
+459b17bc-d955-491f-bcb7-45d2419b2c7a,9ca34038-1a65-4ede-88c5-1492ab4bc249,e224355b-f867-4812-859b-bbbe8b911d9b,"The OrderedList giving a research paper's byline order. Its wrappers' theMember values are the paper's own anAuthor statements, by handle.",str
+39658619-597b-45a4-8547-4cafac0791be,8a707bcb-7ff7-488f-b7e3-b1679f823c95,efe2d554-61f9-4931-9514-7a3bc2bc0d17,e224355b-f867-4812-859b-bbbe8b911d9b,uuid
+66055283-ca26-44c5-84bf-69fd20306944,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,eeef930b-c3f9-41c7-b14a-ced6ec1502ab,anOperationalization,str
+d5671461-4d20-4aa1-9daa-9f8f0ceea7f9,d9496c5d-6e55-43ca-84bf-72d565c33419,66055283-ca26-44c5-84bf-69fd20306944,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+4bbe8518-3f61-41ec-bf29-65188e398fec,9ca34038-1a65-4ede-88c5-1492ab4bc249,eeef930b-c3f9-41c7-b14a-ced6ec1502ab,"Multi-valued: points from a construct item (or similar) at a canonical Instrument/Measure entity used to operationalize it (e.g. IPQ, VRSQ). Lets papers sharing the same instrument be found by query instead of string-matching theDescription prose.",str
+0a10800f-3c96-430d-ab07-78b9b100caf1,d9496c5d-6e55-43ca-84bf-72d565c33419,4bbe8518-3f61-41ec-bf29-65188e398fec,0d9a7284-495e-45ae-98e8-e28f57c5cce3,uuid
+77c8931d-029d-488f-bb02-19f5c405a6b3,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,5fab6903-91fa-46a3-8322-6f7ec954f4bb,theOpenAlexID,str
+23cc4a88-6e76-4343-bd55-91f3e873f0b0,9ca34038-1a65-4ede-88c5-1492ab4bc249,5fab6903-91fa-46a3-8322-6f7ec954f4bb,"The paper's OpenAlex work id (e.g. W7216310588), from which its references and citing works can be looked up. theExplicitAbsence (uuid) when OpenAlex was checked and has no record.",str
+2dd66306-6dfd-48d1-b14e-ab8648707545,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,155e4f9e-318f-4734-b611-64798cc9b8d8,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+a9192a16-1014-4bca-87f2-d04533472219,29a25e0e-3f32-4787-965e-3ecc917d6fef,155e4f9e-318f-4734-b611-64798cc9b8d8,"First ECS System item (Fetch paper metadata), theOpenAlexID, and an aToDo for Expand neighbours; agreed with Mark in a Claude Code chat, 2026-10-11.",str
+e0940687-dc32-4f82-8e7c-e98e7033bb5e,a1e6a161-773d-4011-aaa6-13869931f59f,155e4f9e-318f-4734-b611-64798cc9b8d8,2026-10-11T17:27:48-05:00,str
+b5c5057d-75df-4a74-93d4-65a9afd6d285,d9496c5d-6e55-43ca-84bf-72d565c33419,77c8931d-029d-488f-bb02-19f5c405a6b3,155e4f9e-318f-4734-b611-64798cc9b8d8,uuid
+19e3dddf-92a8-4091-8a90-d3b9d5010798,d9496c5d-6e55-43ca-84bf-72d565c33419,23cc4a88-6e76-4343-bd55-91f3e873f0b0,155e4f9e-318f-4734-b611-64798cc9b8d8,uuid
+8462b578-51b4-461d-ba66-6a02cb45749e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,554c487b-bec5-40a0-8aff-7711222f71e4,ActivePaperReview,str
+8344007f-0176-4629-81af-5cbc3e03e45c,9ca34038-1a65-4ede-88c5-1492ab4bc249,554c487b-bec5-40a0-8aff-7711222f71e4,"To represent an ongoing literature review that's meant to stay up to date based upon maintenance (clarification) of questions, not complete revision of them.",str
+be1a07df-3f90-49da-a5c5-bbab2ca9fdde,24762266-9337-4930-b88c-55b6af4e7642,554c487b-bec5-40a0-8aff-7711222f71e4,9ca34038-1a65-4ede-88c5-1492ab4bc249,uuid
+ddec47e8-3530-4b3d-9e55-b7c7137d0153,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,1063cfaf-996a-48ce-afd2-7e9a49af64c6,anExclusion,str
+c166ebf2-cc7b-4d12-839e-eba2b47611b2,9ca34038-1a65-4ede-88c5-1492ab4bc249,1063cfaf-996a-48ce-afd2-7e9a49af64c6,"Excludes a paper (value) from a review (entity), eg anExclusion of thisReview is thisPaper.",str
+1841afa8-64cc-4471-9d04-144fbae52198,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,7a152a48-21ea-446e-ac63-0f9ca938b9ae,anExclusionReason,str
+f20ba2c8-4ef5-42de-9024-9a6790c1e9e9,9ca34038-1a65-4ede-88c5-1492ab4bc249,7a152a48-21ea-446e-ac63-0f9ca938b9ae,Provides a reason (free text description right now) for why a paper was excluded from the review. It's applied to the statement.,str
+f5de788d-f5da-4440-8421-b3a9988fd19e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,474e2e74-5486-4177-9714-ecdb819070c9,aSeedSource,str
+ad377a68-a02a-4f70-8486-1ed115d4aa18,9ca34038-1a65-4ede-88c5-1492ab4bc249,474e2e74-5486-4177-9714-ecdb819070c9,"Points from a review (entity) to a work (value) that is not itself a candidate for inclusion but whose references and citations are used to find candidates, e.g. a narrative review.",str
+08e229b9-7b89-406e-87dc-f1335f5ee12e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,a320ff74-4942-4de1-9fe9-876803331d26,anInclusion,str
+164403b1-56a6-4123-a5a1-e79cb2379d94,9ca34038-1a65-4ede-88c5-1492ab4bc249,a320ff74-4942-4de1-9fe9-876803331d26,"Includes a paper (value) in a review (entity), eg anInclusion of thisReview is thisPaper.",str
+55f2c3be-463c-4b6e-aedf-4f0a0704eb90,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,aa582fd9-9b2b-4e25-97a6-6e91a926e6fd,JevNoulCall,str
+5cda006a-8092-4fa4-88a3-484cc691ca2b,9ca34038-1a65-4ede-88c5-1492ab4bc249,aa582fd9-9b2b-4e25-97a6-6e91a926e6fd,"Tags an entity as one Jev 'noul' question: the exact question sent to a Jev model, carrying everything needed to re-ask it. The tagged entity is itself used as an attribute: `<call> of <paper> is <probability>` records the noul probability (0-1 float) Jev returned when this question was asked about that paper.",str
+9e16918c-8c37-43cc-83da-89caf50f7fac,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,8a9ec1f7-11cd-46cb-bb38-cdbec00b08e1,theInstructions,str
+ef1c5bbd-881c-438d-8a76-f8d3dadf2b6b,9ca34038-1a65-4ede-88c5-1492ab4bc249,8a9ec1f7-11cd-46cb-bb38-cdbec00b08e1,"The question text passed to Jev as the noul question's `instructions` field, verbatim.",str
+d56beda2-d28e-4cab-9ae4-308cbbaafcde,24762266-9337-4930-b88c-55b6af4e7642,aa582fd9-9b2b-4e25-97a6-6e91a926e6fd,8a9ec1f7-11cd-46cb-bb38-cdbec00b08e1,uuid
+4353e9c3-12b1-41e6-ad93-2fc27e339ff4,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,838f7a5b-b5c1-4bac-9cee-7d6700b2d757,theTrueCriterion,str
+763f3fc0-7977-40eb-9643-54775d623910,9ca34038-1a65-4ede-88c5-1492ab4bc249,838f7a5b-b5c1-4bac-9cee-7d6700b2d757,"The text passed to Jev as the noul question's `criteria.true` field, verbatim: what counts as a yes.",str
+9aa8a45b-4780-42cf-a2dd-59971357e6b7,24762266-9337-4930-b88c-55b6af4e7642,aa582fd9-9b2b-4e25-97a6-6e91a926e6fd,838f7a5b-b5c1-4bac-9cee-7d6700b2d757,uuid
+631e4719-db8b-4878-a3b4-3260a5cca035,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,ddbd60f4-d69e-4c9b-8bbb-d93ac984b1c7,theFalseCriterion,str
+328addac-3fd9-4d8e-8f63-a524588ecb99,9ca34038-1a65-4ede-88c5-1492ab4bc249,ddbd60f4-d69e-4c9b-8bbb-d93ac984b1c7,"The text passed to Jev as the noul question's `criteria.false` field, verbatim: what counts as a no.",str
+131d3a12-8342-411e-aefe-e90be5675752,24762266-9337-4930-b88c-55b6af4e7642,aa582fd9-9b2b-4e25-97a6-6e91a926e6fd,ddbd60f4-d69e-4c9b-8bbb-d93ac984b1c7,uuid
+b648621e-4d2c-429c-b1b8-640dc88bba41,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,bedaf236-bd15-4093-ad71-be3b9acae25f,theModel,str
+93c7f92e-ec13-4636-98ca-f96e34b52695,9ca34038-1a65-4ede-88c5-1492ab4bc249,bedaf236-bd15-4093-ad71-be3b9acae25f,"The model identifier the call was made with, verbatim as sent to the API (e.g. 'typesafe/jev-1.13'), so results from different models are never mixed.",str
+6a360988-f468-4772-8a13-729a41f1e4b2,24762266-9337-4930-b88c-55b6af4e7642,aa582fd9-9b2b-4e25-97a6-6e91a926e6fd,bedaf236-bd15-4093-ad71-be3b9acae25f,uuid
+3d2b5b4b-4f4a-4f16-9d49-94d589b4d626,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,e6e56b95-36fb-4e83-ad41-e2c4fe7d2d75,theInputSection,str
+718bb4ba-f2be-493e-b5ff-16182c82246c,9ca34038-1a65-4ede-88c5-1492ab4bc249,e6e56b95-36fb-4e83-ad41-e2c4fe7d2d75,"Which part of the paper is given to the model as its input, and in what format -- e.g. title + abstract, or full text. The same question asked of a different part of the paper is a different call, because its answers are not comparable.",str
+cd0886fd-aa4d-4080-953a-dbc6358bedc3,24762266-9337-4930-b88c-55b6af4e7642,aa582fd9-9b2b-4e25-97a6-6e91a926e6fd,e6e56b95-36fb-4e83-ad41-e2c4fe7d2d75,uuid
+7b53bd25-1274-4f86-9b26-144ab7367a71,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,44c8a8d6-a6c8-4780-bcd1-0bba0e49b605,theInclusionProcess,str
+4b8960bb-6489-40c2-89bb-a1be246d8560,9ca34038-1a65-4ede-88c5-1492ab4bc249,44c8a8d6-a6c8-4780-bcd1-0bba0e49b605,"Free-text description of how candidate papers are screened for this review: which calls or tools are applied to which part of each paper, how their outputs are combined into a decision, and what gets stored. Singular; a changed process is written as a new statement with aReplacement from the old one.",str
+67f1bd91-de79-4c12-ae16-b711f9db62a4,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,93221557-6180-4c2f-8df3-9cdedae7b1a3,aCandidate,str
+910a00b3-fe81-427b-b37e-d8b4cb300d15,9ca34038-1a65-4ede-88c5-1492ab4bc249,93221557-6180-4c2f-8df3-9cdedae7b1a3,"Marks a paper (value) as a candidate for a review (entity), to be screened by the review's inclusion process, eg aCandidate of thisReview is thisPaper. Multi-valued. Written when a paper is flagged for the review, e.g. Mark tagging a forwarded email as potentially for it. Screening results and anInclusion/anExclusion follow; the candidate statement stays.",str
+14435a12-7699-4079-a00f-cefd8e3bc9bc,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,554c487b-bec5-40a0-8aff-7711222f71e4,93221557-6180-4c2f-8df3-9cdedae7b1a3,uuid
+441f352d-5815-45b1-a03a-288d1e340c28,d9496c5d-6e55-43ca-84bf-72d565c33419,67f1bd91-de79-4c12-ae16-b711f9db62a4,a47d14b1-9549-4216-b05d-35200412d5b9,uuid
+af416e6f-1e41-4b0e-80ba-266df71d323f,d9496c5d-6e55-43ca-84bf-72d565c33419,910a00b3-fe81-427b-b37e-d8b4cb300d15,a47d14b1-9549-4216-b05d-35200412d5b9,uuid
+d76bde5c-6dfb-427a-ae43-49a6fdfce347,d9496c5d-6e55-43ca-84bf-72d565c33419,14435a12-7699-4079-a00f-cefd8e3bc9bc,a47d14b1-9549-4216-b05d-35200412d5b9,uuid
+5d4fd6ff-23e4-4e78-9f8a-e28a2b78055e,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,8cc3ae39-fc1b-47bf-b011-21bce347343a,aScreeningCall,str
+d14224ca-ebef-47e7-8180-6d48c322187a,9ca34038-1a65-4ede-88c5-1492ab4bc249,8cc3ae39-fc1b-47bf-b011-21bce347343a,"A JevNoulCall (value) asked about each candidate of a review (entity) during screening, eg aScreeningCall of thisReview is thisCall. Multi-valued. The Screen candidates System asks every one of them and stores each answer as '<call> of <paper> is <probability>'.",str
+a8b34347-6095-40cb-b0dd-9441d9e7ac95,e8d0e88d-a8ea-4612-8e8c-a4be732d1a93,554c487b-bec5-40a0-8aff-7711222f71e4,8cc3ae39-fc1b-47bf-b011-21bce347343a,uuid
+ff0275ea-e2b3-41a5-8202-3c8815cd5612,d9496c5d-6e55-43ca-84bf-72d565c33419,5d4fd6ff-23e4-4e78-9f8a-e28a2b78055e,fdf1278a-46d1-43bd-8220-cdd9bcb66875,uuid
+182a4f5c-1c4e-412d-89b0-d63e53615640,d9496c5d-6e55-43ca-84bf-72d565c33419,d14224ca-ebef-47e7-8180-6d48c322187a,fdf1278a-46d1-43bd-8220-cdd9bcb66875,uuid
+0b8b18e4-bf73-4662-bd6e-f38fe4922b30,d9496c5d-6e55-43ca-84bf-72d565c33419,a8b34347-6095-40cb-b0dd-9441d9e7ac95,fdf1278a-46d1-43bd-8220-cdd9bcb66875,uuid
+9f1623bb-1c72-41f5-b21f-448508c1f569,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,2df05413-ff06-4395-9154-8056c6768994,IncompleteAuthorList,str
+460c620f-8274-454c-a97c-f4264b8e9d72,9ca34038-1a65-4ede-88c5-1492ab4bc249,2df05413-ff06-4395-9154-8056c6768994,"Tags a ResearchPaper whose anAuthor statements name only some of its authors (for example, only those at the schools a search covers). The full byline can be fetched from theOpenAlexID or theDOI.",str
+e11204b1-983b-4ea0-84c3-81051c677291,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,6aa92d7d-440c-48a9-b372-2edee221b6f8,theAffiliation,str
+6a84cc2e-f68d-444e-bcf5-761b43c78984,9ca34038-1a65-4ede-88c5-1492ab4bc249,6aa92d7d-440c-48a9-b372-2edee221b6f8,"Placed on an anAuthor statement: an AcademicInstitution the author was listed with on that paper. One statement per institution. Describes the paper, not where the person is now.",str
+91db90b7-2bd4-420d-9759-9b824d2ffdb5,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,dfd23f3c-8b75-408d-a262-5fceeacffc5c,theBylinePosition,str
+04691fff-4006-47c9-b09b-f92e2915b149,9ca34038-1a65-4ede-88c5-1492ab4bc249,dfd23f3c-8b75-408d-a262-5fceeacffc5c,"Placed on an anAuthor statement: the author's place in the paper's byline, as 'N of M' (e.g. '5 of 5' for the last of five authors).",str
+3e0c1c62-621b-4fd1-ab55-7908dea1e2af,acf5cebb-8d80-45ad-9a1f-a3dd48682ef6,bc30ee3b-e968-4f67-ad4f-75c41cd16cad,theAuthorPerson,str
+6003b91c-c213-4916-b543-f4f7ed6c5ccd,9ca34038-1a65-4ede-88c5-1492ab4bc249,bc30ee3b-e968-4f67-ad4f-75c41cd16cad,Placed on an anAuthor statement: the Person who is credited under that name.,str
+872d4392-37bf-4f61-8627-10427d8a290d,90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a,2731cc29-63ab-4c61-a01c-7ca5dc52e387,622966de-0519-4a9b-a2d5-95a99850ba42,uuid
+19c8f0c8-bcca-4943-80fa-b64b509f60c1,29a25e0e-3f32-4787-965e-3ecc917d6fef,2731cc29-63ab-4c61-a01c-7ca5dc52e387,"IncompleteAuthorList, theAffiliation, theBylinePosition and theAuthorPerson; agreed with Mark in a Claude Code chat, 2026-10-22.",str
+84abd5f2-b90f-4cff-ba11-1d6a145c6dda,a1e6a161-773d-4011-aaa6-13869931f59f,2731cc29-63ab-4c61-a01c-7ca5dc52e387,2026-10-22T09:29:22-05:00,str
+6764cf28-5bcf-4c82-b1c0-e4e4e9812b96,d9496c5d-6e55-43ca-84bf-72d565c33419,9f1623bb-1c72-41f5-b21f-448508c1f569,2731cc29-63ab-4c61-a01c-7ca5dc52e387,uuid
+6b040342-7941-45ae-8f34-d18fe5343d9e,d9496c5d-6e55-43ca-84bf-72d565c33419,460c620f-8274-454c-a97c-f4264b8e9d72,2731cc29-63ab-4c61-a01c-7ca5dc52e387,uuid
+2a763457-1fb8-46ba-87dc-cb27849ad955,d9496c5d-6e55-43ca-84bf-72d565c33419,e11204b1-983b-4ea0-84c3-81051c677291,2731cc29-63ab-4c61-a01c-7ca5dc52e387,uuid
+f9a9a15f-8a6b-452e-a1f0-e82176a55dfd,d9496c5d-6e55-43ca-84bf-72d565c33419,6a84cc2e-f68d-444e-bcf5-761b43c78984,2731cc29-63ab-4c61-a01c-7ca5dc52e387,uuid
+b88896d9-0616-437d-8e19-d64be534d288,d9496c5d-6e55-43ca-84bf-72d565c33419,91db90b7-2bd4-420d-9759-9b824d2ffdb5,2731cc29-63ab-4c61-a01c-7ca5dc52e387,uuid
+78c68ee6-cf56-4a3e-8bcd-8339ca6b0c0b,d9496c5d-6e55-43ca-84bf-72d565c33419,04691fff-4006-47c9-b09b-f92e2915b149,2731cc29-63ab-4c61-a01c-7ca5dc52e387,uuid
+6ffe663e-f3d3-4897-b6ba-723d6241eb0d,d9496c5d-6e55-43ca-84bf-72d565c33419,3e0c1c62-621b-4fd1-ab55-7908dea1e2af,2731cc29-63ab-4c61-a01c-7ca5dc52e387,uuid
+66d2b7bc-34b7-4dff-81f8-0cb757984103,d9496c5d-6e55-43ca-84bf-72d565c33419,6003b91c-c213-4916-b543-f4f7ed6c5ccd,2731cc29-63ab-4c61-a01c-7ca5dc52e387,uuid
