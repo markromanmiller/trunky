@@ -24,9 +24,14 @@ the statement is not current (for instance, replaced since the page loaded), or 
 unchanged. GET /api/synced lists {item: [attributes]} that the Paug sync tracks
 (state/paug-sync-base.json), so the page can warn that an edit there does not reach the Obsidian note yet.
 
-Adding a slot (2026-11-02): POST /api/add {entity, attribute, text} writes "<attribute> of <entity> is <entry>"
-when the attribute is a required, desirable or optional slot of one of the entity's components and the entity
-has no current value for it. It goes to the set holding that aComponent statement, with provenance as above.
+Adding a value (2026-11-02; any attribute in use since 2026-11-03): POST /api/add {entity, attribute, text}
+writes "<attribute> of <entity> is <entry>" when the entity has no current value for the attribute and the
+attribute is a slot of one of the entity's components or is used by some current statement (so a table column
+can take a value in an empty cell). It goes to the set holding the aComponent statement that declares the slot,
+else one of the entity's aComponent statements, else its theName, with provenance as above.
+
+Every write answers {"ok": true, "rows": [...], "set": <set id>} (plus "id" for a new item): the rows it
+appended, so the page can apply them without downloading everything again.
 
 New items (2026-11-03): POST /api/new {component, set, name} makes a new UUID and writes "aComponent of <it> is
 <component>" and "theName of <it> is <name>" to the chosen set, with provenance as above; it answers with the
@@ -133,8 +138,16 @@ class Store:
 STORE = Store()
 
 
+def append(set_id, out, **extra):
+    """Append rows to a set under the write lock; returns what the page needs to update without a reload."""
+    with write_lock(wait=True, who="trunky-explorer"):
+        with open(ROOT / "sets" / f"{set_id}.csv", "a", newline="", encoding="utf-8") as f:
+            csv.writer(f).writerows(out)
+    return {"rows": out, "set": set_id, **extra}
+
+
 def write_reply(person, question, to, text):
-    """Append a reply to a Question's thread; returns None, or the reason it was refused."""
+    """Append a reply to a Question's thread; returns the appended rows, or the reason it was refused."""
     text = (text or "").strip()
     if not text or len(text) > MAX_REPLY:
         return f"a reply must be 1 to {MAX_REPLY} characters"
@@ -156,10 +169,7 @@ def write_reply(person, question, to, text):
     out = [[r, REPLY, to, text, "str"],
            [t, TODO, question, "Act on the reply to this question: " + (text if len(text) <= 200 else text[:199] + "…"), "str"]
            ] + provenance(person, rows, [r, t])
-    with write_lock(wait=True, who="trunky-explorer"):
-        with open(ROOT / "sets" / f"{home}.csv", "a", newline="", encoding="utf-8") as f:
-            csv.writer(f).writerows(out)
-    return None
+    return append(home, out)
 
 
 def provenance(person, rows, handles):
@@ -174,7 +184,7 @@ def provenance(person, rows, handles):
 
 
 def write_edit(person, handle, text):
-    """Replace one current statement with a new value; returns None, or the reason it was refused."""
+    """Replace one current statement with a new value; returns the appended rows, or the reason it was refused."""
     value, vtype = entry_value(text)
     if value is None:
         return vtype
@@ -193,10 +203,7 @@ def write_edit(person, handle, text):
     new = lambda: str(uuid.uuid4())
     n, x = new(), new()
     out = [[n, a, e, value, vtype], [x, REPLACEMENT, handle, n, "uuid"]] + provenance(person, rows, [n, x])
-    with write_lock(wait=True, who="trunky-explorer"):
-        with open(ROOT / "sets" / f"{home}.csv", "a", newline="", encoding="utf-8") as f:
-            csv.writer(f).writerows(out)
-    return None
+    return append(home, out)
 
 
 UUID_ENTRY = re.compile(r"\{\{\s*([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})\s*\}\}")
@@ -218,7 +225,7 @@ def entry_value(text):
 
 
 def write_add(person, entity, attribute, text):
-    """Give an entity its first value for one of its components' slots; returns None, or the reason it was refused."""
+    """Give an entity its first value for one of its components' slots; returns the appended rows, or the reason it was refused."""
     value, vtype = entry_value(text)
     if value is None:
         return vtype
@@ -227,8 +234,9 @@ def write_add(person, entity, attribute, text):
         rows = STORE.rows
     comps = {v: s for s, _, a, e, v, _ in rows if a == COMP and e == entity}
     homes = [comps[c] for _, _, a, c, v, _ in rows if a in SLOTS and v == attribute and c in comps]
-    if not homes:
-        return "that attribute is not a slot of this item's components"
+    if not homes and not any(a == attribute for _, _, a, _, _, _ in rows):
+        return "that attribute is neither a slot of this item's components nor used anywhere"
+    homes += list(comps.values()) + [s for s, _, a, e, _, _ in rows if a == NAME and e == entity]
     if any(a == attribute and e == entity for _, _, a, e, _, _ in rows):
         return "this item already has a value there; edit that value instead"
     groups = {EVERYONE} | {g for _, _, at, g, m, _ in rows if at == MEMBER and m == person}
@@ -238,36 +246,30 @@ def write_add(person, entity, attribute, text):
         return "you are not in this set's editor group"
     n = str(uuid.uuid4())
     out = [[n, attribute, entity, value, vtype]] + provenance(person, rows, [n])
-    with write_lock(wait=True, who="trunky-explorer"):
-        with open(ROOT / "sets" / f"{home}.csv", "a", newline="", encoding="utf-8") as f:
-            csv.writer(f).writerows(out)
-    return None
+    return append(home, out)
 
 
 def write_new(person, component, set_id, name):
-    """Make an item carrying one component; returns (new id, None), or (None, the reason it was refused)."""
+    """Make an item carrying one component; returns the appended rows and the new id, or the reason it was refused."""
     value, vtype = entry_value(name)
     if value is None:
-        return None, vtype
+        return vtype
     with STORE.lock:
         STORE._load()
         rows = STORE.rows
     if not any(a == COMP and v == component for _, _, a, _, v, _ in rows):
-        return None, "that is not a component in use"
+        return "that is not a component in use"
     groups = {EVERYONE} | {g for _, _, at, g, m, _ in rows if at == MEMBER and m == person}
     if not any(at == EDITOR and en == set_id and g in groups for _, _, at, en, g, _ in rows):
-        return None, "you are not in that set's editor group"
+        return "you are not in that set's editor group"
     new = lambda: str(uuid.uuid4())
     e, c, n = new(), new(), new()
     out = [[c, COMP, e, component, "uuid"], [n, NAME, e, value, vtype]] + provenance(person, rows, [c, n])
-    with write_lock(wait=True, who="trunky-explorer"):
-        with open(ROOT / "sets" / f"{set_id}.csv", "a", newline="", encoding="utf-8") as f:
-            csv.writer(f).writerows(out)
-    return e, None
+    return append(set_id, out, id=e)
 
 
 def write_component(person, entity, component):
-    """Tag an existing item with one more component; returns None, or the reason it was refused."""
+    """Tag an existing item with one more component; returns the appended rows, or the reason it was refused."""
     with STORE.lock:
         STORE._load()
         rows = STORE.rows
@@ -284,10 +286,7 @@ def write_component(person, entity, component):
         return "this item has no component or name in a set you may edit"
     c = str(uuid.uuid4())
     out = [[c, COMP, entity, component, "uuid"]] + provenance(person, rows, [c])
-    with write_lock(wait=True, who="trunky-explorer"):
-        with open(ROOT / "sets" / f"{home}.csv", "a", newline="", encoding="utf-8") as f:
-            csv.writer(f).writerows(out)
-    return None
+    return append(home, out)
 
 
 def synced():
@@ -345,11 +344,10 @@ class Handler(SimpleHTTPRequestHandler):
         if (not self.headers.get("X-Trunky-Explorer") or "application/json" not in (self.headers.get("Content-Type") or "")
                 or not 0 < n <= 20000):
             return self.send_error(400)
-        made = None
         try:
             req = json.loads(self.rfile.read(n))
             if path == "/api/new":
-                made, why = write_new(viewer(self.headers), str(req["component"]), str(req["set"]), str(req["name"]))
+                why = write_new(viewer(self.headers), str(req["component"]), str(req["set"]), str(req["name"]))
             elif path == "/api/component":
                 why = write_component(viewer(self.headers), str(req["entity"]), str(req["component"]))
             elif path == "/api/reply":
@@ -360,7 +358,9 @@ class Handler(SimpleHTTPRequestHandler):
                 why = write_add(viewer(self.headers), str(req["entity"]), str(req["attribute"]), str(req["text"]))
         except (ValueError, KeyError, TypeError):
             why = "bad request"
-        body = json.dumps({"ok": not why, "error": why, **({"id": made} if made else {})}).encode()
+        done = why if isinstance(why, dict) else None
+        why = None if done else why
+        body = json.dumps({"ok": not why, "error": why, **(done or {})}).encode()
         self.send_response(400 if why else 200)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))

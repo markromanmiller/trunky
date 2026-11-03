@@ -75,6 +75,16 @@ kinds); typing filters all components by name, and Enter takes the first. Choosi
 (server.py `write_component`), which writes aComponent to the set of one of the item's aComponent statements,
 else its theName. The new component's slots then appear under Empty slots.
 
+## Table editing, column order, and writes without reloading (2026-11-03)
+- Columns: each header has ‹ › to move it (and can be dragged on a desktop); the order is saved per component
+  with the column choice (`cols:<component>`).
+- "Edit cells" beside "+ New" turns on edit mode: tapping a value cell opens a box per value (Save = /api/edit)
+  or, for an empty cell, one box (Add = /api/add). Any visible column can take a value in an empty cell, since
+  /api/add accepts any attribute some current statement uses, not only declared slots. Links and question
+  panels yield to the editor while edit mode is on.
+- Every write answers with the rows it appended; the page adds them to its copy (dropping what an aReplacement
+  replaces) and redraws, instead of downloading all statements again.
+
 ## Public instance (2026-10-17 to 2026-10-31)
 
 `https://trunky.dev.markromanmiller.com/` serves only the sets whose aReaderGroup is everyone

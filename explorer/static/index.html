@@ -78,6 +78,20 @@ th .sort{cursor:pointer}
 th .sort:hover{color:var(--fg)}
 th .x{cursor:pointer; margin-left:6px; font-weight:400}
 th .x:hover{color:var(--fg)}
+th .mv .x{margin-left:4px}
+th.dropto{box-shadow:inset 3px 0 0 var(--line-strong)}
+td.editable{cursor:text}
+td.editable:hover{box-shadow:inset 0 0 0 2px var(--line-strong)}
+.btn.on{background:var(--line-strong); color:var(--panel)}
+.cellpop{border-color:var(--line-strong)}
+.cellpop .cellbox{margin-top:8px}
+.cellpop .cellbox + .cellbox{border-top:1px dashed var(--line); padding-top:8px}
+.cellpop textarea{width:100%; font:inherit; font-size:13px; padding:7px 9px; border:1px solid var(--line-strong); border-radius:6px; background:var(--bg); color:var(--fg); resize:vertical}
+.cellpop .row{display:flex; justify-content:flex-end; align-items:center; gap:8px; margin-top:6px; flex-wrap:wrap}
+.cellpop .err{font-size:11.5px; color:#a6402a; margin-right:auto}
+.cellpop .hint{font-size:11px; color:var(--muted); margin-right:auto}
+.cellpop .warn{font-size:11.5px; background:var(--q); border-left:3px solid var(--q-line); padding:4px 8px; margin-top:6px}
+.cellpop .kind{font-size:11.5px; color:var(--muted)}
 td{max-width:300px; min-width:90px}
 td .clamp{display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; white-space:pre-line}
 a.ref{color:var(--tag); text-decoration:underline; text-underline-offset:2px; cursor:pointer}
@@ -188,6 +202,7 @@ td.q{background:var(--q); box-shadow:inset 3px 0 0 var(--q-line); cursor:help}
 </div>
 <p class="status" id="status"></p>
 <div class="qpop" id="qpop" hidden></div>
+<div class="qpop cellpop" id="cellpop" hidden></div>
 
 <script>
 const NAME = "acf5cebb-8d80-45ad-9a1f-a3dd48682ef6";
@@ -198,6 +213,7 @@ const QUESTION = "305ecea2-6a7e-4a84-98e9-af4ee25e6a69", THE_QUESTION = "1308043
 const ASKER = "a9ede25b-b646-46d2-b3fe-78c99f2ab1cd", AUDIENCE = "2a0922c5-83fc-459c-8b92-855f8a843636";
 const REPLY = "f7b91816-d622-4178-bf0e-10bad96d7745", QUESTION_STATUS = "4aaadc3d-0810-4fa4-b352-d352346474c6";
 const COMMITMENT = "b219cd44-28bd-4ad3-b4a1-404e6a4de3ee";
+const REPLACEMENT = "8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9";
 
 // Views by component: each component's table can differ from the default. A component not listed gets
 // DEFAULT_VIEW. questions: open Questions on its statements are highlighted from the start (the viewer
@@ -212,7 +228,7 @@ const questionsOn = () => recall("q:" + ui.comp) ?? viewFor(ui.comp).questions;
 // rows: [handle, attribute, entity, value, value_type, set index]
 let D = null;
 const ix = {};
-const ui = { set: "", comp: "", item: "", filter: "", sort: null, desc: false, shown: PAGE, editing: null, creating: false };
+const ui = { set: "", comp: "", item: "", filter: "", sort: null, desc: false, shown: PAGE, editing: null, creating: false, cellEdit: false };
 
 const $ = id => document.getElementById(id);
 const esc = s => (s ?? "").toString().replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -318,9 +334,11 @@ function columnsFor(entities) {
   return Object.keys(use).sort((a, b) => use[b] - use[a] || label(a).localeCompare(label(b)));
 }
 
-function shownColumns(all) {
+// the viewer's saved columns, in their saved order; extra = columns that may appear without being in all
+// (attributes shown only because they hold questions, such as aComponent)
+function shownColumns(all, extra = []) {
   const saved = recall("cols:" + ui.comp);
-  return saved ? saved.filter(a => all.includes(a)) : all.slice(0, DEFAULT_COLUMNS);
+  return saved ? saved.filter(a => all.includes(a) || extra.includes(a)) : all.slice(0, DEFAULT_COLUMNS);
 }
 
 function renderTable() {
@@ -331,7 +349,7 @@ function renderTable() {
     .map(i => qAttrs.add(D.rows[i][1])).length);
   const qOn = qItems.length > 0 && questionsOn();
   // with questions on, a column holding a question is shown too, unless the viewer hid that column by its ×
-  const base = shownColumns(cols), hid = recall("hid:" + ui.comp) || [];
+  const base = shownColumns(cols, qOn ? [...qAttrs] : []), hid = recall("hid:" + ui.comp) || [];
   const shown = [...base, ...(qOn ? [...qAttrs].filter(a => !base.includes(a) && !hid.includes(a)) : [])];
   const hidden = cols.filter(a => !shown.includes(a));
   const f = ui.filter.trim().toLowerCase();
@@ -355,7 +373,10 @@ function renderTable() {
 
   const arrow = a => (ui.sort === a || (a === null && !ui.sort)) ? (ui.desc ? " ▾" : " ▴") : "";
   let html = `<thead><tr><th class="col-entity"><span class="sort" data-sort="">Name${arrow(null)}</span></th>`;
-  shown.forEach(a => html += `<th><span class="sort" data-sort="${esc(a)}">${esc(label(a))}${arrow(a)}</span><span class="x" data-hide="${esc(a)}" title="Hide column">×</span></th>`);
+  shown.forEach((a, k) => html += `<th draggable="true" data-col="${esc(a)}"><span class="sort" data-sort="${esc(a)}">${esc(label(a))}${arrow(a)}</span>` +
+    `<span class="mv">${k > 0 ? `<span class="x" data-move="${esc(a)}" data-by="-1" title="Move left">‹</span>` : ""}` +
+    `${k < shown.length - 1 ? `<span class="x" data-move="${esc(a)}" data-by="1" title="Move right">›</span>` : ""}</span>` +
+    `<span class="x" data-hide="${esc(a)}" title="Hide column">×</span></th>`);
   if (hidden.length) html += "<th>More</th>";
   html += "</tr></thead><tbody>";
   for (const r of rows.slice(0, ui.shown)) {
@@ -363,7 +384,8 @@ function renderTable() {
       `<td class="col-entity" data-open="${esc(r.e)}">${r.name ? esc(r.name) : `<span class="unnamed">${esc(display(r.e))}</span>`}</td>`;
     shown.forEach(a => {
       const qs = qOn ? qOf(r.e, a) : [];
-      html += `<td${qs.length ? ` class="q" data-q="${esc(qs.join(" "))}"` : ""}><div class="clamp">${valuesOf(r.e, a).map(valueHtml).join("; ")}</div></td>`;
+      const cls = [qs.length ? "q" : "", ui.cellEdit ? "editable" : ""].filter(Boolean).join(" ");
+      html += `<td data-e="${esc(r.e)}" data-a="${esc(a)}"${cls ? ` class="${cls}"` : ""}${qs.length ? ` data-q="${esc(qs.join(" "))}"` : ""}><div class="clamp">${valuesOf(r.e, a).map(valueHtml).join("; ")}</div></td>`;
     });
     if (hidden.length) {
       html += "<td>" + hidden.filter(a => valuesOf(r.e, a).length)
@@ -385,6 +407,25 @@ function renderTable() {
     store("cols:" + ui.comp, base.filter(x => x !== a));
     store("hid:" + ui.comp, [...hid.filter(x => x !== a), a]); renderTable();
   });
+  // moving a column saves the whole visible order, so columns shown for questions keep their place
+  const moveTo = (a, k) => {
+    const order = shown.filter(x => x !== a);
+    order.splice(Math.max(0, Math.min(order.length, k)), 0, a);
+    store("cols:" + ui.comp, order); renderTable();
+  };
+  t.querySelectorAll("[data-move]").forEach(el => el.onclick = ev => {
+    ev.stopPropagation(); moveTo(el.dataset.move, shown.indexOf(el.dataset.move) + +el.dataset.by);
+  });
+  t.querySelectorAll("th[data-col]").forEach(th => {
+    th.ondragstart = ev => { ev.dataTransfer.setData("text/plain", th.dataset.col); ev.dataTransfer.effectAllowed = "move"; };
+    th.ondragover = ev => { ev.preventDefault(); th.classList.add("dropto"); };
+    th.ondragleave = () => th.classList.remove("dropto");
+    th.ondrop = ev => {
+      ev.preventDefault(); th.classList.remove("dropto");
+      const a = ev.dataTransfer.getData("text/plain");
+      if (a && a !== th.dataset.col && shown.includes(a)) moveTo(a, shown.filter(x => x !== a).indexOf(th.dataset.col) + (shown.indexOf(a) < shown.indexOf(th.dataset.col) ? 1 : 0));
+    };
+  });
   t.querySelectorAll("[data-show]").forEach(el => el.onclick = () => {
     const a = el.dataset.show;
     store("cols:" + ui.comp, [...base.filter(x => x !== a), a]);
@@ -395,6 +436,10 @@ function renderTable() {
     el.onmouseenter = () => qShowSoon(el);
     el.onmouseleave = qHideSoon;
     el.onclick = ev => { if (!ev.target.closest("a")) qShow(el); };
+  });
+  // in edit mode a click on a value cell opens its editor (links and question panels yield to it)
+  if (ui.cellEdit) t.querySelectorAll("td.editable").forEach(el => el.onclick = ev => {
+    ev.preventDefault(); ev.stopPropagation(); qClose(); cellShow(el);
   });
   const more = $("show-more");
   if (more) more.onclick = () => { ui.shown += PAGE; renderTable(); };
@@ -421,8 +466,11 @@ function renderNewbar() {
   if (k == null) { bar.innerHTML = ""; delete bar.dataset.form; return; }
   if (!ui.creating) {
     delete bar.dataset.form;
-    bar.innerHTML = `<button class="btn" id="new-open">+ New ${esc(label(c))}</button>`;
+    bar.innerHTML = `<button class="btn" id="new-open">+ New ${esc(label(c))}</button>` +
+      `<button class="btn${ui.cellEdit ? " on" : ""}" id="cell-edit" aria-pressed="${ui.cellEdit}">${ui.cellEdit ? "Done editing" : "Edit cells"}</button>` +
+      (ui.cellEdit ? `<span class="kind">Tap a cell to edit it.</span>` : "");
     $("new-open").onclick = () => { ui.creating = true; renderNewbar(); $("new-name").focus(); };
+    $("cell-edit").onclick = () => { ui.cellEdit = !ui.cellEdit; cellClose(); renderTable(); };
     return;
   }
   if (bar.dataset.form === c) return;   // keep what's typed when the table redraws (filtering, sorting)
@@ -448,13 +496,68 @@ async function createItem() {
     if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
     ui.creating = false;
     store("newset:" + ui.comp, D.sets[+$("new-set").value].id);
-    await reload();
+    applyWrite(out);
     go({ i: out.id });
   } catch (e) {
     err.textContent = "Not created: " + e.message;
     b.disabled = false;
   }
 }
+
+// ---------------- editing a table cell ----------------
+// one box per value (edit), or one box to add a value to an empty cell; saving applies the returned rows
+function cellClose() { const p = $("cellpop"); if (p) { p.hidden = true; p.innerHTML = ""; } }
+function cellShow(td) {
+  const e = td.dataset.e, a = td.dataset.a, pop = $("cellpop");
+  const vals = valuesOf(e, a);
+  const warn = (SYNCED[e] || []).includes(a) ? `<div class="warn">This value comes from a Paug note in Obsidian. ` +
+    `An edit here changes Trunky only; the note keeps its old value until the sync can write to Obsidian.</div>` : "";
+  const box = (attrs, v, btn) => `<div class="cellbox" ${attrs}><textarea rows="${Math.min(8, v.split("\n").length + 1)}">${esc(v)}</textarea>` +
+    `<div class="row"><span class="err"></span><button class="btn" data-save>${btn}</button></div></div>`;
+  let html = `<div class="qmeta">${esc(label(a))} of ${esc(display(e))}</div>${warn}`;
+  if (vals.length) html += vals.map(i => editable(i) ? box(`data-h="${esc(D.rows[i][0])}"`, entryOf(D.rows[i][3], D.rows[i][4]), "Save") :
+    `<div class="cellbox">${valueHtml(i)} <span class="kind">(in a set you can't edit)</span></div>`).join("");
+  else html += taggable(e) ? box(`data-e="${esc(e)}" data-a="${esc(a)}"`, "", "Add") : `<p class="kind">This item has no set you may edit.</p>`;
+  html += `<div class="row"><span class="hint">{{uuid}} links to an item · Cmd/Ctrl+Enter saves</span><button class="btn" data-close>Close</button></div>`;
+  pop.innerHTML = html;
+  pop.hidden = false;
+  const r = td.getBoundingClientRect(), w = pop.offsetWidth, ht = pop.offsetHeight;
+  pop.style.left = Math.max(16, Math.min(r.left, innerWidth - w - 16)) + "px";
+  pop.style.top = (r.bottom + 6 + ht < innerHeight ? r.bottom + 6 : Math.max(16, r.top - ht - 6)) + "px";
+  pop.querySelector("[data-close]").onclick = cellClose;
+  pop.querySelectorAll(".cellbox[data-h], .cellbox[data-e]").forEach(b => {
+    const ta = b.querySelector("textarea");
+    b.querySelector("[data-save]").onclick = () => saveCell(b);
+    ta.onkeydown = ev => {
+      if (ev.key === "Escape") { ev.stopPropagation(); cellClose(); }
+      else if (ev.key === "Enter" && (ev.metaKey || ev.ctrlKey)) saveCell(b);
+    };
+  });
+  const first = pop.querySelector("textarea");
+  if (first) { first.focus(); first.setSelectionRange(first.value.length, first.value.length); }
+}
+async function saveCell(b) {
+  const text = b.querySelector("textarea").value.trim(), err = b.querySelector(".err"), btn = b.querySelector("[data-save]");
+  if (!text) { err.textContent = "A value can't be empty."; return; }
+  btn.disabled = true; err.textContent = "Saving…";
+  try {
+    const add = !b.dataset.h;
+    const res = await fetch(add ? "api/add" : "api/edit", { method: "POST",
+      headers: { "Content-Type": "application/json", "X-Trunky-Explorer": "1" },
+      body: JSON.stringify(add ? { entity: b.dataset.e, attribute: b.dataset.a, text } : { handle: b.dataset.h, text }) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
+    applyWrite(out);
+  } catch (e) {
+    err.textContent = "Not saved: " + e.message;
+    btn.disabled = false;
+  }
+}
+document.addEventListener("keydown", ev => { if (ev.key === "Escape" && $("cellpop") && !$("cellpop").hidden) { ev.stopPropagation(); cellClose(); } }, true);
+document.addEventListener("click", ev => {
+  const p = $("cellpop");
+  if (p && !p.hidden && !ev.target.closest("#cellpop") && !ev.target.closest("td.editable")) cellClose();
+});
 
 // ---------------- questions: hover panel with the question, its thread and a reply box ----------------
 let qTimer = null, qCell = null;
@@ -525,13 +628,29 @@ async function sendReply(b) {
     const out = await res.json().catch(() => ({}));
     if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
     ta.value = "";
-    await reload();
+    applyWrite(out);
   } catch (e) {
     err.textContent = "Not sent: " + e.message;
     b.disabled = false;
   }
 }
 // fetch the statements again (after a reply) and redraw, reopening the panel on the same cell
+// add the rows a write appended (dropping any statement they replace) and redraw, without downloading
+// everything again; reopens the question panel on the same cell, as reload() does
+function applyWrite(out) {
+  const si = D.sets.findIndex(x => x.id === out.set);
+  if (si < 0 || !Array.isArray(out.rows)) return reload();
+  const gone = new Set(out.rows.filter(r => r[1] === REPLACEMENT).map(r => r[2]));
+  D.rows = D.rows.filter(r => !gone.has(r[0]));
+  for (const r of out.rows) D.rows.push([...r, si]);
+  D.sets[si].statements += out.rows.length - gone.size;
+  const q = qCell && qCell.dataset.q;
+  build();
+  qClose(); cellClose();
+  route();
+  const el = q && [...document.querySelectorAll("td.q")].find(x => x.dataset.q === q);
+  if (el) qShow(el);
+}
 async function reload() {
   const q = qCell && qCell.dataset.q;
   const res = await fetch("api/data");
@@ -684,7 +803,7 @@ async function addComponent(e, c) {
     const out = await res.json().catch(() => ({}));
     if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
     ui.editing = null;
-    await reload();
+    applyWrite(out);
   } catch (x) {
     err.textContent = "Not added: " + x.message;
   }
@@ -713,7 +832,7 @@ async function saveEdit(ed) {
     const out = await res.json().catch(() => ({}));
     if (!res.ok || !out.ok) throw new Error(out.error || res.status + " " + res.statusText);
     ui.editing = null;
-    await reload();
+    applyWrite(out);
   } catch (e) {
     err.textContent = "Not saved: " + e.message;
     b.disabled = false;
