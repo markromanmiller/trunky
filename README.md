@@ -180,7 +180,7 @@ Why not use…
 
 Clone the repository and install `requirements.txt` (Python 3.11 or later). The statements are in `sets/`, one CSV file per statement set, named by the set's UUID, with the columns `handle,attribute,entity,value,value_type`. This repository includes only the sets everyone may read. On a full instance, a `registry` set names and describes every set and a `permissions` set says who may read and edit each; both stay private, since they list the private sets too. Without them the explorer shows every set file present, under the start of its UUID.
 
-- `python3 explorer/server.py` serves a browser view on `http://127.0.0.1:8850`: tables of items by component, item pages, and small edits (each edit appends statements; nothing is overwritten). See `explorer/README.md`.
+- `python3 explorer/server.py` serves a browser view on `http://127.0.0.1:8850`: tables of items by component, item pages, and, once `owner` is set in `trunky.conf` (copy `trunky.conf.example`), small edits (each edit appends statements; nothing is overwritten). See `explorer/README.md`.
 - `python3 tools/check.py` reports problems in the statements, such as missing required slots, items with several names, and statements without provenance.
 - To write, append rows to a set's file; `tools/trunky_lock.py` holds the lock every writer takes. `aReplacement` and `anErratum` are how anything is changed or retracted.
 

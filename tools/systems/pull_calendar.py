@@ -26,6 +26,10 @@ half of the window's events (and more than 5) raises instead of writing.
 """
 import datetime as dt, re, urllib.request, uuid
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "ecs"))
+from view import conf  # noqa: E402
 
 from dateutil import rrule, tz
 
@@ -42,7 +46,7 @@ FEED = "40d24795-9b2f-4ad1-92dd-e1acfaaaab3f"         # theCalendarFeed
 LOCATION = "c8545a8a-12d7-402f-b742-42ce0e6ad8d5"     # theLocation
 BUSY = "f08d9b3d-483d-4cb0-9d8e-3fa667842bfa"         # theBusyStatus
 TIME_ZONE = "d1697ad1-ea8f-4b75-9a48-4e6074ad3045"    # theTimeZone
-ENV = Path.home() / ".config" / "trunky-ecs.env"
+ENV = Path(conf("env_file", Path.home() / ".config" / "trunky.env"))   # secrets, as NAME=value lines
 WINDOW_DAYS = 7
 WIDE_DAYS = 120   # how far series are expanded when checking whether an occurrence still exists
 HOME = tz.gettz("America/Chicago")

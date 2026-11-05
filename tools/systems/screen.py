@@ -8,6 +8,10 @@ no score for yet are asked together, one Jev request per model, on the paper's t
 """
 import json, os, urllib.request
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "ecs"))
+from view import conf  # noqa: E402
 
 SCREENING_CALL = "8cc3ae39-fc1b-47bf-b011-21bce347343a"   # aScreeningCall
 NAME = "acf5cebb-8d80-45ad-9a1f-a3dd48682ef6"
@@ -16,7 +20,7 @@ INSTRUCTIONS = "8a9ec1f7-11cd-46cb-bb38-cdbec00b08e1"
 TRUE_CRIT = "838f7a5b-b5c1-4bac-9cee-7d6700b2d757"
 FALSE_CRIT = "ddbd60f4-d69e-4c9b-8bbb-d93ac984b1c7"
 MODEL = "bedaf236-bd15-4093-ad71-be3b9acae25f"
-ENV = Path.home() / ".config" / "trunky-ecs.env"
+ENV = Path(conf("env_file", Path.home() / ".config" / "trunky.env"))   # secrets, as NAME=value lines
 URL = "https://openrouter.ai/api/alpha/decisions"
 
 

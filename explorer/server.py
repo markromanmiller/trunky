@@ -57,7 +57,7 @@ from threading import Lock
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "tools" / "ecs"))
-from view import ROOT, current  # noqa: E402
+from view import ROOT, conf, current  # noqa: E402
 sys.path.insert(0, str(HERE.parent / "tools"))
 from trunky_lock import write_lock  # noqa: E402
 
@@ -65,7 +65,6 @@ NAME = "acf5cebb-8d80-45ad-9a1f-a3dd48682ef6"
 READER = "8faeaac3-1745-4d74-9d76-d4aa2550e8a9"
 MEMBER = "d512b1b7-079f-4447-a5a0-0a761ca3427d"
 EVERYONE = "7f5cce91-c4cf-464a-8005-45ce5d5ee609"
-MARK = "01567ad3-e1cd-4a9d-8332-2df55c3523f1"
 COMP = "90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a"
 NOTE = "29a25e0e-3f32-4787-965e-3ecc917d6fef"
 PROV = "d9496c5d-6e55-43ca-84bf-72d565c33419"
@@ -82,12 +81,13 @@ MAX_REPLY = 4000
 MAX_EDIT = 20000
 SYNC_BASE = ROOT / "state" / "paug-sync-base.json"
 ANONYMOUS = "anonymous"   # a member of no group, so it reads only the sets everyone may read
-PUBLIC = "--public" in sys.argv
+OWNER = conf("owner")   # the person item every request acts as; without one, only sets everyone may read
+PUBLIC = "--public" in sys.argv or not OWNER
 PUBLIC_PATHS = {"/", "/index.html"}
 
 
 def viewer(headers):
-    return ANONYMOUS if PUBLIC else MARK
+    return ANONYMOUS if PUBLIC else OWNER
 
 
 class Store:

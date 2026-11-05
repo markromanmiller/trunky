@@ -19,12 +19,15 @@ Runs and their answers are kept in state/claude-runs/<run id>/ (request.json, re
 
     .venv/bin/python tools/ecs/claude_actor.py <run dir>     # the detached runner (started by the engine)
 """
-import datetime as dt, importlib.util, json, os, re, subprocess, sys, uuid
+import datetime as dt, importlib.util, json, os, re, shutil, subprocess, sys, uuid
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from view import conf
 
 ROOT = Path(__file__).resolve().parents[2]
 RUNS = ROOT / "state" / "claude-runs"
-CLAUDE = Path.home() / ".local" / "bin" / "claude"
+CLAUDE = conf("claude") or shutil.which("claude") or "claude"
 PYTHON = ROOT / ".venv" / "bin" / "python"
 MODEL = "sonnet"     # defaults; a System can set theModel and theEffort
 EFFORT = "medium"

@@ -5,7 +5,7 @@ entities named by anErratum, statements and entities whose theRemovalTime has pa
 filter anything yet. Each statement becomes one RDF triple <urn:uuid:entity> <urn:uuid:attribute> value,
 with uuid values as IRIs and everything else as plain literals.
 """
-import csv, datetime as dt
+import csv, datetime as dt, os
 from pathlib import Path
 
 from rdflib import Graph, Literal, URIRef
@@ -15,6 +15,19 @@ COMP = "90c2b9bb-ff6b-4f84-a29b-7b9e8dcfe04a"
 REPLACEMENT = "8f9dc95b-c4d3-4500-9a6c-9ddc63cdecf9"
 ERRATUM = "1c260a46-c907-4efc-adb2-9345aebd9500"
 REMOVAL_TIME = "7ede6e59-945b-4a85-94d8-cce67bf154cc"
+
+
+def conf(key, default=None, many=False):
+    """A setting from trunky.conf (`key = value` lines; see trunky.conf.example). Paths are given with ~
+    expanded. many=True returns every value for a key that may repeat."""
+    vals = []
+    path = ROOT / "trunky.conf"
+    if path.exists():
+        for line in path.read_text().splitlines():
+            k, sep, v = line.partition("=")
+            if sep and not line.lstrip().startswith("#") and k.strip() == key and v.strip():
+                vals.append(os.path.expanduser(v.strip()))
+    return vals if many else (vals[0] if vals else default)
 
 
 def _passed(t):

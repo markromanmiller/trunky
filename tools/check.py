@@ -28,6 +28,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools" / "ecs"))
+from view import conf  # noqa: E402
 HDR = ["handle", "attribute", "entity", "value", "value_type"]
 UUID = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 NAME = "acf5cebb-8d80-45ad-9a1f-a3dd48682ef6"
@@ -65,12 +67,6 @@ def main():
     ap.add_argument("--examples", type=int, default=5)
     args = ap.parse_args()
     rep = Report(args.examples)
-
-    conf = defaultdict(list)
-    for line in (ROOT / "trunky.conf").read_text().splitlines():
-        if " = " in line:
-            k, v = line.split(" = ", 1)
-            conf[k.strip()].append(v.strip())
 
     # ---- load
     files = {p.stem: p for p in (ROOT / "sets").glob("*.csv")}
@@ -164,7 +160,7 @@ def main():
 
     # ---- 7 published files
     public = {sid for sid in files if EVERYONE in readers[sid]}
-    for path in conf.get("published", []):
+    for path in conf("published", many=True):
         p = Path(path)
         if not p.exists():
             rep.add("ERROR", "7 published", f"{path} does not exist")

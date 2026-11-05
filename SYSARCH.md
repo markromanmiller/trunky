@@ -12,7 +12,6 @@ before this version) kept the same rows in one SQLite table behind an HTTP API.
 - `sets/<set uuid>.csv`: one file per set, with a header row and the five columns above. `value_type` is
   `uuid` for a reference to an item and otherwise a literal type (`str`, `int`, `float`).
 - **registry** (`1282694a…`): what each set is: a StatementSet item per set, with theName and theIntention.
-  `trunky.conf` names the registry set.
 - **permissions** (`748ce9b6…`): groups (`owner`, `everyone`, …) with `aMember`, and `aReaderGroup` /
   `anEditorGroup` on each set.
 - A set is the unit of sharing: this repository includes only the sets whose aReaderGroup is `everyone`.
@@ -79,9 +78,10 @@ serves only the sets everyone may read and accepts no writes. Details in `explor
 
 ## Configuration and secrets
 
-- `trunky.conf`: `registry = <set uuid>` and `published = <path>` (an exported file that `check.py` verifies
-  against the sets; `tools/export.py` writes such exports).
-- Secrets (API keys, private calendar feed URLs) are read at run time from environment files outside the
+- `trunky.conf` (local; `trunky.conf.example` lists the settings): `owner`, the person item the explorer
+  acts as (without it the explorer is read-only); `published`, exported files that `check.py` verifies against
+  the sets (`tools/export.py` writes them); `tasks_dir`, where the engine files notes; `env_file`; `claude`.
+- Secrets (API keys, private calendar feed URLs) are read at run time from `env_file`, outside the
   repository; Systems name the variable they need, never the value.
 - Runtime state (engine timings, sync bases, the write lock) is in `state/`, which is not committed.
 

@@ -28,7 +28,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from view import ROOT, View
+from view import ROOT, View, conf
 import claude_actor
 from trunky_lock import write_lock
 
@@ -52,7 +52,7 @@ EFFORT = "8ae31291-ca18-4dcb-a7e2-b0035f7db0e0"
 SOURCE = "467b485a-4dc2-4f0a-a090-e78b83d84231"
 MAX_ROUNDS = 10
 STATE = ROOT / "state" / "ecs-engine.json"
-TASKS = Path.home() / "knowledge-base" / "Paug v3.0" / "tasks tmp"
+TASKS = Path(conf("tasks_dir", ROOT / "state" / "tasks"))   # where failures and approvals are filed as notes
 BACKOFF_BASE_MIN, BACKOFF_FACTOR, BACKOFF_CAP_MIN = 1, 4, 24 * 60
 TASK_TEMPLATE = """---
 gtd: task

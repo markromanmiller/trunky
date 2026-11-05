@@ -1,0 +1,20 @@
+# Copy to trunky.conf (which stays out of git) and fill in what you use. Every setting is optional.
+# One `key = value` per line; ~ is expanded in paths; lines starting with # are ignored.
+
+# The person item (its UUID) the explorer acts as. Without it the explorer is read-only. This is only the
+# name written into each edit's provenance; nothing checks that the person running the explorer is that person.
+# owner = 00000000-0000-0000-0000-000000000000
+
+# An exported statement file that tools/check.py checks against the sets (tools/export.py writes these).
+# May be repeated.
+# published = ~/my-site/data/statements.csv
+
+# Folder where the ECS engine writes a note when a System fails or needs approval. Default: state/tasks.
+# tasks_dir = ~/notes/tasks
+
+# Secrets (API keys, private feed URLs) as NAME=value lines, read by Systems that need them.
+# Default: ~/.config/trunky.env
+# env_file = ~/.config/trunky.env
+
+# The Claude Code CLI, for Systems whose actor is Claude. Default: claude on PATH.
+# claude = ~/.local/bin/claude
